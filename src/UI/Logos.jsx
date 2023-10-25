@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Logo from './Logo';
+import Image from './Image';
 import Title from './Title';
 
 const StyledLogos = styled.div`
@@ -13,13 +13,13 @@ const StyledLogos = styled.div`
 function Logos() {
   return (
     <StyledLogos>
-      <Logo
+      <Image
         imageLink='../../images/logos/UniversityOfJordanLogo.svg.png'
         href='https://www.ju.edu.jo/'
         alt='University of Jordan Logo'
       />
       <Title />
-      <Logo
+      <Image
         imageLink='../../images/logos/LanguageCenterLogo.png'
         href='https://centers.ju.edu.jo/ar/ujlc/'
         alt='Language Center Logo'

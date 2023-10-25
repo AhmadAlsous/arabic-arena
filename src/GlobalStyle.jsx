@@ -40,6 +40,12 @@ const GlobalStyle = createGlobalStyle`
 
 a {
     text-decoration: none;
+    color: inherit;
+}
+
+body {
+  margin: 0;
+    font-family: sans-serif;
 }
 `;
 

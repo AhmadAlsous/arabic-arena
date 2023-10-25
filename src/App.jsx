@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import '@mui/styled-engine-sc';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import Layout from './pages/Layout';
@@ -8,6 +9,8 @@ import Forum from './features/Forum';
 import Tables from './features/Tables';
 import Quiz from './features/Quiz';
 import GlobalStyle from './GlobalStyle';
+import PlacementTest from './features/PlacementTest';
+import Settings from './features/Settings';
 
 const router = createBrowserRouter([
   { path: '/', element: <HomePage /> },
@@ -19,7 +22,11 @@ const router = createBrowserRouter([
       { path: '/learn/:lesson', element: <Lesson /> },
       { path: '/ask', element: <Forum /> },
       { path: '/tables', element: <Tables /> },
+      { path: '/tables/:table', element: <Tables /> },
       { path: '/quiz', element: <Quiz /> },
+      { path: '/quiz/:quiz', element: <Quiz /> },
+      { path: '/placement', element: <PlacementTest /> },
+      { path: '/settings', element: <Settings /> },
     ],
   },
 ]);

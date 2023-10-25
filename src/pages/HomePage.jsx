@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import NavBar from '../UI/NavBar';
+import NavBar from '../UI/header/NavBar';
 
 const StyledHomePage = styled.div``;
 
