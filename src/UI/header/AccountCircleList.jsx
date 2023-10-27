@@ -20,7 +20,10 @@ function AccountCircleList() {
 
   return (
     <Box sx={{ flexGrow: 0 }}>
-      <AccountCircleIcon onClick={handleClick} sx={{ fontSize: '45px' }} />
+      <AccountCircleIcon
+        onClick={handleClick}
+        sx={{ fontSize: '45px', cursor: 'pointer' }}
+      />
       <Menu
         anchorEl={anchorEl}
         open={open}

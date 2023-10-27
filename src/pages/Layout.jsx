@@ -11,6 +11,7 @@ const AppWrapper = styled.div`
 
 const Content = styled.div`
   flex: 1;
+  background-color: var(--primary-blue-900);
 `;
 
 function Layout() {

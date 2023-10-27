@@ -5,16 +5,9 @@ import SearchIcon from '@mui/icons-material/Search';
 const Search = styled.div`
   position: relative;
   border-radius: 50px;
-  background-color: var(--primary-green-900);
-  &:focus-within {
-    background-color: var(--primary-green-700);
-  }
+  border: 2px solid #000000;
   margin-left: 0;
   width: 100%;
-  @media (min-width: 600px)  {
-    margin-left: 8px
-    width: auto;
-  }
 `;
 
 const SearchIconWrapper = styled.div`
@@ -32,9 +25,9 @@ const StyledInputBase = styled(InputBase)`
   & .MuiInputBase-input {
     padding: 8px 8px 8px 0;
     padding-left: calc(1em + 32px);
-    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
     width: 100%;
-    @media (min-width: 600px) {
+    transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    @media (min-width: 1144px) {
       width: 12ch;
       &:focus {
         width: 20ch;

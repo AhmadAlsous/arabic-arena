@@ -5,14 +5,20 @@ import SearchBar from './SearchBar';
 import AccountCircleList from './AccountCircleList';
 
 const StyledNavBar = styled.div`
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0;
+  background-color: #ffffff;
+  box-shadow: 0 3px 20px 4px grey;
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
-  margin: 5px 18% 0 25px;
+  margin: 0 18% 0 25px;
   width: 60%;
   justify-content: space-between;
   align-items: center;
@@ -23,15 +29,16 @@ const ButtonsContainer = styled.div`
 `;
 
 const SearchContainer = styled.div`
+  padding-right: 50px;
   max-width: 30%;
 `;
 
 const ProfileContainer = styled.div`
   display: flex;
   justify-content: center;
-  width: 5%;
   align-items: center;
   margin-top: 5px;
+  padding-right: 25px;
 `;
 
 function NavBar() {

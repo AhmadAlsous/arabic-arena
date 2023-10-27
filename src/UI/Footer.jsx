@@ -9,7 +9,7 @@ const StyledFooter = styled.footer`
   display: grid;
   grid-template-columns: 7fr 4fr 4fr;
   gap: 20px;
-  padding: 20px;
+  padding: 40px 20px;
   background-color: #555;
   color: #fff;
   letter-spacing: 1px;
@@ -85,7 +85,9 @@ function Footer({ withAboutUs = true }) {
       <Column1>
         {withAboutUs && (
           <>
-            <Link to='/'>About Us</Link>
+            <Links>
+              <Link to='/'>About Us</Link>
+            </Links>
             <Links href='#'>Submit Feedback</Links>
             <Links href='#'>Report Problems</Links>
           </>
