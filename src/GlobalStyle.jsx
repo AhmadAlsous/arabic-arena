@@ -6,6 +6,11 @@ const GlobalStyle = createGlobalStyle`
   src: url('/fonts/Anton-Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Arabic-bold';
+  src: url('/fonts/ReemKufi-Bold.ttf') format('truetype');
+}
+
 :root {
   --primary-blue-500: #43a0d8;
   --primary-blue-400: #3680ad;
@@ -36,6 +41,9 @@ const GlobalStyle = createGlobalStyle`
   --primary-green-700: #c2f1e8;
   --primary-green-800: #ccf3ec;
   --primary-green-900: #d6f5f0;
+
+  --homepage-blue: #1a4a61;
+  --homepage-grey: #bbc4c1;
 }
 
 a {
@@ -50,7 +58,6 @@ body {
 
 input,
 button,
-textarea,
 select {
   font: inherit;
   color: inherit;

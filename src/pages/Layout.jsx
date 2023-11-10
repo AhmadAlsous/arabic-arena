@@ -11,7 +11,14 @@ const AppWrapper = styled.div`
 
 const Content = styled.div`
   flex: 1;
-  background-color: var(--primary-blue-900);
+  background-color: var(--homepage-blue);
+`;
+
+const OutletContainer = styled.div`
+  background-color: #ffffff;
+  margin: 50px 15%;
+  padding: 0 50px 20px 50px;
+  box-shadow: 0 5px 20px 3px black;
 `;
 
 function Layout() {
@@ -19,7 +26,9 @@ function Layout() {
     <AppWrapper>
       <Content>
         <NavBar />
-        <Outlet />
+        <OutletContainer>
+          <Outlet />
+        </OutletContainer>
       </Content>
       <Footer />
     </AppWrapper>

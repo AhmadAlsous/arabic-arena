@@ -13,7 +13,7 @@ const StyledNavBar = styled.div`
   align-items: center;
   padding: 10px 0;
   background-color: #ffffff;
-  box-shadow: 0 3px 20px 4px grey;
+  box-shadow: 0 3px 20px 4px black;
 `;
 
 const ButtonsContainer = styled.div`
@@ -51,7 +51,7 @@ function NavBar() {
         />
         <NavBarButton name='HOME' navTo='/' />
         <NavBarButton name='LESSONS' navTo='/learn' />
-        <NavBarButton name='TABLES' navTo='/tables' />
+        <NavBarButton name='VOCABULARY' navTo='/vocabulary' />
         <NavBarButton name='QUIZZES' navTo='/quiz' />
         <NavBarButton name='PLACEMENT' navTo='/placement' />
         <NavBarButton name='ASK' navTo='/ask' />

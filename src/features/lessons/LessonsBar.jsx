@@ -13,7 +13,7 @@ const StyledLessonsBar = styled.div`
 const TypesContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 350px;
+  width: ${(props) => (props.type === undefined ? '135px' : '350px')};
   font-size: 0.9rem;
   margin-right: 30px;
 `;
@@ -29,29 +29,31 @@ const Title = styled.h3`
   letter-spacing: 8px;
 `;
 
-function LessonsBar({ level, type, onChangeLevel, onChangeType }) {
+function LessonsBar({ level, type, onChangeLevel, onChangeType, title }) {
   const typeItems = ['All', 'Grammar', 'Listening', 'Writing', 'Reading'];
   const levelItems = ['All', 'Beginner', 'Intermediate', 'Advanced'];
 
   return (
     <StyledLessonsBar>
-      <Title>LESSONS</Title>
-      <TypesContainer>
-        <div>
-          Level
-          <MenuComponent
-            selectedValue={level}
-            onChange={onChangeLevel}
-            items={levelItems}
-          />
-        </div>
-        <div>
-          Type
-          <ButtonContainer>
+      <Title>{title}</Title>
+      <TypesContainer type={type}>
+        {type && (
+          <div>
+            Type
             <MenuComponent
               selectedValue={type}
               onChange={onChangeType}
               items={typeItems}
+            />
+          </div>
+        )}
+        <div>
+          Level
+          <ButtonContainer>
+            <MenuComponent
+              selectedValue={level}
+              onChange={onChangeLevel}
+              items={levelItems}
             />
           </ButtonContainer>
         </div>

@@ -4,13 +4,14 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import Layout from './pages/Layout';
 import Lessons from './features/lessons/Lessons';
-import Lesson from './features/lessons/Lesson';
+import Lesson from './features/lesson/Lesson';
 import Forum from './features/Forum';
-import Tables from './features/Tables';
+import VocabularyTables from './features/VocabularyTables';
 import Quiz from './features/Quiz';
 import GlobalStyle from './GlobalStyle';
 import PlacementTest from './features/PlacementTest';
 import Settings from './features/Settings';
+import Table from './features/table/Table';
 
 const router = createBrowserRouter([
   { path: '/', element: <HomePage /> },
@@ -21,8 +22,8 @@ const router = createBrowserRouter([
       { path: '/learn', element: <Lessons /> },
       { path: '/learn/:lesson', element: <Lesson /> },
       { path: '/ask', element: <Forum /> },
-      { path: '/tables', element: <Tables /> },
-      { path: '/tables/:table', element: <Tables /> },
+      { path: '/vocabulary', element: <VocabularyTables /> },
+      { path: '/vocabulary/:table', element: <Table /> },
       { path: '/quiz', element: <Quiz /> },
       { path: '/quiz/:quiz', element: <Quiz /> },
       { path: '/placement', element: <PlacementTest /> },

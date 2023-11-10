@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { LinkReset } from '../utility/LinkReset';
 import PhoneIcon from '@mui/icons-material/Phone';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import EmailIcon from '@mui/icons-material/Email';
 import Image from './Image';
+import FeedbackModal from './FeedbackModal';
+import FeedbackForm from './FeedbackForm';
 
 const StyledFooter = styled.footer`
   display: grid;
@@ -60,10 +62,30 @@ const Icon = styled.div`
   top: 6px;
 `;
 
-const Links = styled.a`
+const Links = styled.span`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+const Button = styled.button`
+  background-color: transparent;
+  border: none;
+
+  &:hover {
+    border-bottom: 1px solid #fff;
+  }
+`;
+
+const ModalTitle = styled.h4`
+  margin: 0 0 30px 0;
+  font-size: 1.75rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+`;
+
+const Text = styled.p`
+  line-height: 1.5;
 `;
 
 function Footer({ withAboutUs = true }) {
@@ -85,11 +107,35 @@ function Footer({ withAboutUs = true }) {
       <Column1>
         {withAboutUs && (
           <>
-            <Links>
-              <Link to='/'>About Us</Link>
-            </Links>
-            <Links href='#'>Submit Feedback</Links>
-            <Links href='#'>Report Problems</Links>
+            <LinkReset to='/'>
+              <Button>About Us</Button>
+            </LinkReset>
+            <FeedbackModal btn='Submit Feedback' type='feedback'>
+              <ModalTitle>Share Your Feedback</ModalTitle>
+              <Text>
+                Thank you for sending us your feedback. We can't respond
+                individually but we appreciate your feedback and we will make
+                sure pass it on to the team who are working to help make our
+                website better.
+              </Text>
+              <Text>
+                Please enter your feedback in the box below and then press
+                submit.
+              </Text>
+            </FeedbackModal>
+            <FeedbackModal btn='Report Problems' type='problem'>
+              <ModalTitle>Report a Problem</ModalTitle>
+              <Text>
+                Thank you for taking the time to report a problem. We can't
+                respond individually but we appreciate your feedback and we will
+                make sure pass it on to the team who are working to help make
+                our website better.
+              </Text>
+              <Text>
+                Please enter your problem in the box below and then press
+                submit.
+              </Text>
+            </FeedbackModal>
           </>
         )}
       </Column1>
@@ -101,14 +147,16 @@ function Footer({ withAboutUs = true }) {
         <Item name={' ujlc@ju.edu.jo'}>
           <EmailIcon />
         </Item>
-        <Links
-          href='https://www.facebook.com/people/Language-Center-University-of-Jordan/100089620122123/?sk=about'
-          target='_blank'
-          rel='noopener noreferrer'
-        >
-          <Item name={' Language Center'}>
-            <FacebookRoundedIcon />
-          </Item>
+        <Links>
+          <a
+            href='https://www.facebook.com/people/Language-Center-University-of-Jordan/100089620122123/?sk=about'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
+            <Item name={' Language Center'}>
+              <FacebookRoundedIcon />
+            </Item>
+          </a>
         </Links>
       </Column2>
     </StyledFooter>

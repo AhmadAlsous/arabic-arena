@@ -25,8 +25,7 @@ export const dummyLessons = [
     titleArabic: 'الأنواع المختلفة للسحب',
     level: 'Intermediate',
     type: 'Listening',
-    imageLink:
-      'https://www.treehugger.com/thmb/z9XWueIDAUQI6QvXfCR6JyuFzl8=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2018__08__CollectionOfCloudsAgainstABlueSky-8cae9f3109d14dcf98d9facc5775222f.jpg',
+    imageLink: '',
     video: false,
   },
   {
@@ -45,8 +44,7 @@ export const dummyLessons = [
     titleArabic: 'المجموعة الشمسية',
     level: 'Advanced',
     type: 'Grammar',
-    imageLink:
-      'https://images.nationalgeographic.org/image/upload/t_edhub_resource_key_image/v1638890145/EducationHub/photos/solar-system-exploration-50-years-and-counting.jpg',
+    imageLink: '',
     video: false,
   },
   {
@@ -65,8 +63,7 @@ export const dummyLessons = [
     titleArabic: 'كيفية كتابة السيرة الذاتية',
     level: 'Beginner',
     type: 'Reading',
-    imageLink:
-      'https://cdn-blog.novoresume.com/articles/how-to-write-a-resume-guide/novoresume-vs-text-editor.png',
+    imageLink: '',
     video: false,
   },
   {
@@ -124,8 +121,7 @@ export const dummyLessons = [
     titleArabic: 'مستقبل العمل',
     level: 'Advanced',
     type: 'Writing',
-    imageLink:
-      'https://www.madison.co.nz/wp-content/uploads/2018/08/Future-of-work.jpg',
+    imageLink: '',
     video: false,
   },
   {

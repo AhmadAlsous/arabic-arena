@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { LinkReset } from '../../utility/LinkReset';
 import { replaceSpacesWithDashes } from '../../utility/stringOperations';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import styled from 'styled-components';
@@ -9,7 +9,6 @@ const StyledLessonBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #444444;
   box-shadow: 0 5px 10px 2px grey;
   transition: transform 0.3s, box-shadow 0.3s;
 
@@ -57,14 +56,16 @@ const LevelInfo = styled.div`
   width: 100%;
   text-align: center;
   padding: 10px 0;
+  letter-spacing: 1px;
   background-color: var(--primary-blue-dark-500);
-  border-right: 0.5px solid #ffffff;
+  border-right: ${(props) => props.type && '0.5px solid #ffffff'};
 `;
 
 const TypeInfo = styled.div`
   width: 100%;
   text-align: center;
   padding: 10px 0;
+  letter-spacing: 1px;
   background-color: var(--primary-blue-dark-500);
   border-left: 0.5px solid #ffffff;
 `;
@@ -74,6 +75,32 @@ const ImageContainer = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
+  background-color: #3aafa9;
+`;
+
+const TitleImageContainer = styled.div`
+  padding: 0 15%;
+  font-family: 'Arabic-bold', sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  font-size: 2.5rem;
+  opacity: 0.35;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  @media (max-width: 1157px) {
+    font-size: 4rem;
+  }
+
+  @media (max-width: 940px) {
+    font-size: 3rem;
+  }
+
+  @media (max-width: 850px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const PlayContainer = styled.div`
@@ -99,22 +126,27 @@ const Image = styled.img`
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: conatin;
 `;
 
 function LessonBox({ lesson }) {
-  const { titleEnglish, titleArabic, level, type, imageLink, video } = lesson;
+  const { id, titleEnglish, titleArabic, level, type, imageLink, video } =
+    lesson;
 
   return (
-    <Link to={`/learn/${replaceSpacesWithDashes(titleEnglish.toLowerCase())}`}>
+    <LinkReset
+      to={`/${type ? 'learn' : 'vocabulary'}/${replaceSpacesWithDashes(
+        titleEnglish.toLowerCase()
+      )}`}
+      state={{ id }}
+    >
       <StyledLessonBox>
         <TitleContainer>
           <Title>{titleEnglish}</Title>
           <Title>{titleArabic}</Title>
         </TitleContainer>
         <InfoConatiner>
-          <LevelInfo>{level}</LevelInfo>
-          <TypeInfo>{type}</TypeInfo>
+          <LevelInfo type={type}>{level}</LevelInfo>
+          {type && <TypeInfo>{type}</TypeInfo>}
         </InfoConatiner>
         <ImageContainer>
           {video && (
@@ -123,17 +155,21 @@ function LessonBox({ lesson }) {
                 <PlayCircleFilledIcon
                   sx={{
                     fontSize: 80,
-                    color: '#aaaaaa',
+                    color: '#999999',
                   }}
                 />
               </PlayContainer>
               <WhiteCircle />
             </>
           )}
-          <Image src={imageLink} alt={titleEnglish} />
+          {imageLink ? (
+            <Image src={imageLink} alt={titleEnglish} />
+          ) : (
+            <TitleImageContainer>{titleArabic}</TitleImageContainer>
+          )}
         </ImageContainer>
       </StyledLessonBox>
-    </Link>
+    </LinkReset>
   );
 }
 
