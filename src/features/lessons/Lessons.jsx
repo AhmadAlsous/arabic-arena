@@ -22,7 +22,6 @@ function Lessons() {
         type={selectedType}
         onChangeLevel={setSelectedLevel}
         onChangeType={setSelectedType}
-        title='LESSONS'
       />
       <LessonsContainer lessons={filteredLessons} />
       <Pagination count={filteredLessons.length} />

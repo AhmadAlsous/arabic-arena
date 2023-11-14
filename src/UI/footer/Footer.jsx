@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { LinkReset } from '../utility/LinkReset';
+import { LinkReset } from '../../utility/LinkReset';
 import PhoneIcon from '@mui/icons-material/Phone';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import EmailIcon from '@mui/icons-material/Email';

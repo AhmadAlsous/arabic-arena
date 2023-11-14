@@ -5,28 +5,35 @@ export const dummyLessons = [
     titleArabic: 'فوائد الشاي الأخضر',
     level: 'Beginner',
     type: 'Reading',
-    imageLink:
-      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/green-tea_400-237a32b.jpg?quality=90&resize=400,363',
+    imageLink: 'https://assets.rbl.ms/19152954/origin.jpg',
     video: false,
   },
   {
-    id: 22222,
-    titleEnglish: 'How to Cook a Perfect Omelet',
-    titleArabic: 'كيف تصنع عجة مثالية',
+    id: 0,
+    titleEnglish: 'Letters',
+    titleArabic: 'الحروف',
     level: 'Beginner',
-    type: 'Reading',
+    type: 'Vocabulary',
     imageLink:
-      'https://cdn.apartmenttherapy.info/image/upload/f_jpg,q_auto:eco,c_fill,g_auto,w_1500,ar_1:1/k%2FPhoto%2FSeries%2F2022-07-How-To-Make-an-Omelet-Step-by-Step%2F2022_July_K_EDR_OMELET_31904',
-    video: true,
+      'https://www.lebanesearabicinstitute.com/wp-content/uploads/2017/02/Alphabet.jpg',
+    video: false,
   },
   {
-    id: 33333,
-    titleEnglish: 'The Different Types of Clouds',
-    titleArabic: 'الأنواع المختلفة للسحب',
-    level: 'Intermediate',
-    type: 'Listening',
+    id: 1,
+    titleEnglish: 'Days of the Week',
+    titleArabic: 'أيام الأسبوع',
+    level: 'Beginner',
+    type: 'Vocabulary',
+    imageLink:
+      'https://ecdn.teacherspayteachers.com/thumbitem/%D8%A3%D9%8A%D8%A7%D9%85-%D8%A7%D9%84%D8%A3%D8%B3%D8%A8%D9%88%D8%B9-5774095-1624390540/original-5774095-1.jpg',
+  },
+  {
+    id: 2,
+    titleEnglish: 'Months of the Year',
+    titleArabic: 'أشهر السنة',
+    level: 'Beginner',
+    type: 'Vocabulary',
     imageLink: '',
-    video: false,
   },
   {
     id: 44444,
@@ -56,6 +63,33 @@ export const dummyLessons = [
     imageLink:
       'https://upload.wikimedia.org/wikipedia/commons/d/d9/Internal_organs.png',
     video: false,
+  },
+  {
+    id: 5,
+    titleEnglish: 'Colors',
+    titleArabic: 'الألوان',
+    level: 'Beginner',
+    type: 'Vocabulary',
+    imageLink:
+      'https://blog.khamsat.com/wp-content/uploads/2021/04/%D8%B9%D9%84%D9%85-%D9%86%D9%81%D8%B3-%D8%A7%D9%84%D8%A3%D9%84%D9%88%D8%A7%D9%86.jpg',
+  },
+  {
+    id: 6,
+    titleEnglish: 'Numbers',
+    titleArabic: 'الأرقام',
+    level: 'Beginner',
+    type: 'Vocabulary',
+    imageLink:
+      'https://media.licdn.com/dms/image/D4D12AQFARwQFHC3zww/article-cover_image-shrink_720_1280/0/1662013068402?e=2147483647&v=beta&t=V-YMzEdx1xwEQvnhZMllzYqpdfDldeGY-m0b6nrKwKY',
+  },
+  {
+    id: 7,
+    titleEnglish: 'Animals',
+    titleArabic: 'الحيوانات',
+    level: 'Intermediate',
+    type: 'Vocabulary',
+    imageLink:
+      'https://static.webteb.net/images/content/tbl_articles_article_17204_6546e0b64c-15a7-4501-95a0-864e67932185.jpg',
   },
   {
     id: 77777,
@@ -143,6 +177,23 @@ export const dummyLessons = [
     imageLink:
       'https://teachyourkidscode.com/wp-content/uploads/2022/02/best-coding-language-for-games.jpg',
     video: true,
+  },
+  {
+    id: 8,
+    titleEnglish: 'Food',
+    titleArabic: 'الطعام',
+    level: 'Intermediate',
+    type: 'Vocabulary',
+    imageLink:
+      'https://www.ibelieveinsci.com/wp-content/uploads/Variety_Image_747px.jpg',
+  },
+  {
+    id: 9,
+    titleEnglish: 'Body Parts',
+    titleArabic: 'أجزاء الجسم',
+    level: 'Advanced',
+    type: 'Vocabulary',
+    imageLink: '',
   },
   {
     id: 100006,

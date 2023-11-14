@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import NavBarButton from './NavBarButton';
-import Image from '../Image';
+import Image from '../footer/Image';
 import SearchBar from './SearchBar';
 import AccountCircleList from './AccountCircleList';
 
@@ -19,7 +19,7 @@ const StyledNavBar = styled.div`
 const ButtonsContainer = styled.div`
   display: flex;
   margin: 0 18% 0 25px;
-  width: 60%;
+  width: 50%;
   justify-content: space-between;
   align-items: center;
 
@@ -51,7 +51,6 @@ function NavBar() {
         />
         <NavBarButton name='HOME' navTo='/' />
         <NavBarButton name='LESSONS' navTo='/learn' />
-        <NavBarButton name='VOCABULARY' navTo='/vocabulary' />
         <NavBarButton name='QUIZZES' navTo='/quiz' />
         <NavBarButton name='PLACEMENT' navTo='/placement' />
         <NavBarButton name='ASK' navTo='/ask' />

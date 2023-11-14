@@ -134,9 +134,7 @@ function LessonBox({ lesson }) {
 
   return (
     <LinkReset
-      to={`/${type ? 'learn' : 'vocabulary'}/${replaceSpacesWithDashes(
-        titleEnglish.toLowerCase()
-      )}`}
+      to={`/learn/${replaceSpacesWithDashes(titleEnglish.toLowerCase())}`}
       state={{ id }}
     >
       <StyledLessonBox>
@@ -146,7 +144,7 @@ function LessonBox({ lesson }) {
         </TitleContainer>
         <InfoConatiner>
           <LevelInfo type={type}>{level}</LevelInfo>
-          {type && <TypeInfo>{type}</TypeInfo>}
+          {<TypeInfo>{type}</TypeInfo>}
         </InfoConatiner>
         <ImageContainer>
           {video && (

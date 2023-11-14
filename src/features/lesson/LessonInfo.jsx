@@ -1,10 +1,18 @@
 import styled from 'styled-components';
+import EdpuzzleVideo from './EdpuzzleVideo';
+import YoutubeVideo from './YoutubeVideo';
+import { isEdpuzzle } from '../../utility/stringOperations';
+import Transcript from './Transcript';
 
 const StyledLessonInfo = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px;
+`;
+
+const TitleContainer = styled.div`
+  margin-bottom: 20px;
 `;
 
 const Title = styled.h3`
@@ -16,7 +24,7 @@ const Title = styled.h3`
 const ImageContainer = styled.div`
   width: 80%;
   max-width: 600px;
-  margin: 20px auto;
+  margin: 0px auto;
   position: relative;
   overflow: hidden;
 `;
@@ -30,38 +38,22 @@ const Image = styled.img`
 function LessonInfo({ lesson }) {
   return (
     <StyledLessonInfo>
-      <Title>{lesson.titleEnglish}</Title>
-      <Title>{lesson.titleArabic}</Title>
-      <ImageContainer>
-        {lesson.video ? null : (
-          <Image src={lesson.imageLink} alt={lesson.titleEnglish} />
-        )}
-      </ImageContainer>
-      {/* <iframe
-        width='470'
-        height='404'
-        src='https://edpuzzle.com/embed/media/65414c42bb1e074025510209'
-        frameBorder='0'
-        allowfullscreen='true'
-      ></iframe> */}
-      {/* <iframe
-        width='560'
-        height='315'
-        src='https://www.youtube.com/embed/a3j6RvbSBlU?si=DxsTKWHx3RYleuTS'
-        title='YouTube video player'
-        frameBorder='0'
-        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-        allowfullscreen
-      ></iframe> */}
-      {/* <iframe
-        width='600'
-        height='400'
-        scrolling='no'
-        src='https://app.playpos.it/go/share/1852316/1661094/0/0/video-test'
-        allow='autoplay *;'
-        allowfullscreen='true'
-        frameBorder='0'
-      ></iframe> */}
+      <TitleContainer>
+        <Title>{lesson.titleArabic}</Title>
+        <Title>{lesson.titleEnglish}</Title>
+      </TitleContainer>
+      {!lesson.videoLink ? (
+        lesson.includeImage && (
+          <ImageContainer>
+            <Image src={lesson.imageLink} alt={lesson.titleEnglish} />
+          </ImageContainer>
+        )
+      ) : isEdpuzzle(lesson.videoLink) ? (
+        <EdpuzzleVideo url={lesson.videoLink} />
+      ) : (
+        <YoutubeVideo url={lesson.videoLink} />
+      )}
+      {lesson.videoText && <Transcript>{lesson.videoText}</Transcript>}
     </StyledLessonInfo>
   );
 }

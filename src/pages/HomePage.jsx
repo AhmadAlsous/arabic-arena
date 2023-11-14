@@ -1,7 +1,7 @@
 import HomePageBar from '../UI/homepage/HomePageBar';
 import LazyImage from '../UI/homepage/LazyImage';
 import OverviewContainer from '../UI/homepage/OverviewContainer';
-import Footer from '../UI/Footer';
+import Footer from '../UI/footer/Footer';
 import Features from '../UI/homepage/features';
 
 function HomePage() {

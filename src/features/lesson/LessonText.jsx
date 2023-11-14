@@ -7,13 +7,14 @@ const StyledLessonText = styled.div`
   line-height: 1.6;
   text-align: right;
   font-size: 1.2rem;
+  padding: 0 10%;
 `;
 
-function LessonText({ lesson }) {
+function LessonText({ text }) {
   return (
     <StyledLessonText
       dangerouslySetInnerHTML={{
-        __html: replaceNewLinesWithBreaks(lesson.text),
+        __html: replaceNewLinesWithBreaks(text),
       }}
     />
   );

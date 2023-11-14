@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import { questions } from '../data/DummyQuestions';
-import QuizQuestion from '../UI/QuizQuestion';
+import QuizQuestion from '../../UI/QuizQuestion';
 
-const QuizContainer = styled.div`
-  margin: 60px 10%;
+const StyledExerciseContainer = styled.div`
+  margin: 40px 10%;
   padding: 20px 25px 15px 25px;
-  border: 1px solid #bbb;
-  box-shadow: 0px 2px 20px 5px #d5d5d5;
+  border: 1px solid #eee;
+  box-shadow: 0 5px 20px 2px #ddd;
 `;
 
 const QuestionNumber = styled.h3`
@@ -20,7 +19,7 @@ const QuestionNumber = styled.h3`
 
 const ButtonsContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 15px;
 `;
 
@@ -30,63 +29,69 @@ const NavButtonsContainer = styled.div`
   gap: 10px;
 `;
 
-const dummyQuestions = questions;
-
-function Quiz() {
+function ExerciseContainer({ exercises }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedValue, setSelectedValue] = useState([]);
-  const [answers, setAnswers] = useState(
-    Array(dummyQuestions.length).fill(null)
-  );
+  const [isAnswerChecked, setIsAnswerChecked] = useState(false);
+  const [answers, setAnswers] = useState(Array(exercises.length).fill(null));
 
-  if (dummyQuestions.length === 0) return null;
+  if (exercises.length === 0) return null;
 
   const handleNext = () => {
     setCurrentQuestion((cur) => {
-      const newAnswers = [...answers];
-      newAnswers[currentQuestion] = selectedValue;
-      setAnswers(newAnswers);
       const nextQuestion = cur + 1;
       const isAnswered = answers[nextQuestion] != null;
+      setIsAnswerChecked(isAnswered);
       setSelectedValue(isAnswered ? answers[nextQuestion] : '');
       return nextQuestion;
     });
   };
 
   const handlePrevious = () => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion] = selectedValue;
-    setAnswers(newAnswers);
     setCurrentQuestion((cur) => {
       const prevQuestion = cur - 1;
       const isAnswered = answers[prevQuestion] != null;
+      setIsAnswerChecked(isAnswered);
       setSelectedValue(isAnswered ? answers[prevQuestion] : '');
       return prevQuestion;
     });
   };
 
+  const handleCheckAnswer = () => {
+    setIsAnswerChecked(true);
+    const newAnswers = [...answers];
+    newAnswers[currentQuestion] = selectedValue;
+    setAnswers(newAnswers);
+  };
+
   return (
-    <QuizContainer>
+    <StyledExerciseContainer>
       <QuestionNumber>
-        Question
-        {dummyQuestions.length !== 1
-          ? ` ${currentQuestion + 1} / ${dummyQuestions.length}`
+        Exercise
+        {exercises.length !== 1
+          ? ` ${currentQuestion + 1} / ${exercises.length}`
           : null}
       </QuestionNumber>
       <QuizQuestion
-        question={dummyQuestions[currentQuestion]}
+        question={exercises[currentQuestion]}
         selectedValue={selectedValue}
         setSelectedValue={setSelectedValue}
-        isAnswerChecked={false}
+        isAnswerChecked={isAnswerChecked}
       />
       <ButtonsContainer>
-        {dummyQuestions.length !== 1 && (
+        <Button
+          disabled={selectedValue.length == 0 || isAnswerChecked}
+          onClick={handleCheckAnswer}
+        >
+          Check Answer
+        </Button>
+        {exercises.length !== 1 && (
           <NavButtonsContainer>
             {currentQuestion !== 0 && (
               <Button onClick={handlePrevious}>Previous</Button>
             )}
             <Button
-              disabled={currentQuestion === dummyQuestions.length - 1}
+              disabled={currentQuestion === exercises.length - 1}
               onClick={handleNext}
             >
               Next
@@ -94,8 +99,8 @@ function Quiz() {
           </NavButtonsContainer>
         )}
       </ButtonsContainer>
-    </QuizContainer>
+    </StyledExerciseContainer>
   );
 }
 
-export default Quiz;
+export default ExerciseContainer;

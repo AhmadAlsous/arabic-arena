@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Image from '../Image';
+import Image from '../footer/Image';
 import Title from './Title';
 import MainPageButton from './MainPageButton';
 

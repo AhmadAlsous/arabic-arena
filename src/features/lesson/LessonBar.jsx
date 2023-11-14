@@ -40,18 +40,18 @@ const Title = styled.h3`
   }
 `;
 
-function LessonBar({ lesson, type }) {
+function LessonBar({ lesson }) {
   return (
     <StyledLessonBar>
       <Title>
-        {type}
+        Lessons
         <ChevronRightIcon />
         {lesson.titleEnglish}
       </Title>
       <TypesContainer>
-        <StyledLink to={type === 'Lessons' ? '/learn' : '/vocabulary'}>
+        <StyledLink to={'/learn'}>
           <ChevronLeftIcon />
-          Back to {type}
+          Back to Lessons
         </StyledLink>
       </TypesContainer>
     </StyledLessonBar>

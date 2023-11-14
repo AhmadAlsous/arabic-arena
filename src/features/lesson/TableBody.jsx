@@ -10,6 +10,10 @@ import { generateTableCells } from '../../utility/tableOperations';
 import { readText } from '../../services/textToSpeech';
 import SoundButton from '../../UI/SoundButton';
 
+const StyledTableContainer = styled(TableContainer)`
+  margin-bottom: 40px;
+`;
+
 const StyledTableCell = styled(TableCell)`
   && {
     font-size: 1.2rem;
@@ -44,7 +48,7 @@ const StyledTableRow = styled(TableRow)`
 
 function TableBody({ header, body, id }) {
   return (
-    <TableContainer component={Paper}>
+    <StyledTableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }}>
         <TableHead>
           <TableRow>
@@ -69,7 +73,7 @@ function TableBody({ header, body, id }) {
           ))}
         </MuiTableBody>
       </Table>
-    </TableContainer>
+    </StyledTableContainer>
   );
 }
 

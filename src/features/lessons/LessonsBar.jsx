@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import MenuComponent from '../../UI/Menu';
+import MenuComponent from '../../UI/header/Menu';
 
 const StyledLessonsBar = styled.div`
   display: flex;
@@ -13,9 +13,13 @@ const StyledLessonsBar = styled.div`
 const TypesContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: ${(props) => (props.type === undefined ? '135px' : '350px')};
+  width: 350px;
   font-size: 0.9rem;
   margin-right: 30px;
+
+  @media (max-width: 950px) {
+    width: 300px;
+  }
 `;
 
 const ButtonContainer = styled.span`
@@ -29,24 +33,29 @@ const Title = styled.h3`
   letter-spacing: 8px;
 `;
 
-function LessonsBar({ level, type, onChangeLevel, onChangeType, title }) {
-  const typeItems = ['All', 'Grammar', 'Listening', 'Writing', 'Reading'];
+function LessonsBar({ level, type, onChangeLevel, onChangeType }) {
+  const typeItems = [
+    'All',
+    'Grammar',
+    'Vocabulary',
+    'Listening',
+    'Writing',
+    'Reading',
+  ];
   const levelItems = ['All', 'Beginner', 'Intermediate', 'Advanced'];
 
   return (
     <StyledLessonsBar>
-      <Title>{title}</Title>
+      <Title>LESSONS</Title>
       <TypesContainer type={type}>
-        {type && (
-          <div>
-            Type
-            <MenuComponent
-              selectedValue={type}
-              onChange={onChangeType}
-              items={typeItems}
-            />
-          </div>
-        )}
+        <div>
+          Type
+          <MenuComponent
+            selectedValue={type}
+            onChange={onChangeType}
+            items={typeItems}
+          />
+        </div>
         <div>
           Level
           <ButtonContainer>
