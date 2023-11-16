@@ -6,7 +6,7 @@ import Layout from './pages/Layout';
 import Lessons from './features/lessons/Lessons';
 import Lesson from './features/lesson/Lesson';
 import Forum from './features/Forum';
-import Quiz from './features/Quiz';
+import Quiz from './features/quiz/Quiz';
 import GlobalStyle from './GlobalStyle';
 import PlacementTest from './features/PlacementTest';
 import Settings from './features/Settings';

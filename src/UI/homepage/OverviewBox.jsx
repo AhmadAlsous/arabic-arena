@@ -10,6 +10,7 @@ const StyledTitle = styled.h3`
   font-size: 1.3rem;
   letter-spacing: 2px;
   margin-bottom: 7px;
+  font-family: 'Feather';
 `;
 
 const StyledText = styled.p`

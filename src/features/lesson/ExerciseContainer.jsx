@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import QuizQuestion from '../../UI/QuizQuestion';
+import QuizQuestion from '../quiz/QuizQuestion';
 
 const StyledExerciseContainer = styled.div`
   margin: 40px 10%;

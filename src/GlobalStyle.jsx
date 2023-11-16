@@ -11,6 +11,11 @@ const GlobalStyle = createGlobalStyle`
   src: url('/fonts/ReemKufi-Bold.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Feather';
+  src: url('/fonts/Feather Bold.ttf') format('truetype');
+}
+
 :root {
   --primary-blue-500: #43a0d8;
   --primary-blue-400: #3680ad;

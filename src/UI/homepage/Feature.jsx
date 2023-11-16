@@ -14,6 +14,7 @@ const Styledfeature = styled.div`
 const FeatureTitle = styled.h4`
   font-size: 1.5rem;
   margin: 0 0 10px 0;
+  font-family: 'Feather';
 `;
 
 const FeatureDescription = styled.p`

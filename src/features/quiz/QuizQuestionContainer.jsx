@@ -1,14 +1,19 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
-import { questions } from '../data/DummyQuestions';
-import QuizQuestion from '../UI/QuizQuestion';
+import { questions } from '../../data/DummyQuestions';
+import QuizQuestion from './QuizQuestion';
 
 const QuizContainer = styled.div`
-  margin: 60px 10%;
+  margin: 40px 10%;
   padding: 20px 25px 15px 25px;
   border: 1px solid #bbb;
   box-shadow: 0px 2px 20px 5px #d5d5d5;
+`;
+
+const QuizHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const QuestionNumber = styled.h3`
@@ -16,6 +21,11 @@ const QuestionNumber = styled.h3`
   font-weight: 500;
   margin: 0 0 20px 0;
   letter-spacing: 2px;
+`;
+
+const TimerContainer = styled.div`
+  margin-right: 10px;
+  font-size: 1.3rem;
 `;
 
 const ButtonsContainer = styled.div`
@@ -32,7 +42,7 @@ const NavButtonsContainer = styled.div`
 
 const dummyQuestions = questions;
 
-function Quiz() {
+function QuizQuestionContainer() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedValue, setSelectedValue] = useState([]);
   const [answers, setAnswers] = useState(
@@ -67,12 +77,15 @@ function Quiz() {
 
   return (
     <QuizContainer>
-      <QuestionNumber>
-        Question
-        {dummyQuestions.length !== 1
-          ? ` ${currentQuestion + 1} / ${dummyQuestions.length}`
-          : null}
-      </QuestionNumber>
+      <QuizHeader>
+        <QuestionNumber>
+          Question
+          {dummyQuestions.length !== 1
+            ? ` ${currentQuestion + 1} / ${dummyQuestions.length}`
+            : null}
+        </QuestionNumber>
+        <TimerContainer>00:30:00</TimerContainer>
+      </QuizHeader>
       <QuizQuestion
         question={dummyQuestions[currentQuestion]}
         selectedValue={selectedValue}
@@ -98,4 +111,4 @@ function Quiz() {
   );
 }
 
-export default Quiz;
+export default QuizQuestionContainer;
