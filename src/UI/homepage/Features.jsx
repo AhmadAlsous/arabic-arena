@@ -8,7 +8,7 @@ const StyledFeatures = styled.div`
   gap: 100px 30px;
   align-items: center;
   width: 100%;
-  background-color: #fff;
+  background-color: #f0f0f0;
   padding: 80px 0;
 
   & > :nth-child(odd) {

@@ -10,6 +10,11 @@ export function replaceNewLinesWithBreaks(str) {
   return str.replace(/\n/g, '<br>');
 }
 
+export function formatTime(time) {
+  if (time < 10) return `0${time}`;
+  else return time;
+}
+
 export function constructEmbedUrl(url) {
   let videoId = url.split('/').pop();
   if (isEdpuzzle(url)) {

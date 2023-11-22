@@ -16,6 +16,11 @@ const GlobalStyle = createGlobalStyle`
   src: url('/fonts/Feather Bold.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Din-round';
+  src: url('/fonts/DINRoundPro-Medi.ttf') format('truetype');
+}
+
 :root {
   --primary-blue-500: #43a0d8;
   --primary-blue-400: #3680ad;
@@ -80,6 +85,10 @@ select:disabled,
 input:disabled {
   background-color: var(--color-grey-200);
   color: var(--color-grey-500);
+}
+
+* {
+  font-family: 'Din-round';
 }
 `;
 

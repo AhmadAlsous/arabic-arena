@@ -6,8 +6,8 @@ import QuizQuestion from '../quiz/QuizQuestion';
 const StyledExerciseContainer = styled.div`
   margin: 40px 10%;
   padding: 20px 25px 15px 25px;
-  border: 1px solid #eee;
-  box-shadow: 0 5px 20px 2px #ddd;
+  border: 1px solid #bbb;
+  box-shadow: 0 5px 20px 2px #ccc;
 `;
 
 const QuestionNumber = styled.h3`

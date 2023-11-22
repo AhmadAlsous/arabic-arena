@@ -12,14 +12,14 @@ const StyledNavBar = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  background-color: #ffffff;
+  background-color: #f0f0f0;
   box-shadow: 0 3px 20px 4px black;
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
   margin: 0 18% 0 25px;
-  width: 50%;
+  width: 45%;
   justify-content: space-between;
   align-items: center;
 
@@ -53,7 +53,7 @@ function NavBar() {
         <NavBarButton name='LESSONS' navTo='/learn' />
         <NavBarButton name='QUIZZES' navTo='/quiz' />
         <NavBarButton name='PLACEMENT' navTo='/placement' />
-        <NavBarButton name='ASK' navTo='/ask' />
+        {/* <NavBarButton name='ASK' navTo='/ask' /> */}
       </ButtonsContainer>
       <SearchContainer>
         <SearchBar />

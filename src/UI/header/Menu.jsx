@@ -9,6 +9,7 @@ const Button = styled.button`
   padding: 10px 20px;
   font-size: 1.1rem;
   position: relative;
+  color: black;
 
   &::before {
     content: '';

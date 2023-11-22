@@ -10,6 +10,7 @@ import Quiz from './features/quiz/Quiz';
 import GlobalStyle from './GlobalStyle';
 import PlacementTest from './features/PlacementTest';
 import Settings from './features/Settings';
+import Quizzes from './features/quizzes/quizzes';
 
 const router = createBrowserRouter([
   { path: '/', element: <HomePage /> },
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/learn', element: <Lessons /> },
       { path: '/learn/:lesson', element: <Lesson /> },
-      { path: '/quiz', element: <Quiz /> },
+      { path: '/quiz', element: <Quizzes /> },
       { path: '/quiz/:quiz', element: <Quiz /> },
       { path: '/placement', element: <PlacementTest /> },
       { path: '/ask', element: <Forum /> },

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import LessonBox from './lessonBox';
+import QuizStartConfirm from '../quizzes/QuizStartConfirm';
 
 const StyledLessonsContainer = styled.div`
   display: grid;
@@ -11,12 +12,20 @@ const StyledLessonsContainer = styled.div`
   padding: 50px 30px;
 `;
 
-function LessonsContainer({ lessons }) {
+function LessonsContainer({ lessons, isQuiz }) {
   return (
     <StyledLessonsContainer>
-      {lessons.map((lesson) => (
-        <LessonBox key={lesson.id} lesson={lesson} />
-      ))}
+      {lessons.map((lesson) =>
+        isQuiz ? (
+          <QuizStartConfirm
+            key={lesson.quizId}
+            quiz={lesson}
+            type={'confirm'}
+          />
+        ) : (
+          <LessonBox key={lesson.id} lesson={lesson} />
+        )
+      )}
     </StyledLessonsContainer>
   );
 }

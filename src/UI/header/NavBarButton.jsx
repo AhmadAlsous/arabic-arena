@@ -2,10 +2,6 @@ import { NavLinkReset } from '../../utility/LinkReset';
 import styled from 'styled-components';
 
 const StyledButton = styled(NavLinkReset)`
-  border: none;
-  background-color: transparent;
-  font-size: 0.85rem;
-  letter-spacing: 3px;
   height: 40px;
   position: relative;
   display: flex;
@@ -40,9 +36,13 @@ const StyledButton = styled(NavLinkReset)`
   }
 
   &.active {
-    font-weight: bold;
     border-bottom: 2px solid var(--primary-blue-500);
   }
+`;
+
+const Button = styled.div`
+  font-size: 1rem;
+  letter-spacing: 1px;
 `;
 
 function NavBarButton({ name, navTo }) {
@@ -51,7 +51,7 @@ function NavBarButton({ name, navTo }) {
       to={navTo}
       className={({ isActive }) => (isActive ? 'active' : '')}
     >
-      {name}
+      <Button>{name}</Button>
     </StyledButton>
   );
 }

@@ -16,9 +16,10 @@ const TypesContainer = styled.div`
   width: 350px;
   font-size: 0.9rem;
   margin-right: 30px;
+  color: #555;
 
-  @media (max-width: 950px) {
-    width: 300px;
+  @media (max-width: 1100px) {
+    width: 320px;
   }
 `;
 
@@ -33,7 +34,7 @@ const Title = styled.h3`
   letter-spacing: 8px;
 `;
 
-function LessonsBar({ level, type, onChangeLevel, onChangeType }) {
+function LessonsBar({ level, type, onChangeLevel, onChangeType, isQuiz }) {
   const typeItems = [
     'All',
     'Grammar',
@@ -46,7 +47,7 @@ function LessonsBar({ level, type, onChangeLevel, onChangeType }) {
 
   return (
     <StyledLessonsBar>
-      <Title>LESSONS</Title>
+      <Title>{isQuiz ? 'QUIZZES' : 'LESSONS'}</Title>
       <TypesContainer type={type}>
         <div>
           Type

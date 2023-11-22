@@ -14,7 +14,8 @@ const StyledTitle = styled.h3`
 `;
 
 const StyledText = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
+  font-family: 'Din-round';
 `;
 
 function OverviewBox({ title, children }) {

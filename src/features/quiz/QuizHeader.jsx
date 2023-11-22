@@ -21,13 +21,38 @@ const Title = styled.h3`
   margin-left: 10px;
 `;
 
-function QuizHeader({ questions }) {
+function QuizHeader({
+  isPlacement,
+  quizLevel,
+  quizType,
+  questions,
+  currentQuestion,
+  setCurrentQuestion,
+  answers,
+  setAnswers,
+  selectedValue,
+  isSubmitted,
+  setIsSubmitted,
+  isAnswerChecked,
+}) {
   return (
     <StyledLessonBar>
-      <Title>Beginner Vocabulary Quiz</Title>
-      <NavContainer>
-        <QuestionsMenuButton questions={questions} />
-      </NavContainer>
+      <Title>
+        {isPlacement ? 'Placement Test' : `${quizLevel} ${quizType} Quiz`}
+      </Title>
+      {!isSubmitted && !isAnswerChecked && (
+        <NavContainer>
+          <QuestionsMenuButton
+            questions={questions}
+            currentQuestion={currentQuestion}
+            setCurrentQuestion={setCurrentQuestion}
+            answers={answers}
+            setIsSubmitted={setIsSubmitted}
+            setAnswers={setAnswers}
+            selectedValue={selectedValue}
+          />
+        </NavContainer>
+      )}
     </StyledLessonBar>
   );
 }

@@ -130,45 +130,21 @@ export const questions = [
   },
   {
     questionId: '6',
-    questionArabic: 'أي الآفعال التالية فعل مضارع؟',
-    questionEnglish: 'Which of the following verbs is in the present tense?',
+    questionArabic: 'ما هي الأحرف التي تتشكل منها الكلمة التالية؟',
+    questionEnglish: 'Which letters make up the following word?',
+    audioWord: 'مَلِكْ',
     questionType: 'AllThatApply',
     options: [
       {
-        option: 'يكتب',
+        option: 'الميم',
         optionId: '1',
       },
       {
-        option: 'كتب',
+        option: 'اللام',
         optionId: '2',
       },
       {
-        option: 'اكتب',
-        optionId: '3',
-      },
-      {
-        option: 'تكتب',
-        optionId: '4',
-      },
-    ],
-    correctAnswer: ['1', '4'],
-  },
-  {
-    questionId: '7',
-    questionArabic: 'ما هو الحرف الأخير في اللغة العربية؟',
-    questionEnglish: 'What is the last letter in the Arabic language?',
-    questionType: 'multipleChoice',
-    options: [
-      {
-        option: 'الألف',
-        optionId: '1',
-      },
-      {
-        option: 'الياء',
-        optionId: '2',
-      },
-      {
-        option: 'الواو',
+        option: 'الكاف',
         optionId: '3',
       },
       {
@@ -176,35 +152,6 @@ export const questions = [
         optionId: '4',
       },
     ],
-    correctAnswer: ['2'],
-  },
-  {
-    questionId: '8',
-    questionArabic: 'أي من الأحرف التالية حرف مد؟',
-    questionEnglish: 'Which of the following letters is a long vowel?',
-    questionType: 'AllThatApply',
-    options: [
-      {
-        option: 'الألف',
-        optionId: '1',
-      },
-      {
-        option: 'النون',
-        optionId: '2',
-      },
-      {
-        option: 'التاء',
-        optionId: '3',
-      },
-      {
-        option: 'الواو',
-        optionId: '4',
-      },
-      {
-        option: 'الياء',
-        optionId: '5',
-      },
-    ],
-    correctAnswer: ['1', '4', '5'],
+    correctAnswer: ['1', '2', '3'],
   },
 ];

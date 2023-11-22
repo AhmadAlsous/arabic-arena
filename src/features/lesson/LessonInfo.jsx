@@ -13,12 +13,14 @@ const StyledLessonInfo = styled.div`
 
 const TitleContainer = styled.div`
   margin-bottom: 20px;
+  font-family: 'Feather';
 `;
 
 const Title = styled.h3`
   margin: 10px 0;
   font-size: 1.5rem;
   text-align: center;
+  letter-spacing: 1px;
 `;
 
 const ImageContainer = styled.div`

@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import { useState } from 'react';
 import Button from '@mui/material/Button';
-import { questions } from '../../data/DummyQuestions';
 import QuizQuestion from './QuizQuestion';
+import QuizTimer from './QuizTimer';
+import QuizSubmitModal from './QuizSubmitModal';
 
 const QuizContainer = styled.div`
   margin: 40px 10%;
   padding: 20px 25px 15px 25px;
   border: 1px solid #bbb;
-  box-shadow: 0px 2px 20px 5px #d5d5d5;
+  box-shadow: 0px 2px 20px 3px #d9d9d9;
 `;
 
 const QuizHeader = styled.div`
@@ -30,7 +30,7 @@ const TimerContainer = styled.div`
 
 const ButtonsContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   margin-top: 15px;
 `;
 
@@ -40,16 +40,22 @@ const NavButtonsContainer = styled.div`
   gap: 10px;
 `;
 
-const dummyQuestions = questions;
+function QuizQuestionContainer({
+  time: timeLimit,
+  answers,
+  setAnswers,
+  currentQuestion,
+  setCurrentQuestion,
+  selectedValue,
+  setSelectedValue,
+  setIsSubmitted,
+  isAnswerChecked,
+  questions,
+}) {
+  const time = new Date();
+  time.setSeconds(time.getSeconds() + timeLimit * 60);
 
-function QuizQuestionContainer() {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedValue, setSelectedValue] = useState([]);
-  const [answers, setAnswers] = useState(
-    Array(dummyQuestions.length).fill(null)
-  );
-
-  if (dummyQuestions.length === 0) return null;
+  if (questions.length === 0) return null;
 
   const handleNext = () => {
     setCurrentQuestion((cur) => {
@@ -75,35 +81,64 @@ function QuizQuestionContainer() {
     });
   };
 
+  const handleClear = () => {
+    setSelectedValue([]);
+  };
+
+  const handleSubmit = () => {
+    const newAnswers = [...answers];
+    newAnswers[currentQuestion] = selectedValue;
+    setAnswers(newAnswers);
+    setIsSubmitted(true);
+  };
+
   return (
     <QuizContainer>
       <QuizHeader>
         <QuestionNumber>
           Question
-          {dummyQuestions.length !== 1
-            ? ` ${currentQuestion + 1} / ${dummyQuestions.length}`
+          {questions.length !== 1
+            ? ` ${currentQuestion + 1} / ${questions.length}`
             : null}
         </QuestionNumber>
-        <TimerContainer>00:30:00</TimerContainer>
+        {!isAnswerChecked && (
+          <TimerContainer>
+            <QuizTimer submit={handleSubmit} expiryTimestamp={time} />
+          </TimerContainer>
+        )}
       </QuizHeader>
       <QuizQuestion
-        question={dummyQuestions[currentQuestion]}
+        question={questions[currentQuestion]}
         selectedValue={selectedValue}
         setSelectedValue={setSelectedValue}
-        isAnswerChecked={false}
+        isAnswerChecked={isAnswerChecked}
       />
       <ButtonsContainer>
-        {dummyQuestions.length !== 1 && (
+        {!isAnswerChecked ? (
+          <Button disabled={selectedValue.length == 0} onClick={handleClear}>
+            Clear Choice
+          </Button>
+        ) : (
+          <div></div>
+        )}
+        {questions.length !== 1 && (
           <NavButtonsContainer>
             {currentQuestion !== 0 && (
               <Button onClick={handlePrevious}>Previous</Button>
             )}
-            <Button
-              disabled={currentQuestion === dummyQuestions.length - 1}
-              onClick={handleNext}
-            >
-              Next
-            </Button>
+            {currentQuestion === questions.length - 1 && !isAnswerChecked ? (
+              <QuizSubmitModal
+                btn={'Submit'}
+                onSubmit={handleSubmit}
+                type={'submit'}
+              />
+            ) : currentQuestion === questions.length - 1 && isAnswerChecked ? (
+              <Button onClick={() => setIsSubmitted(true)}>
+                Finish Review
+              </Button>
+            ) : (
+              <Button onClick={handleNext}>Next</Button>
+            )}
           </NavButtonsContainer>
         )}
       </ButtonsContainer>

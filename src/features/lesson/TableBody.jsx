@@ -11,7 +11,7 @@ import { readText } from '../../services/textToSpeech';
 import SoundButton from '../../UI/SoundButton';
 
 const StyledTableContainer = styled(TableContainer)`
-  margin-bottom: 40px;
+  margin: -15px 0 40px 0;
 `;
 
 const StyledTableCell = styled(TableCell)`

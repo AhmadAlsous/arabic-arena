@@ -8,7 +8,7 @@ const ImageContainer = styled.div`
   width: 55%;
   height: 400px;
   overflow: hidden;
-  background-color: #fff;
+  background-color: #f0f0f0;
 
   @media (max-width: 1300px) {
     width: 70%;
@@ -28,7 +28,7 @@ const ImageContainer = styled.div`
 const ImageWrapper = styled.div`
   position: relative;
   width: 95%;
-  background-color: #fff;
+  background-color: #f0f0f0;
 `;
 
 const StyledImg = styled.img`

@@ -43,6 +43,7 @@ const Title = styled.h3`
   margin: 5px 0;
   font-size: 1rem;
   text-align: center;
+  font-family: 'Feather';
 `;
 
 const InfoConatiner = styled.div`
@@ -58,6 +59,7 @@ const LevelInfo = styled.div`
   padding: 10px 0;
   letter-spacing: 1px;
   background-color: var(--primary-blue-dark-500);
+  font-family: 'Din-round';
   border-right: ${(props) => props.type && '0.5px solid #ffffff'};
 `;
 
@@ -67,6 +69,7 @@ const TypeInfo = styled.div`
   padding: 10px 0;
   letter-spacing: 1px;
   background-color: var(--primary-blue-dark-500);
+  font-family: 'Din-round';
   border-left: 0.5px solid #ffffff;
 `;
 
@@ -144,7 +147,7 @@ function LessonBox({ lesson }) {
         </TitleContainer>
         <InfoConatiner>
           <LevelInfo type={type}>{level}</LevelInfo>
-          {<TypeInfo>{type}</TypeInfo>}
+          <TypeInfo>{type}</TypeInfo>
         </InfoConatiner>
         <ImageContainer>
           {video && (

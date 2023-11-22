@@ -5,7 +5,6 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import EmailIcon from '@mui/icons-material/Email';
 import Image from './Image';
 import FeedbackModal from './FeedbackModal';
-import FeedbackForm from './FeedbackForm';
 
 const StyledFooter = styled.footer`
   display: grid;

@@ -2,18 +2,28 @@ import { useState, forwardRef } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
 import clsx from 'clsx';
+import Button from '@mui/material/Button';
 import { Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import HandlerButton from '@mui/material/Button';
 import FeedbackForm from './FeedbackForm';
+import QuizBox from '../../features/quizzes/QuizBox';
+import { LinkReset } from '../../utility/LinkReset';
+import { replaceSpacesWithDashes } from '../../utility/stringOperations';
 
-const Button = styled.button`
+const FeedbackButton = styled.button`
   background-color: transparent;
   border: none;
 
   &:hover {
     border-bottom: 1px solid #fff;
   }
+`;
+
+const NoneButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 `;
 
 const CloseButton = styled.button`
@@ -33,31 +43,73 @@ const ButtonContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-function FeedbackModal({ btn, children, type }) {
+function FeedbackModal({
+  btn,
+  children,
+  type,
+  onClose,
+  width = 600,
+  onSubmit,
+  quiz,
+}) {
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    if (onClose) onClose();
+    setOpen(false);
+  };
+  const handleSubmit = () => {
+    handleClose();
+    if (onSubmit) onSubmit();
+  };
 
   return (
     <div>
-      <Button onClick={handleOpen}>{btn}</Button>
+      {type === 'submit' ? (
+        <Button onClick={handleOpen}>{btn}</Button>
+      ) : type === 'confirm' ? (
+        <NoneButton onClick={handleOpen}>
+          <QuizBox quiz={quiz} />
+        </NoneButton>
+      ) : (
+        <FeedbackButton onClick={handleOpen}>{btn}</FeedbackButton>
+      )}
       <Modal
         open={open}
         onClose={handleClose}
         slots={{ backdrop: StyledBackdrop }}
       >
-        <ModalContent sx={{ width: 600 }}>
+        <ModalContent sx={{ width }}>
           <CloseButton onClick={handleClose}>
             <CloseIcon />
           </CloseButton>
-          <FeedbackForm type={type}>{children}</FeedbackForm>
+          {type === 'feedback' || type === 'problem' ? (
+            <FeedbackForm type={type}>{children}</FeedbackForm>
+          ) : (
+            children
+          )}
           <ButtonContainer>
             <HandlerButton variant='outlined' onClick={handleClose}>
               Cancel
             </HandlerButton>
-            <HandlerButton variant='contained' onClick={handleClose}>
-              Submit
-            </HandlerButton>
+            {type === 'confirm' ? (
+              <LinkReset
+                to={`/quiz/${replaceSpacesWithDashes(
+                  quiz.titleEnglish.toLowerCase()
+                )}`}
+                state={{ quizId: quiz.quizId }}
+              >
+                <HandlerButton variant='contained' onClick={handleSubmit}>
+                  Start
+                </HandlerButton>
+              </LinkReset>
+            ) : (
+              <HandlerButton variant='contained' onClick={handleSubmit}>
+                Submit
+              </HandlerButton>
+            )}
           </ButtonContainer>
         </ModalContent>
       </Modal>
@@ -100,7 +152,7 @@ const ModalContent = styled(Box)`
   flex-direction: column;
   gap: 8px;
   overflow: hidden;
-  background-color: #fff;
+  background-color: #f0f0f0;
   border-radius: 8px;
   border: 1px solid #dae2ed;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);

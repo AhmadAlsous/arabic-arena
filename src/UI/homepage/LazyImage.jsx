@@ -12,7 +12,7 @@ const ImageContainer = styled.div`
 
 const ImageWrapper = styled.div`
   position: relative;
-  width: 95%;
+  width: 90%;
   background-color: var(--homepage-grey);
 
   &::before {

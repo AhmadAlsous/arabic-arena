@@ -33,7 +33,15 @@ const Icon = styled(ArrowDropDownIcon)`
   top: 7px;
 `;
 
-function QuestionsMenuButton({ questions }) {
+function QuestionsMenuButton({
+  questions,
+  currentQuestion,
+  setCurrentQuestion,
+  answers,
+  setAnswers,
+  selectedValue,
+  setIsSubmitted,
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -57,7 +65,16 @@ function QuestionsMenuButton({ questions }) {
         open={Boolean(anchorEl)}
         onClose={() => handleClose()}
       >
-        <QuestionsMenu questions={questions} />
+        <QuestionsMenu
+          questions={questions}
+          currentQuestion={currentQuestion}
+          setCurrentQuestion={setCurrentQuestion}
+          answers={answers}
+          handleClose={handleClose}
+          setIsSubmitted={setIsSubmitted}
+          setAnswers={setAnswers}
+          selectedValue={selectedValue}
+        />
       </Menu>
     </>
   );

@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import VolumeUpIcon from '@mui/icons-material/VolumeUp';
 import VolumeUpOutlinedIcon from '@mui/icons-material/VolumeUpOutlined';
+import { Button } from '@mui/material';
 
-const StyledButton = styled.button`
+const StyledButton = styled(Button)`
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -24,11 +25,20 @@ const StyledButton = styled.button`
   }
 `;
 
-function SoundButton({ onClick }) {
+function SoundButton({ onClick, isQuestion }) {
   return (
-    <StyledButton onClick={onClick}>
+    <StyledButton
+      variant={isQuestion ? 'outlined' : 'text'}
+      sx={{
+        color: 'black',
+        borderColor: 'black',
+        ':hover': { borderColor: 'black', backgroundColor: 'transparent' },
+      }}
+      onClick={onClick}
+    >
       <VolumeUpIcon className='volume-up-icon' />
       <VolumeUpOutlinedIcon className='volume-up-outlined-icon' />
+      &nbsp;{isQuestion && `Click here`}
     </StyledButton>
   );
 }

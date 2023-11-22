@@ -20,6 +20,8 @@ const FeatureTitle = styled.h4`
 const FeatureDescription = styled.p`
   font-size: 1rem;
   line-height: 1.4;
+  color: #444;
+  font-family: 'Din-round';
 `;
 
 function Feature({ title, children }) {

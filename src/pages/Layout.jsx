@@ -15,7 +15,7 @@ const Content = styled.div`
 `;
 
 const OutletContainer = styled.div`
-  background-color: #ffffff;
+  background-color: #f0f0f0;
   margin: 50px 15%;
   padding: 0 50px 20px 50px;
   box-shadow: 0 5px 20px 3px black;
