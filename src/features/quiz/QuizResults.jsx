@@ -6,12 +6,14 @@ import {
   getPlacement,
   getResult,
 } from '../../utility/quizCalculations';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const StyledQuizResults = styled.div`
   margin: 40px 10%;
   padding: 20px 25px 15px 25px;
   border: 1px solid #bbb;
   box-shadow: 0px 2px 20px 3px #d9d9d9;
+  background-color: #fff;
 `;
 
 const QuizHeader = styled.div`
@@ -54,18 +56,13 @@ const ButtonsContainer = styled.div`
   padding: 10px 0 0 0;
 `;
 
-function QuizResults({
-  isPlacement,
-  setIsSubmitted,
-  setIsAnswerChecked,
-  setCurrentQuestion,
-  questions,
-  answers,
-}) {
+function QuizResults({ isPlacement, setIsAnswerChecked, questions, answers }) {
+  const navigate = useNavigate();
+  const { quiz } = useParams();
+
   const handleClick = () => {
-    setIsSubmitted(false);
     setIsAnswerChecked(true);
-    setCurrentQuestion(0);
+    navigate(isPlacement ? `/placement/review` : `/quiz/${quiz}/review`);
   };
 
   const numCorrectAnswers = getResult(questions, answers);

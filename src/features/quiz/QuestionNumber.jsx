@@ -34,12 +34,12 @@ function QuestionNumber({
   questionNumber,
   status,
   isActive,
-  setCurrentQuestion,
   handleClose,
+  handleQuestionChange,
 }) {
   const handleClick = () => {
     handleClose();
-    setCurrentQuestion(questionNumber - 1);
+    handleQuestionChange(questionNumber);
   };
 
   return (

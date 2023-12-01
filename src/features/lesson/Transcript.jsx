@@ -10,6 +10,10 @@ import { replaceNewLinesWithBreaks } from '../../utility/stringOperations';
 const StyledTranscript = styled.div`
   margin-top: 20px;
   padding: 0 5%;
+
+  @media (min-width: 1792px) {
+    padding: 0 7%;
+  }
 `;
 
 const Shadow = styled.div`
@@ -25,10 +29,11 @@ const Summary = styled.h4`
 const Text = styled(AccordionDetails)`
   margin: 10px 0 0 0;
   direction: rtl;
-  font-family: 'Arial', 'Tahoma', sans-serif;
+  font-family: 'Greta', 'Arial', 'Helvetica', sans-serif;
   text-align: right;
   line-height: 1.6;
   font-size: 1.1rem;
+  color: #333;
 `;
 
 function Transcript({ children }) {

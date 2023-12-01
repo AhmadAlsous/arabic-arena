@@ -21,6 +21,16 @@ const GlobalStyle = createGlobalStyle`
   src: url('/fonts/DINRoundPro-Medi.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Al-Jazeera';
+  src: url('/fonts/Al-Jazeera-Arabic Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Greta';
+  src: url('/fonts/Greta Arabic Regular.ttf') format('truetype');
+}
+
 :root {
   --primary-blue-500: #43a0d8;
   --primary-blue-400: #3680ad;
@@ -88,7 +98,7 @@ input:disabled {
 }
 
 * {
-  font-family: 'Din-round';
+  font-family: 'Din-round', sans-serif;
 }
 `;
 

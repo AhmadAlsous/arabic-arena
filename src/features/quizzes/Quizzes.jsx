@@ -9,8 +9,8 @@ function Quizzes() {
   const [selectedType, setSelectedType] = useState('All');
   const filteredQuizzes = quizzes.filter(
     (lesson) =>
-      (selectedLevel === 'All' || lesson.quizLevel === selectedLevel) &&
-      (selectedType === 'All' || lesson.quizType === selectedType)
+      (selectedLevel === 'All' || lesson.level === selectedLevel) &&
+      (selectedType === 'All' || lesson.type === selectedType)
   );
 
   return (

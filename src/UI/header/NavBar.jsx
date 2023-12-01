@@ -12,7 +12,8 @@ const StyledNavBar = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  background-color: #f0f0f0;
+  background-color: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
   box-shadow: 0 3px 20px 4px black;
 `;
 

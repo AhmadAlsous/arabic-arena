@@ -10,8 +10,17 @@ import { generateTableCells } from '../../utility/tableOperations';
 import { readText } from '../../services/textToSpeech';
 import SoundButton from '../../UI/SoundButton';
 
+const WholeContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const Container = styled.div`
+  width: 80%;
+`;
+
 const StyledTableContainer = styled(TableContainer)`
-  margin: -15px 0 40px 0;
+  margin: 0px 0 30px 0;
 `;
 
 const StyledTableCell = styled(TableCell)`
@@ -28,8 +37,8 @@ const StyledTableHeadCell = styled(StyledTableCell)`
   && {
     font-size: 1.2rem;
     background-color: var(--primary-blue-dark-500);
+    font-family: 'Din-round';
     color: #ffffff;
-    font-weight: 700;
     @media (max-width: 1200px) {
       font-size: 1rem;
     }
@@ -48,32 +57,36 @@ const StyledTableRow = styled(TableRow)`
 
 function TableBody({ header, body, id }) {
   return (
-    <StyledTableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }}>
-        <TableHead>
-          <TableRow>
-            {header.map((word) => (
-              <StyledTableHeadCell key={word} align='center'>
-                {word}
-              </StyledTableHeadCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <MuiTableBody>
-          {body.map((obj) => (
-            <StyledTableRow
-              key={obj[id]}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              {generateTableCells(obj)}
-              <StyledTableCell align='center'>
-                <SoundButton onClick={() => readText(obj[id])} />
-              </StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </MuiTableBody>
-      </Table>
-    </StyledTableContainer>
+    <WholeContainer>
+      <Container>
+        <StyledTableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                {header.map((word) => (
+                  <StyledTableHeadCell key={word} align='center'>
+                    {word}
+                  </StyledTableHeadCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <MuiTableBody>
+              {body.map((obj) => (
+                <StyledTableRow
+                  key={obj[id]}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  {generateTableCells(obj)}
+                  <StyledTableCell align='center'>
+                    <SoundButton onClick={() => readText(obj[id])} />
+                  </StyledTableCell>
+                </StyledTableRow>
+              ))}
+            </MuiTableBody>
+          </Table>
+        </StyledTableContainer>
+      </Container>
+    </WholeContainer>
   );
 }
 

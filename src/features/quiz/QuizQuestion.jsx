@@ -16,7 +16,7 @@ const QuestionContainer = styled.div`
 const QuestionTextContainer = styled.div`
   text-align: center;
   margin: 10px 0;
-  background-color: #ededed;
+  background-color: #f0f0f0;
   margin-bottom: 15px;
   letter-spacing: 1px;
   padding: 8px 5px;
@@ -27,6 +27,11 @@ const Question = styled.h3`
   padding: 0;
   font-size: 1.2rem;
   font-weight: 500;
+  color: #222;
+`;
+
+const Arabic = styled.span`
+  font-family: 'Al-Jazeera';
 `;
 
 const ButtonContainer = styled.div`
@@ -93,8 +98,10 @@ function QuizQuestion({
   return (
     <QuestionContainer>
       <QuestionTextContainer>
-        <Question>{questionArabic}</Question>
-        {questionEnglish && <Question>{questionEnglish}</Question>}
+        <Question>
+          <Arabic>{questionArabic}</Arabic>
+        </Question>
+        <Question>{questionEnglish}</Question>
         {audioWord && (
           <ButtonContainer>
             <SoundButton

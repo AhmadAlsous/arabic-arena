@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import { LinkReset } from '../../utility/LinkReset';
 import { replaceSpacesWithDashes } from '../../utility/stringOperations';
-import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import styled from 'styled-components';
 
 const StyledLessonBox = styled.div`
@@ -9,7 +9,7 @@ const StyledLessonBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 5px 10px 2px grey;
+  box-shadow: 0 5px 10px 2px #bbb;
   transition: transform 0.3s, box-shadow 0.3s;
 
   &:hover {
@@ -35,7 +35,7 @@ const StyledLessonBox = styled.div`
 
 const TitleContainer = styled.div`
   width: 100%;
-  padding: 6px 0;
+  padding: 6px 0 2px 0;
   background-color: #dddddd;
 `;
 
@@ -44,6 +44,10 @@ const Title = styled.h3`
   font-size: 1rem;
   text-align: center;
   font-family: 'Feather';
+`;
+
+const Arabic = styled.span`
+  font-family: 'Al-Jazeera';
 `;
 
 const InfoConatiner = styled.div`
@@ -106,25 +110,6 @@ const TitleImageContainer = styled.div`
   }
 `;
 
-const PlayContainer = styled.div`
-  z-index: 1;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
-
-const WhiteCircle = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 100%;
-  background-color: #ffffff;
-`;
-
 const Image = styled.img`
   display: block;
   width: 100%;
@@ -132,8 +117,8 @@ const Image = styled.img`
 `;
 
 function LessonBox({ lesson }) {
-  const { id, titleEnglish, titleArabic, level, type, imageLink, video } =
-    lesson;
+  const { id, titleEnglish, titleArabic, level, type, imageLink } = lesson;
+  const [imageLoaded, setImageLoaded] = useState(!!imageLink);
 
   return (
     <LinkReset
@@ -143,28 +128,21 @@ function LessonBox({ lesson }) {
       <StyledLessonBox>
         <TitleContainer>
           <Title>{titleEnglish}</Title>
-          <Title>{titleArabic}</Title>
+          <Title>
+            <Arabic>{titleArabic}</Arabic>
+          </Title>
         </TitleContainer>
         <InfoConatiner>
           <LevelInfo type={type}>{level}</LevelInfo>
           <TypeInfo>{type}</TypeInfo>
         </InfoConatiner>
         <ImageContainer>
-          {video && (
-            <>
-              <PlayContainer>
-                <PlayCircleFilledIcon
-                  sx={{
-                    fontSize: 80,
-                    color: '#999999',
-                  }}
-                />
-              </PlayContainer>
-              <WhiteCircle />
-            </>
-          )}
-          {imageLink ? (
-            <Image src={imageLink} alt={titleEnglish} />
+          {imageLoaded ? (
+            <Image
+              onError={() => setImageLoaded(false)}
+              src={imageLink}
+              alt={titleEnglish}
+            />
           ) : (
             <TitleImageContainer>{titleArabic}</TitleImageContainer>
           )}

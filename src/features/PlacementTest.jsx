@@ -25,11 +25,11 @@ const ButtonContainer = styled.div`
   text-align: center;
 `;
 
-function PlacementTest() {
+function PlacementTest({ results }) {
   const [startTest, setStartTest] = useState(false);
 
   return startTest ? (
-    <Quiz isPlacement={true} />
+    <Quiz isPlacement={true} results={results} />
   ) : (
     <>
       <Bar>PLACEMENT TEST</Bar>

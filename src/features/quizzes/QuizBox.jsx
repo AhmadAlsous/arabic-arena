@@ -101,7 +101,7 @@ const TitleImageContainer = styled.div`
 `;
 
 function QuizBox({ quiz }) {
-  const { titleEnglish, titleArabic, quizLevel, quizType } = quiz;
+  const { titleEnglish, titleArabic, level, type } = quiz;
 
   return (
     <StyledQuizBox>
@@ -110,8 +110,8 @@ function QuizBox({ quiz }) {
         <Title>{titleArabic}</Title>
       </TitleContainer>
       <InfoConatiner>
-        <LevelInfo type={quizType}>{quizLevel}</LevelInfo>
-        <TypeInfo>{quizType}</TypeInfo>
+        <LevelInfo type={type}>{level}</LevelInfo>
+        <TypeInfo>{type}</TypeInfo>
       </InfoConatiner>
       <ImageContainer>
         <TitleImageContainer>{titleArabic}</TitleImageContainer>

@@ -65,6 +65,8 @@ const StyledFormControlLabel = styled(FormControlLabel)`
       letter-spacing: 1px;
       text-align: right;
       user-select: none;
+      font-family: 'Greta';
+      color: #222;
     }
 
     .MuiRadio-root {

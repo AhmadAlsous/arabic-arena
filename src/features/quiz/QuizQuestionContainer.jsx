@@ -3,12 +3,14 @@ import Button from '@mui/material/Button';
 import QuizQuestion from './QuizQuestion';
 import QuizTimer from './QuizTimer';
 import QuizSubmitModal from './QuizSubmitModal';
+import { useSearchParams } from 'react-router-dom';
 
 const QuizContainer = styled.div`
   margin: 40px 10%;
   padding: 20px 25px 15px 25px;
   border: 1px solid #bbb;
   box-shadow: 0px 2px 20px 3px #d9d9d9;
+  background-color: #fff;
 `;
 
 const QuizHeader = styled.div`
@@ -42,55 +44,22 @@ const NavButtonsContainer = styled.div`
 
 function QuizQuestionContainer({
   time: timeLimit,
-  answers,
-  setAnswers,
-  currentQuestion,
-  setCurrentQuestion,
   selectedValue,
   setSelectedValue,
-  setIsSubmitted,
   isAnswerChecked,
   questions,
+  handleQuestionChange,
+  handleClear,
+  handleSubmit,
+  handleFinishReview,
 }) {
+  const [searchParams] = useSearchParams();
+  const currentQuestion = parseInt(searchParams.get('question'), 10) || 1;
+
   const time = new Date();
   time.setSeconds(time.getSeconds() + timeLimit * 60);
 
   if (questions.length === 0) return null;
-
-  const handleNext = () => {
-    setCurrentQuestion((cur) => {
-      const newAnswers = [...answers];
-      newAnswers[currentQuestion] = selectedValue;
-      setAnswers(newAnswers);
-      const nextQuestion = cur + 1;
-      const isAnswered = answers[nextQuestion] != null;
-      setSelectedValue(isAnswered ? answers[nextQuestion] : '');
-      return nextQuestion;
-    });
-  };
-
-  const handlePrevious = () => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion] = selectedValue;
-    setAnswers(newAnswers);
-    setCurrentQuestion((cur) => {
-      const prevQuestion = cur - 1;
-      const isAnswered = answers[prevQuestion] != null;
-      setSelectedValue(isAnswered ? answers[prevQuestion] : '');
-      return prevQuestion;
-    });
-  };
-
-  const handleClear = () => {
-    setSelectedValue([]);
-  };
-
-  const handleSubmit = () => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion] = selectedValue;
-    setAnswers(newAnswers);
-    setIsSubmitted(true);
-  };
 
   return (
     <QuizContainer>
@@ -98,7 +67,7 @@ function QuizQuestionContainer({
         <QuestionNumber>
           Question
           {questions.length !== 1
-            ? ` ${currentQuestion + 1} / ${questions.length}`
+            ? ` ${currentQuestion} / ${questions.length}`
             : null}
         </QuestionNumber>
         {!isAnswerChecked && (
@@ -108,7 +77,7 @@ function QuizQuestionContainer({
         )}
       </QuizHeader>
       <QuizQuestion
-        question={questions[currentQuestion]}
+        question={questions[currentQuestion - 1]}
         selectedValue={selectedValue}
         setSelectedValue={setSelectedValue}
         isAnswerChecked={isAnswerChecked}
@@ -119,25 +88,28 @@ function QuizQuestionContainer({
             Clear Choice
           </Button>
         ) : (
-          <div></div>
+          <Button onClick={handleFinishReview}>Finish Review</Button>
         )}
         {questions.length !== 1 && (
           <NavButtonsContainer>
-            {currentQuestion !== 0 && (
-              <Button onClick={handlePrevious}>Previous</Button>
+            {currentQuestion !== 1 && (
+              <Button onClick={() => handleQuestionChange(currentQuestion - 1)}>
+                Previous
+              </Button>
             )}
-            {currentQuestion === questions.length - 1 && !isAnswerChecked ? (
+            {currentQuestion === questions.length && !isAnswerChecked ? (
               <QuizSubmitModal
                 btn={'Submit'}
                 onSubmit={handleSubmit}
                 type={'submit'}
               />
-            ) : currentQuestion === questions.length - 1 && isAnswerChecked ? (
-              <Button onClick={() => setIsSubmitted(true)}>
-                Finish Review
-              </Button>
             ) : (
-              <Button onClick={handleNext}>Next</Button>
+              <Button
+                disabled={currentQuestion === questions.length}
+                onClick={() => handleQuestionChange(currentQuestion + 1)}
+              >
+                Next
+              </Button>
             )}
           </NavButtonsContainer>
         )}

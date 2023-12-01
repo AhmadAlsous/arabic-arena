@@ -4,6 +4,10 @@ import { constructEmbedUrl } from '../../utility/stringOperations';
 const Container = styled.div`
   width: 90%;
   padding: 0 10%;
+
+  @media (min-width: 1792px) {
+    width: 86%;
+  }
 `;
 
 const StyledEdpuzzleVideo = styled.div`
@@ -38,7 +42,7 @@ const StyledEdpuzzleVideo = styled.div`
   }
 
   @media (min-width: 1792px) {
-    padding-top: 63.5%;
+    padding-top: 64%;
   }
 `;
 

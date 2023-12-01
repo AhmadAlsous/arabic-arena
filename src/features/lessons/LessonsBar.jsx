@@ -31,7 +31,7 @@ const ButtonContainer = styled.span`
 const Title = styled.h3`
   font-size: 1.5rem;
   font-weight: 400;
-  letter-spacing: 8px;
+  letter-spacing: 5px;
 `;
 
 function LessonsBar({ level, type, onChangeLevel, onChangeType, isQuiz }) {

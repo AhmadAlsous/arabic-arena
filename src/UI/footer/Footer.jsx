@@ -31,8 +31,10 @@ const Title = styled.div`
 `;
 
 const Top = styled.div`
-  font-size: 1.75rem;
-  letter-spacing: 2px;
+  font-size: 1.8rem;
+  letter-spacing: 1.3px;
+  font-family: 'Al-Jazeera';
+  margin-bottom: -10px;
 `;
 
 const Bottom = styled.div`

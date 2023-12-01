@@ -53,7 +53,7 @@ export const questions = [
     questionId: '3',
     questionArabic: 'أي الآفعال التالية فعل مضارع؟',
     questionEnglish: 'Which of the following verbs is in the present tense?',
-    questionType: 'AllThatApply',
+    questionType: 'AllThatApply', //TODO: Change to allThatApply
     options: [
       {
         option: 'يكتب',

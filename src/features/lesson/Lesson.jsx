@@ -8,6 +8,7 @@ import LessonBar from './LessonBar';
 import ExerciseContainer from './ExerciseContainer';
 import TableBody from './TableBody';
 import { replaceSpacesWithDashes } from '../../utility/stringOperations';
+import { transformLesson } from '../../utility/transforms';
 //import PdfLesson from './PdfLesson';
 
 const header = [
@@ -36,22 +37,24 @@ function Lesson() {
       (lesson) =>
         replaceSpacesWithDashes(lesson.titleEnglish.toLocaleLowerCase()) ===
         lessonName
-    ) || greenTeaLesson;
+    ) || transformLesson(greenTeaLesson);
+
+  console.log(lesson);
 
   return (
     <>
       <LessonBar lesson={lesson} />
       <LessonInfo lesson={lesson} />
-      {lesson.type === 'Vocabulary' && (
+      {lesson.text && <LessonText text={lesson.text} />}
+      {lesson.table && (
         <TableBody
           header={lesson.titleEnglish === 'Letters' ? letterHeader : header}
           body={lesson.table}
           id={lesson.titleEnglish === 'Letters' ? 'letter' : 'arabicWord'}
         />
       )}
-      {lesson.text && <LessonText text={lesson.text} />}
       {/* <PdfLesson /> */}
-      <ExerciseContainer exercises={lesson.exercises} />
+      {lesson.exercises && <ExerciseContainer exercises={lesson.exercises} />}
     </>
   );
 }

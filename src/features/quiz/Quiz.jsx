@@ -3,68 +3,86 @@ import QuizHeader from './QuizHeader';
 import { quiz } from '../../data/DummyQuiz';
 import QuizQuestionContainer from './QuizQuestionContainer';
 import QuizResults from './QuizResults';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 const dummyQuiz = quiz;
 
-function Quiz({ isPlacement }) {
+function Quiz({ isPlacement, results = false }) {
   const { quizLevel, quizType, questions, time } = dummyQuiz;
+  const { quiz: quizName } = useParams();
 
-  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedValue, setSelectedValue] = useState([]);
   const [answers, setAnswers] = useState(
     Array.from({ length: questions.length }, () => [])
   );
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const currentQuestion = parseInt(searchParams.get('question'), 10) || 1;
 
   const handleQuestionChange = (questionNumber) => {
-    setCurrentQuestion(() => {
-      const newAnswers = [...answers];
-      newAnswers[currentQuestion] = selectedValue;
-      setAnswers(newAnswers);
-      const isAnswered = answers[questionNumber] != null;
-      setSelectedValue(isAnswered ? answers[questionNumber] : '');
-      return questionNumber;
-    });
+    const newAnswers = [...answers];
+    newAnswers[currentQuestion - 1] = selectedValue;
+    setAnswers(newAnswers);
+    const isAnswered = answers[questionNumber - 1] != null;
+    searchParams.set('question', questionNumber);
+    setSearchParams(searchParams);
+    setSelectedValue(isAnswered ? answers[questionNumber - 1] : '');
   };
+
+  const handleClear = () => {
+    setSelectedValue([]);
+  };
+
+  const handleSubmit = () => {
+    const newAnswers = [...answers];
+    newAnswers[currentQuestion - 1] = selectedValue;
+    setAnswers(newAnswers);
+    searchParams.delete('question');
+    setSearchParams(searchParams);
+    navigate('./results');
+  };
+
+  const handleFinishReview = () => {
+    searchParams.delete('question');
+    setSearchParams(searchParams);
+    console.log(isPlacement);
+    navigate(isPlacement ? `/placement/results` : `/quiz/${quizName}/results`);
+  };
+
+  const quizTitle = isPlacement
+    ? 'Placement Test'
+    : `${quizLevel} ${quizType} Quiz`;
 
   return (
     <>
       <QuizHeader
-        isPlacement={isPlacement}
-        quizLevel={quizLevel}
-        quizType={quizType}
+        quizTitle={quizTitle}
         questions={questions}
-        currentQuestion={currentQuestion}
-        setCurrentQuestion={handleQuestionChange}
-        answers={answers}
-        setAnswers={setAnswers}
+        handleQuestionChange={handleQuestionChange}
+        handleSubmit={handleSubmit}
         selectedValue={selectedValue}
-        isSubmitted={isSubmitted}
-        setIsSubmitted={setIsSubmitted}
+        results={results}
         isAnswerChecked={isAnswerChecked}
+        answers={answers}
       />
-      {!isSubmitted && (
+      {!results && (
         <QuizQuestionContainer
           time={time}
           questions={questions}
-          currentQuestion={currentQuestion}
-          setCurrentQuestion={setCurrentQuestion}
           selectedValue={selectedValue}
           setSelectedValue={setSelectedValue}
-          answers={answers}
-          setAnswers={setAnswers}
-          isSubmitted={isSubmitted}
-          setIsSubmitted={setIsSubmitted}
           isAnswerChecked={isAnswerChecked}
+          handleQuestionChange={handleQuestionChange}
+          handleClear={handleClear}
+          handleSubmit={handleSubmit}
+          handleFinishReview={handleFinishReview}
         />
       )}
-      {isSubmitted && (
+      {results && (
         <QuizResults
           isPlacement={isPlacement}
-          setIsSubmitted={setIsSubmitted}
           setIsAnswerChecked={setIsAnswerChecked}
-          setCurrentQuestion={handleQuestionChange}
           questions={questions}
           answers={answers}
         />

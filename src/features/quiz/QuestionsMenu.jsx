@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import QuestionNumber from './QuestionNumber';
 import { Divider } from '@mui/material';
 import QuizSubmitModal from './QuizSubmitModal';
+import { useSearchParams } from 'react-router-dom';
 
 const Menu = styled.div`
   display: flex;
@@ -25,20 +26,13 @@ const StyledButton = styled.div`
 
 function QuestionsMenu({
   questions,
-  currentQuestion,
-  setCurrentQuestion,
   answers,
-  setAnswers,
-  selectedValue,
   handleClose,
-  setIsSubmitted,
+  handleQuestionChange,
+  handleSubmit,
 }) {
-  const handleSubmit = () => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion] = selectedValue;
-    setAnswers(newAnswers);
-    setIsSubmitted(true);
-  };
+  const [searchParams] = useSearchParams();
+  const currentQuestion = parseInt(searchParams.get('question'), 10) || 1;
 
   return (
     <Menu>
@@ -47,10 +41,10 @@ function QuestionsMenu({
           <QuestionNumber
             key={question.questionId}
             questionNumber={index + 1}
-            isActive={currentQuestion === index}
-            setCurrentQuestion={setCurrentQuestion}
+            isActive={currentQuestion === index + 1}
             status={answers[index]?.length ? 'answered' : 'unanswered'}
             handleClose={handleClose}
+            handleQuestionChange={handleQuestionChange}
           />
         ))}
       </StyledQuestionsMenu>

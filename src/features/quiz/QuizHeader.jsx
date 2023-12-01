@@ -22,34 +22,26 @@ const Title = styled.h3`
 `;
 
 function QuizHeader({
-  isPlacement,
-  quizLevel,
-  quizType,
+  quizTitle,
   questions,
-  currentQuestion,
-  setCurrentQuestion,
-  answers,
-  setAnswers,
+  handleSubmit,
   selectedValue,
-  isSubmitted,
-  setIsSubmitted,
+  results,
   isAnswerChecked,
+  handleQuestionChange,
+  answers,
 }) {
   return (
     <StyledLessonBar>
-      <Title>
-        {isPlacement ? 'Placement Test' : `${quizLevel} ${quizType} Quiz`}
-      </Title>
-      {!isSubmitted && !isAnswerChecked && (
+      <Title>{quizTitle}</Title>
+      {!results && !isAnswerChecked && (
         <NavContainer>
           <QuestionsMenuButton
             questions={questions}
-            currentQuestion={currentQuestion}
-            setCurrentQuestion={setCurrentQuestion}
-            answers={answers}
-            setIsSubmitted={setIsSubmitted}
-            setAnswers={setAnswers}
+            handleSubmit={handleSubmit}
             selectedValue={selectedValue}
+            handleQuestionChange={handleQuestionChange}
+            answers={answers}
           />
         </NavContainer>
       )}
