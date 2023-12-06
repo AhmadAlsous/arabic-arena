@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import QuizQuestion from './QuizQuestion';
 import QuizTimer from './QuizTimer';
 import QuizSubmitModal from './QuizSubmitModal';
-import { useSearchParams } from 'react-router-dom';
 
 const QuizContainer = styled.div`
   margin: 40px 10%;
@@ -52,12 +51,14 @@ function QuizQuestionContainer({
   handleClear,
   handleSubmit,
   handleFinishReview,
+  handleChangeAnswer,
+  currentQuestion,
+  quizId,
 }) {
-  const [searchParams] = useSearchParams();
-  const currentQuestion = parseInt(searchParams.get('question'), 10) || 1;
-
   const time = new Date();
   time.setSeconds(time.getSeconds() + timeLimit * 60);
+  if (!localStorage.getItem(`${quizId}-time`) && !isAnswerChecked)
+    localStorage.setItem(`${quizId}-time`, time);
 
   if (questions.length === 0) return null;
 
@@ -72,7 +73,7 @@ function QuizQuestionContainer({
         </QuestionNumber>
         {!isAnswerChecked && (
           <TimerContainer>
-            <QuizTimer submit={handleSubmit} expiryTimestamp={time} />
+            <QuizTimer submit={handleSubmit} quizId={quizId} />
           </TimerContainer>
         )}
       </QuizHeader>
@@ -81,6 +82,7 @@ function QuizQuestionContainer({
         selectedValue={selectedValue}
         setSelectedValue={setSelectedValue}
         isAnswerChecked={isAnswerChecked}
+        handleChangeAnswer={handleChangeAnswer}
       />
       <ButtonsContainer>
         {!isAnswerChecked ? (
@@ -98,11 +100,7 @@ function QuizQuestionContainer({
               </Button>
             )}
             {currentQuestion === questions.length && !isAnswerChecked ? (
-              <QuizSubmitModal
-                btn={'Submit'}
-                onSubmit={handleSubmit}
-                type={'submit'}
-              />
+              <QuizSubmitModal btn={'Submit'} onSubmit={handleSubmit} />
             ) : (
               <Button
                 disabled={currentQuestion === questions.length}

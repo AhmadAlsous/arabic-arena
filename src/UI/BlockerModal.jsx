@@ -2,29 +2,9 @@ import { useState, forwardRef } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import styled from 'styled-components';
 import clsx from 'clsx';
-import Button from '@mui/material/Button';
 import { Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import HandlerButton from '@mui/material/Button';
-import FeedbackForm from './FeedbackForm';
-import QuizBox from '../../features/quizzes/QuizBox';
-import { LinkReset } from '../../utility/LinkReset';
-import { replaceSpacesWithDashes } from '../../utility/stringOperations';
-
-const FeedbackButton = styled.button`
-  background-color: transparent;
-  border: none;
-
-  &:hover {
-    border-bottom: 1px solid #fff;
-  }
-`;
-
-const NoneButton = styled.button`
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-`;
 
 const CloseButton = styled.button`
   position: absolute;
@@ -43,81 +23,70 @@ const ButtonContainer = styled.div`
   margin-bottom: 10px;
 `;
 
-function FeedbackModal({
-  btn,
-  children,
-  type,
-  onClose,
-  width = 600,
-  onSubmit,
-  quiz,
-}) {
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(true);
-  };
+const ConfirmContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.h3`
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 11px 0 0 0;
+  letter-spacing: 1.5px;
+`;
+
+const ConfirmText = styled.div`
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 30px;
+  text-align: center;
+`;
+
+function BlockerModal({ cancel, proceed }) {
+  const [open, setOpen] = useState(true);
   const handleClose = () => {
-    if (onClose) onClose();
     setOpen(false);
+    cancel();
   };
   const handleSubmit = () => {
-    handleClose();
-    if (onSubmit) onSubmit();
+    setOpen(false);
+    proceed();
   };
 
   return (
     <div>
-      {type === 'submit' ? (
-        <Button onClick={handleOpen}>{btn}</Button>
-      ) : type === 'confirm' ? (
-        <NoneButton onClick={handleOpen}>
-          <QuizBox quiz={quiz} />
-        </NoneButton>
-      ) : (
-        <FeedbackButton onClick={handleOpen}>{btn}</FeedbackButton>
-      )}
-      <Modal
+      <StyledModal
         open={open}
         onClose={handleClose}
         slots={{ backdrop: StyledBackdrop }}
       >
-        <ModalContent sx={{ width }}>
+        <ModalContent sx={{ width: '400px' }}>
           <CloseButton onClick={handleClose}>
             <CloseIcon />
           </CloseButton>
-          {type === 'feedback' || type === 'problem' ? (
-            <FeedbackForm type={type}>{children}</FeedbackForm>
-          ) : (
-            children
-          )}
+          <ConfirmContainer>
+            <Title>Confirmation</Title>
+            <ConfirmText>
+              Are you sure you want to leave this page? All your progress will
+              be lost.
+            </ConfirmText>
+          </ConfirmContainer>
           <ButtonContainer>
             <HandlerButton variant='outlined' onClick={handleClose}>
               Cancel
             </HandlerButton>
-            {type === 'confirm' ? (
-              <LinkReset
-                to={`/quiz/${replaceSpacesWithDashes(
-                  quiz.titleEnglish.toLowerCase()
-                )}`}
-                state={{ quizId: quiz.quizId }}
-              >
-                <HandlerButton variant='contained' onClick={handleSubmit}>
-                  Start
-                </HandlerButton>
-              </LinkReset>
-            ) : (
-              <HandlerButton variant='contained' onClick={handleSubmit}>
-                Submit
-              </HandlerButton>
-            )}
+            <HandlerButton variant='contained' onClick={handleSubmit}>
+              Proceed
+            </HandlerButton>
           </ButtonContainer>
         </ModalContent>
-      </Modal>
+      </StyledModal>
     </div>
   );
 }
 
-export default FeedbackModal;
+export default BlockerModal;
 
 const Backdrop = forwardRef(function backdrop(props, ref) {
   const { open, className, ownerState, ...other } = props;
@@ -130,7 +99,7 @@ const Backdrop = forwardRef(function backdrop(props, ref) {
   );
 });
 
-const Modal = styled(BaseModal)`
+const StyledModal = styled(BaseModal)`
   position: fixed;
   z-index: 1300;
   inset: 0;

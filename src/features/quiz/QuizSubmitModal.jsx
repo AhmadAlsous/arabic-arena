@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import FeedbackModal from '../../UI/footer/FeedbackModal';
+import Modal from '../../UI/Modal';
+import { Button } from '@mui/material';
 
 const ConfirmContainer = styled.div`
   display: flex;
@@ -21,14 +22,13 @@ const ConfirmText = styled.div`
   text-align: center;
 `;
 
-function QuizSubmitModal({ btn, onClose, onSubmit, type }) {
+function QuizSubmitModal({ btn, onClose, onSubmit }) {
   return (
-    <FeedbackModal
-      btn={btn}
-      onClose={onClose}
-      width={400}
+    <Modal
+      trigger={<Button>{btn}</Button>}
       onSubmit={onSubmit}
-      type={type}
+      btn='Submit'
+      onClose={onClose}
     >
       <ConfirmContainer>
         <Title>Confirmation</Title>
@@ -37,7 +37,7 @@ function QuizSubmitModal({ btn, onClose, onSubmit, type }) {
           this attempt.
         </ConfirmText>
       </ConfirmContainer>
-    </FeedbackModal>
+    </Modal>
   );
 }
 

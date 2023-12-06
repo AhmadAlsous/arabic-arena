@@ -1,6 +1,6 @@
 export const quizzes = [
   {
-    quizId: 1,
+    id: 1,
     titleEnglish: 'Beginner Vocabulary Quiz',
     titleArabic: 'اختبار المفردات للمبتدئين',
     time: 10,
@@ -8,7 +8,7 @@ export const quizzes = [
     type: 'Vocabulary',
   },
   {
-    quizId: 2,
+    id: 2,
     titleEnglish: 'Beginner Grammar Quiz',
     titleArabic: 'اختبار القواعد للمبتدئين',
     time: 10,
@@ -16,7 +16,7 @@ export const quizzes = [
     type: 'Grammar',
   },
   {
-    quizId: 3,
+    id: 3,
     titleEnglish: 'Intermediate Vocabulary Quiz',
     titleArabic: 'اختبار المفردات للمتوسطين',
     time: 10,
@@ -24,7 +24,7 @@ export const quizzes = [
     type: 'Vocabulary',
   },
   {
-    quizId: 4,
+    id: 4,
     titleEnglish: 'Intermediate Grammar Quiz',
     titleArabic: 'اختبار القواعد للمتوسطين',
     time: 10,
@@ -32,7 +32,7 @@ export const quizzes = [
     type: 'Grammar',
   },
   {
-    quizId: 5,
+    id: 5,
     titleEnglish: 'Advanced Vocabulary Quiz',
     titleArabic: 'اختبار المفردات للمتقدمين',
     time: 10,
@@ -40,7 +40,7 @@ export const quizzes = [
     type: 'Vocabulary',
   },
   {
-    quizId: 6,
+    id: 6,
     titleEnglish: 'Advanced Grammar Quiz',
     titleArabic: 'اختبار القواعد للمتقدمين',
     time: 10,
@@ -48,7 +48,7 @@ export const quizzes = [
     type: 'Grammar',
   },
   {
-    quizId: 7,
+    id: 7,
     titleEnglish: 'Beginner Reading Quiz',
     titleArabic: 'اختبار القراءة للمبتدئين',
     time: 10,
@@ -56,7 +56,7 @@ export const quizzes = [
     type: 'Reading',
   },
   {
-    quizId: 8,
+    id: 8,
     titleEnglish: 'Intermediate Reading Quiz',
     titleArabic: 'اختبار القراءة للمتوسطين',
     time: 10,
@@ -64,7 +64,7 @@ export const quizzes = [
     type: 'Reading',
   },
   {
-    quizId: 9,
+    id: 9,
     titleEnglish: 'Advanced Reading Quiz',
     titleArabic: 'اختبار القراءة للمتقدمين',
     time: 10,
@@ -72,7 +72,7 @@ export const quizzes = [
     type: 'Reading',
   },
   {
-    quizId: 10,
+    id: 10,
     titleEnglish: 'Beginner Listening Quiz',
     titleArabic: 'اختبار الاستماع للمبتدئين',
     time: 10,
@@ -80,7 +80,7 @@ export const quizzes = [
     type: 'Listening',
   },
   {
-    quizId: 11,
+    id: 11,
     titleEnglish: 'Intermediate Listening Quiz',
     titleArabic: 'اختبار الاستماع للمتوسطين',
     time: 10,
@@ -88,7 +88,7 @@ export const quizzes = [
     type: 'Listening',
   },
   {
-    quizId: 12,
+    id: 12,
     titleEnglish: 'Advanced Listening Quiz',
     titleArabic: 'اختبار الاستماع للمتقدمين',
     time: 10,
@@ -96,7 +96,7 @@ export const quizzes = [
     type: 'Listening',
   },
   {
-    quizId: 13,
+    id: 13,
     titleEnglish: 'Beginner Writing Quiz',
     titleArabic: 'اختبار الكتابة للمبتدئين',
     time: 10,
@@ -104,7 +104,7 @@ export const quizzes = [
     type: 'Writing',
   },
   {
-    quizId: 14,
+    id: 14,
     titleEnglish: 'Intermediate Writing Quiz',
     titleArabic: 'اختبار الكتابة للمتوسطين',
     time: 10,
@@ -112,7 +112,7 @@ export const quizzes = [
     type: 'Writing',
   },
   {
-    quizId: 15,
+    id: 15,
     titleEnglish: 'Advanced Writing Quiz',
     titleArabic: 'اختبار الكتابة للمتقدمين',
     time: 10,

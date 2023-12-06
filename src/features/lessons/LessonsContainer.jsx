@@ -17,11 +17,7 @@ function LessonsContainer({ lessons, isQuiz }) {
     <StyledLessonsContainer>
       {lessons.map((lesson) =>
         isQuiz ? (
-          <QuizStartConfirm
-            key={lesson.quizId}
-            quiz={lesson}
-            type={'confirm'}
-          />
+          <QuizStartConfirm key={lesson.id} quiz={lesson} type={'confirm'} />
         ) : (
           <LessonBox key={lesson.id} lesson={lesson} />
         )

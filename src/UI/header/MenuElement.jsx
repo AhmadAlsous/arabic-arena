@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function MenuElement({ children, onClick, name, navTo }) {
   return (
     <Link to={navTo}>
-      <MenuItem onClick={onClick}>
+      <MenuItem onClick={onClick} sx={{ fontFamily: 'Din-round' }}>
         <ListItemIcon>{children}</ListItemIcon>
         {name}
       </MenuItem>

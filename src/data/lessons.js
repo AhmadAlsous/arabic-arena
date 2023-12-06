@@ -7,10 +7,8 @@ export const lessons = [
     titleArabic: 'أيام الأسبوع',
     imageLink:
       'https://ecdn.teacherspayteachers.com/thumbitem/%D8%A3%D9%8A%D8%A7%D9%85-%D8%A7%D9%84%D8%A3%D8%B3%D8%A8%D9%88%D8%B9-5774095-1624390540/original-5774095-1.jpg',
-    includeImage: false,
     level: 'Beginner',
     type: 'Vocabulary',
-    isCompleted: false,
     exercises: [],
     table: [
       {
@@ -64,8 +62,6 @@ export const lessons = [
     level: 'Beginner',
     type: 'Reading',
     imageLink: 'https://assets.rbl.ms/19152954/origin.jpg',
-    includeImage: true,
-    isCompleted: false,
     exercises: questions,
     //videoLink: '',
     //videoLink: 'https://edpuzzle.com/media/6553a11ba164024027006fdc',
@@ -93,10 +89,8 @@ export const lessons = [
     titleArabic: 'الحروف',
     imageLink:
       'https://www.lebanesearabicinstitute.com/wp-content/uploads/2017/02/Alphabet.jpg',
-    includeImage: false,
     level: 'Beginner',
     type: 'Vocabulary',
-    isCompleted: false,
     exercises: [],
     table: [
       {

@@ -18,7 +18,7 @@ const QuestionTextContainer = styled.div`
   margin: 10px 0;
   background-color: #f0f0f0;
   margin-bottom: 15px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   padding: 8px 5px;
 `;
 
@@ -43,6 +43,7 @@ function QuizQuestion({
   selectedValue,
   setSelectedValue,
   isAnswerChecked,
+  handleChangeAnswer,
 }) {
   const {
     questionArabic,
@@ -74,13 +75,16 @@ function QuizQuestion({
 
   const modifySelectedValue = (optionId) => {
     if (questionType === 'AllThatApply') {
-      setSelectedValue((currentSelected) =>
-        currentSelected.includes(optionId)
+      setSelectedValue((currentSelected) => {
+        const newValue = currentSelected.includes(optionId)
           ? currentSelected.filter((id) => id !== optionId)
-          : [...currentSelected, optionId]
-      );
+          : [...currentSelected, optionId];
+        handleChangeAnswer(newValue);
+        return newValue;
+      });
     } else {
       setSelectedValue([optionId]);
+      handleChangeAnswer([optionId]);
     }
   };
 

@@ -2,11 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
 @font-face {
-  font-family: 'Anton';
-  src: url('/fonts/Anton-Regular.ttf') format('truetype');
-}
-
-@font-face {
   font-family: 'Arabic-bold';
   src: url('/fonts/ReemKufi-Bold.ttf') format('truetype');
 }

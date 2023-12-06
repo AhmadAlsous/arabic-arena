@@ -33,7 +33,6 @@ const ProgressContainer = styled.div`
 const Word = styled.p`
   padding-left: 15px;
   font-size: 1rem;
-  font-family: sans-serif;
 `;
 
 function AccountInfo() {

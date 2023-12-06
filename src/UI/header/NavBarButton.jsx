@@ -2,41 +2,39 @@ import { NavLinkReset } from '../../utility/LinkReset';
 import styled from 'styled-components';
 
 const StyledButton = styled(NavLinkReset)`
-  height: 40px;
+  height: 27px;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
 
   @media (max-width: 1050px) {
     font-size: 0.75rem;
     letter-spacing: 2px;
   }
 
-  &::before {
+  &::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-51%);
-    width: 100%;
+    width: 0;
     height: 2.5px;
-    background-color: transparent;
-    transition: background-color 0.5s;
+    transition: width 0.4s;
+    bottom: -5px;
+    left: -2.5%;
+    background-color: var(--primary-blue-500);
   }
 
-  &:hover:not(.active)::before {
-    background-color: var(--primary-blue-500);
+  &:hover:not(.active)::after,
+  &.active::after {
+    width: 105%;
   }
 
   transition: transform 0.5s;
 
   &:hover:not(.active) {
-    transform: translateY(-3px);
+    color: black;
   }
 
-  &.active {
-    border-bottom: 2px solid var(--primary-blue-500);
+  &.active::after {
+    background-color: var(--primary-blue-500);
   }
 `;
 

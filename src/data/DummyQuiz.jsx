@@ -1,9 +1,8 @@
 import { questions } from './DummyQuestions';
 
 export const quiz = {
-  quizId: '1',
-  quizLevel: 'Beginner',
-  quizType: 'Vocabulary',
+  id: '1',
+  titleEnglish: 'Beginner Vocabulary Quiz',
   time: 10,
   questions,
 };

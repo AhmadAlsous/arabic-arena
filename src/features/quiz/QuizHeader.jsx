@@ -30,6 +30,7 @@ function QuizHeader({
   isAnswerChecked,
   handleQuestionChange,
   answers,
+  currentQuestion,
 }) {
   return (
     <StyledLessonBar>
@@ -42,6 +43,7 @@ function QuizHeader({
             selectedValue={selectedValue}
             handleQuestionChange={handleQuestionChange}
             answers={answers}
+            currentQuestion={currentQuestion}
           />
         </NavContainer>
       )}

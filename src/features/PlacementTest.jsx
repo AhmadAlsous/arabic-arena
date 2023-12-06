@@ -1,6 +1,7 @@
-import { useState } from 'react';
 import { Button } from '@mui/material';
 import styled from 'styled-components';
+import { DummyPlacement } from '../data/DummyPlacement';
+import { Link } from 'react-router-dom';
 import Quiz from './quiz/Quiz';
 
 const Bar = styled.div`
@@ -25,12 +26,13 @@ const ButtonContainer = styled.div`
   text-align: center;
 `;
 
-function PlacementTest({ results }) {
-  const [startTest, setStartTest] = useState(false);
+function Placement() {
+  const hasTakenPlacementTest = localStorage.getItem('placement');
+  if (hasTakenPlacementTest) {
+    return <Quiz isPlacement={true} results={true} />;
+  }
 
-  return startTest ? (
-    <Quiz isPlacement={true} results={results} />
-  ) : (
+  return (
     <>
       <Bar>PLACEMENT TEST</Bar>
       <TextContainer>
@@ -43,17 +45,17 @@ function PlacementTest({ results }) {
           following levels: Beginner, Intermediate, or Advanced.
         </p>
         <p>
-          The test consists of 30 questions. You will have 30 minutes to
-          complete it.
+          The test consists of {DummyPlacement.questions.length} questions. You
+          will have {DummyPlacement.time} minutes to complete it.
         </p>
       </TextContainer>
       <ButtonContainer>
-        <Button sx={{ fontSize: '18px' }} onClick={() => setStartTest(true)}>
-          Start Placement Test
-        </Button>
+        <Link to='/placement/test'>
+          <Button sx={{ fontSize: '18px' }}>Start Placement Test</Button>
+        </Link>
       </ButtonContainer>
     </>
   );
 }
 
-export default PlacementTest;
+export default Placement;

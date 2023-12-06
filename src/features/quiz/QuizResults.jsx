@@ -7,6 +7,7 @@ import {
   getResult,
 } from '../../utility/quizCalculations';
 import { useNavigate, useParams } from 'react-router-dom';
+import Modal from '../../UI/Modal';
 
 const StyledQuizResults = styled.div`
   margin: 40px 10%;
@@ -50,19 +51,59 @@ const Class = styled.p`
 
 const ButtonsContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   width: 100%;
   border-top: 1px solid #999;
   padding: 10px 0 0 0;
 `;
 
-function QuizResults({ isPlacement, setIsAnswerChecked, questions, answers }) {
+const ConfirmContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.h3`
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 11px 0 0 0;
+  letter-spacing: 1.5px;
+`;
+
+const ConfirmTextContainer = styled.div`
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 30px;
+  text-align: center;
+`;
+
+const ConfirmText = styled.p`
+  margin: 0;
+  letter-spacing: 0.5px;
+`;
+
+function QuizResults({
+  quizId,
+  isPlacement,
+  setIsAnswerChecked,
+  questions,
+  answers,
+  setAnswers,
+}) {
   const navigate = useNavigate();
   const { quiz } = useParams();
 
-  const handleClick = () => {
+  const handleReview = () => {
     setIsAnswerChecked(true);
-    navigate(isPlacement ? `/placement/review` : `/quiz/${quiz}/review`);
+    navigate(isPlacement ? `/placement/test/review` : `/quiz/${quiz}/review`);
+  };
+
+  const handleTryAgain = () => {
+    setIsAnswerChecked(false);
+    setAnswers(Array.from({ length: questions.length }, () => []));
+    localStorage.removeItem(`${quiz}-answers`);
+    localStorage.removeItem(quizId);
+    navigate(`/quiz/${quiz}`);
   };
 
   const numCorrectAnswers = getResult(questions, answers);
@@ -93,10 +134,29 @@ function QuizResults({ isPlacement, setIsAnswerChecked, questions, answers }) {
           </LinkReset>
         ) : (
           <LinkReset to='/quiz'>
-            <Button>Back to Quizzes</Button>
+            <Button>Back</Button>
           </LinkReset>
         )}
-        <Button onClick={handleClick}>Review</Button>
+        {!isPlacement && (
+          <Modal
+            btn='Try Again'
+            onSubmit={handleTryAgain}
+            trigger={<Button>Try Again</Button>}
+          >
+            <ConfirmContainer>
+              <Title>Confirmation</Title>
+              <ConfirmTextContainer>
+                <ConfirmText>
+                  Are you sure you want to try this quiz again?
+                </ConfirmText>
+                <ConfirmText>
+                  Your previous answers will be deleted.
+                </ConfirmText>
+              </ConfirmTextContainer>
+            </ConfirmContainer>
+          </Modal>
+        )}
+        <Button onClick={handleReview}>Review</Button>
       </ButtonsContainer>
     </StyledQuizResults>
   );

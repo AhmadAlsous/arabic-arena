@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import FeedbackModal from '../../UI/footer/FeedbackModal';
+import QuizBox from './QuizBox';
+import { LinkReset } from '../../utility/LinkReset';
+import { replaceSpacesWithDashes } from '../../utility/stringOperations';
+import Modal from '../../UI/Modal';
+import { Button } from '@mui/material';
 
 const ConfirmContainer = styled.div`
   display: flex;
@@ -26,9 +30,33 @@ const Text = styled.p`
   letter-spacing: 0.5px;
 `;
 
-function QuizStartConfirm({ onSubmit, type, quiz }) {
-  return (
-    <FeedbackModal width={400} onSubmit={onSubmit} type={type} quiz={quiz}>
+const NoneButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+`;
+
+function QuizStartConfirm({ quiz }) {
+  const firstTime = localStorage.getItem(quiz.id) === null;
+
+  return firstTime ? (
+    <Modal
+      trigger={
+        <NoneButton>
+          <QuizBox quiz={quiz} />
+        </NoneButton>
+      }
+      navButton={
+        <LinkReset
+          to={`/quiz/${replaceSpacesWithDashes(
+            quiz.titleEnglish.toLowerCase()
+          )}`}
+          state={{ quizId: quiz.quizId }}
+        >
+          <Button variant='contained'>Start</Button>
+        </LinkReset>
+      }
+    >
       <ConfirmContainer>
         <Title>Confirmation</Title>
         <ConfirmText>
@@ -37,7 +65,15 @@ function QuizStartConfirm({ onSubmit, type, quiz }) {
           <Text>Number of questions: {quiz?.questions?.length}</Text>
         </ConfirmText>
       </ConfirmContainer>
-    </FeedbackModal>
+    </Modal>
+  ) : (
+    <LinkReset
+      to={`/quiz/${replaceSpacesWithDashes(
+        quiz.titleEnglish.toLowerCase()
+      )}/results`}
+    >
+      <QuizBox quiz={quiz} />
+    </LinkReset>
   );
 }
 

@@ -27,3 +27,19 @@ export function constructEmbedUrl(url) {
 export function isEdpuzzle(url) {
   return url.includes('edpuzzle.com');
 }
+
+export function getQuizActive(url) {
+  return (
+    url.includes(`/quiz/`) &&
+    !url.includes('/results') &&
+    !url.includes('/review')
+  );
+}
+
+export function getPlacementActive(url) {
+  return (
+    url.includes(`/placement/test`) &&
+    !url.includes('/results') &&
+    !url.includes('/review')
+  );
+}

@@ -4,7 +4,8 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import EmailIcon from '@mui/icons-material/Email';
 import Image from './Image';
-import FeedbackModal from './FeedbackModal';
+import Modal from '../Modal';
+import FeedbackForm from './FeedbackForm';
 
 const StyledFooter = styled.footer`
   display: grid;
@@ -111,32 +112,44 @@ function Footer({ withAboutUs = true }) {
             <LinkReset to='/'>
               <Button>About Us</Button>
             </LinkReset>
-            <FeedbackModal btn='Submit Feedback' type='feedback'>
-              <ModalTitle>Share Your Feedback</ModalTitle>
-              <Text>
-                Thank you for sending us your feedback. We can't respond
-                individually but we appreciate your feedback and we will make
-                sure pass it on to the team who are working to help make our
-                website better.
-              </Text>
-              <Text>
-                Please enter your feedback in the box below and then press
-                submit.
-              </Text>
-            </FeedbackModal>
-            <FeedbackModal btn='Report Problems' type='problem'>
-              <ModalTitle>Report a Problem</ModalTitle>
-              <Text>
-                Thank you for taking the time to report a problem. We can't
-                respond individually but we appreciate your feedback and we will
-                make sure pass it on to the team who are working to help make
-                our website better.
-              </Text>
-              <Text>
-                Please enter your problem in the box below and then press
-                submit.
-              </Text>
-            </FeedbackModal>
+            <Modal
+              trigger={<Button>Submit Feedback</Button>}
+              width={'600px'}
+              btn='Submit'
+            >
+              <FeedbackForm type='feedback'>
+                <ModalTitle>Share Your Feedback</ModalTitle>
+                <Text>
+                  Thank you for sending us your feedback. We can't respond
+                  individually but we appreciate your feedback and we will make
+                  sure pass it on to the team who are working to help make our
+                  website better.
+                </Text>
+                <Text>
+                  Please enter your feedback in the box below and then press
+                  submit.
+                </Text>
+              </FeedbackForm>
+            </Modal>
+            <Modal
+              trigger={<Button>Report Problems</Button>}
+              width={'600px'}
+              btn='Submit'
+            >
+              <FeedbackForm type='problem'>
+                <ModalTitle>Report a Problem</ModalTitle>
+                <Text>
+                  Thank you for taking the time to report a problem. We can't
+                  respond individually but we appreciate your feedback and we
+                  will make sure pass it on to the team who are working to help
+                  make our website better.
+                </Text>
+                <Text>
+                  Please enter your problem in the box below and then press
+                  submit.
+                </Text>
+              </FeedbackForm>
+            </Modal>
           </>
         )}
       </Column1>

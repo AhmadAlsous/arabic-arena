@@ -39,6 +39,7 @@ function QuestionsMenuButton({
   selectedValue,
   handleQuestionChange,
   answers,
+  currentQuestion,
 }) {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -70,6 +71,7 @@ function QuestionsMenuButton({
           handleQuestionChange={handleQuestionChange}
           handleSubmit={handleSubmit}
           answers={answers}
+          currentQuestion={currentQuestion}
         />
       </Menu>
     </>

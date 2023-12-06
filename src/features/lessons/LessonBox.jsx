@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { LinkReset } from '../../utility/LinkReset';
 import { replaceSpacesWithDashes } from '../../utility/stringOperations';
 import styled from 'styled-components';
+import SvgColor from '../../UI/svg-color';
 
 const StyledLessonBox = styled.div`
   width: 300px;
   height: 300px;
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
   box-shadow: 0 5px 10px 2px #bbb;
@@ -33,6 +35,13 @@ const StyledLessonBox = styled.div`
   }
 `;
 
+const StyledCheckIcon2 = styled(SvgColor)`
+  position: absolute;
+  color: #44bd22;
+  top: -15px;
+  left: -7px;
+`;
+
 const TitleContainer = styled.div`
   width: 100%;
   padding: 6px 0 2px 0;
@@ -40,7 +49,7 @@ const TitleContainer = styled.div`
 `;
 
 const Title = styled.h3`
-  margin: 5px 0;
+  margin: 7px 0;
   font-size: 1rem;
   text-align: center;
   font-family: 'Feather';
@@ -48,6 +57,10 @@ const Title = styled.h3`
 
 const Arabic = styled.span`
   font-family: 'Al-Jazeera';
+  font-size: 1.15rem;
+  text-align: center;
+  display: block;
+  margin: -5px 0 -8px 0;
 `;
 
 const InfoConatiner = styled.div`
@@ -126,11 +139,12 @@ function LessonBox({ lesson }) {
       state={{ id }}
     >
       <StyledLessonBox>
+        <StyledCheckIcon2 src='/images/check.svg' />
         <TitleContainer>
-          <Title>{titleEnglish}</Title>
           <Title>
             <Arabic>{titleArabic}</Arabic>
           </Title>
+          <Title>{titleEnglish}</Title>
         </TitleContainer>
         <InfoConatiner>
           <LevelInfo type={type}>{level}</LevelInfo>

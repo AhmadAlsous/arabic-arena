@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import QuestionNumber from './QuestionNumber';
 import { Divider } from '@mui/material';
 import QuizSubmitModal from './QuizSubmitModal';
-import { useSearchParams } from 'react-router-dom';
 
 const Menu = styled.div`
   display: flex;
@@ -30,10 +29,8 @@ function QuestionsMenu({
   handleClose,
   handleQuestionChange,
   handleSubmit,
+  currentQuestion,
 }) {
-  const [searchParams] = useSearchParams();
-  const currentQuestion = parseInt(searchParams.get('question'), 10) || 1;
-
   return (
     <Menu>
       <StyledQuestionsMenu>
@@ -54,7 +51,6 @@ function QuestionsMenu({
           btn={'Submit Answers'}
           onClose={handleClose}
           onSubmit={handleSubmit}
-          type={'submit'}
         />
       </StyledButton>
     </Menu>

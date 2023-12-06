@@ -8,10 +8,18 @@ const StyledTimer = styled.div`
   color: ${(props) => (props.$time < 300 ? 'red' : 'black')};
 `;
 
-function QuizTimer({ expiryTimestamp, submit }) {
+function QuizTimer({ submit, quizId }) {
+  const savedExpiryTime = localStorage.getItem(`${quizId}-time`);
+  const expiryTimestamp = savedExpiryTime
+    ? new Date(savedExpiryTime)
+    : new Date();
+
   const { totalSeconds, seconds, minutes, hours } = useTimer({
     expiryTimestamp,
-    onExpire: () => submit(),
+    onExpire: () => {
+      submit();
+      localStorage.removeItem(`${quizId}-time`);
+    },
   });
 
   return (

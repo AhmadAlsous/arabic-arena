@@ -6,7 +6,7 @@ const StyledQuizBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 5px 10px 2px grey;
+  box-shadow: 0 5px 10px 2px #bbb;
   transition: transform 0.3s, box-shadow 0.3s;
 
   &:hover {
@@ -37,9 +37,18 @@ const TitleContainer = styled.div`
 `;
 
 const Title = styled.h3`
-  margin: 5px 0;
+  margin: 7px 0;
   font-size: 1rem;
   text-align: center;
+  font-family: 'Feather';
+`;
+
+const Arabic = styled.span`
+  font-family: 'Al-Jazeera';
+  font-size: 1.15rem;
+  text-align: center;
+  display: block;
+  margin: -5px 0 -8px 0;
 `;
 
 const InfoConatiner = styled.div`
@@ -106,8 +115,10 @@ function QuizBox({ quiz }) {
   return (
     <StyledQuizBox>
       <TitleContainer>
+        <Title>
+          <Arabic>{titleArabic}</Arabic>
+        </Title>
         <Title>{titleEnglish}</Title>
-        <Title>{titleArabic}</Title>
       </TitleContainer>
       <InfoConatiner>
         <LevelInfo type={type}>{level}</LevelInfo>

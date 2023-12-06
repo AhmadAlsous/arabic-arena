@@ -39,8 +39,6 @@ function Lesson() {
         lessonName
     ) || transformLesson(greenTeaLesson);
 
-  console.log(lesson);
-
   return (
     <>
       <LessonBar lesson={lesson} />
@@ -54,7 +52,13 @@ function Lesson() {
         />
       )}
       {/* <PdfLesson /> */}
-      {lesson.exercises && <ExerciseContainer exercises={lesson.exercises} />}
+      {lesson.exercises && (
+        <ExerciseContainer
+          exercises={lesson.exercises}
+          lessonName={lesson.titleEnglish}
+          lesson={lesson}
+        />
+      )}
     </>
   );
 }
