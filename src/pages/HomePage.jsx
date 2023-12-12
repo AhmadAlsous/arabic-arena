@@ -6,6 +6,8 @@ import Features from '../UI/homepage/Features';
 import { useIsAuthenticated } from '@azure/msal-react';
 import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import { fetchLessons } from '../services/lessonService';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -19,6 +21,22 @@ const Content = styled.div`
 `;
 
 function HomePage() {
+  const [lessons, setLessons] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getLessons = async () => {
+      try {
+        const lessonsData = await fetchLessons();
+        setLessons(lessonsData);
+        console.log(lessonsData);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+
+    getLessons();
+  }, []);
   const isAuthenticated = useIsAuthenticated();
   return isAuthenticated ? (
     <>
