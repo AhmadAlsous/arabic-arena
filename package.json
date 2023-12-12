@@ -10,14 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@azure/msal-browser": "^3.6.0",
+    "@azure/msal-common": "^14.5.0",
+    "@azure/msal-react": "^2.0.8",
     "@google-cloud/text-to-speech": "^5.0.1",
     "@google-cloud/translate": "^8.0.2",
     "@mui/icons-material": "^5.14.14",
     "@mui/material": "^5.14.14",
     "@mui/styled-engine": "^5.14.14",
     "@mui/styled-engine-sc": "^6.0.0-alpha.2",
-    "firebase": "^10.7.0",
-    "firebaseui": "^6.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.48.2",

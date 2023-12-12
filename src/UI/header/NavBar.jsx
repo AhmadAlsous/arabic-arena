@@ -12,9 +12,11 @@ const StyledNavBar = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 0;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: ${(props) =>
+    props.$isHomepage ? 'var(--homepage-blue)' : 'rgba(255, 255, 255, 0.95)'};
   backdrop-filter: blur(15px);
-  box-shadow: 0 3px 20px 4px black;
+  box-shadow: ${(props) =>
+    props.$isHomepage ? 'none' : '0 3px 20px 4px black'};
 `;
 
 const ButtonsContainer = styled.div`
@@ -42,25 +44,31 @@ const ProfileContainer = styled.div`
   padding-right: 25px;
 `;
 
-function NavBar() {
+function NavBar({ isHomepage = false, hasSearchBar = false }) {
   return (
-    <StyledNavBar>
+    <StyledNavBar $isHomepage={isHomepage}>
       <ButtonsContainer>
         <Image
           imageLink='../../images/logos/LanguageCenterLogo.png'
           alt='Languages Center Logo'
         />
-        <NavBarButton name='HOME' navTo='/' />
-        <NavBarButton name='LESSONS' navTo='/learn' />
-        <NavBarButton name='QUIZZES' navTo='/quiz' />
-        <NavBarButton name='PLACEMENT' navTo='/placement' />
+        <NavBarButton isHomepage={isHomepage} name='HOME' navTo='/' />
+        <NavBarButton isHomepage={isHomepage} name='LESSONS' navTo='/learn' />
+        <NavBarButton isHomepage={isHomepage} name='QUIZZES' navTo='/quiz' />
+        <NavBarButton
+          isHomepage={isHomepage}
+          name='PLACEMENT'
+          navTo='/placement'
+        />
         {/* <NavBarButton name='ASK' navTo='/ask' /> */}
       </ButtonsContainer>
-      <SearchContainer>
-        <SearchBar />
-      </SearchContainer>
+      {hasSearchBar && (
+        <SearchContainer>
+          <SearchBar />
+        </SearchContainer>
+      )}
       <ProfileContainer>
-        <AccountCircleList />
+        <AccountCircleList isHomepage={isHomepage} />
       </ProfileContainer>
     </StyledNavBar>
   );

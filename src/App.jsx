@@ -1,7 +1,6 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import '@mui/styled-engine-sc';
 import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
 import Layout from './pages/Layout';
 import Lessons from './features/lessons/Lessons';
 import Lesson from './features/lesson/Lesson';
@@ -14,7 +13,6 @@ import Quizzes from './features/quizzes/quizzes';
 
 const router = createBrowserRouter([
   { path: '/', element: <HomePage /> },
-  { path: '/login', element: <LoginPage /> },
   {
     element: <Layout />,
     children: [

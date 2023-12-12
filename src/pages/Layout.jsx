@@ -1,7 +1,8 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Footer from '../UI/footer/Footer';
 import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
+import { useIsAuthenticated } from '@azure/msal-react';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -22,15 +23,21 @@ const OutletContainer = styled.div`
 `;
 
 function Layout() {
+  const isAuthenticated = useIsAuthenticated();
+  const location = useLocation();
+  const hasSearchBar =
+    location.pathname === '/learn' || location.pathname === '/quiz';
   return (
     <AppWrapper>
       <Content>
-        <NavBar />
-        <OutletContainer>
-          <Outlet />
-        </OutletContainer>
+        <NavBar hasSearchBar={hasSearchBar} />
+        {isAuthenticated && (
+          <OutletContainer>
+            <Outlet />
+          </OutletContainer>
+        )}
       </Content>
-      <Footer />
+      {isAuthenticated ? <Footer /> : <Footer withAboutUs={false} />}
     </AppWrapper>
   );
 }

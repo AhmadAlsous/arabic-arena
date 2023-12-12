@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { useMsal } from '@azure/msal-react';
+import { loginRequest } from '../../config/authConfig';
 
-const StyledMainPageButton = styled(Link)`
+const StyledMainPageButton = styled.button`
   border: none;
   background-color: transparent;
   color: #ffffff;
@@ -75,8 +76,15 @@ const StyledMainPageButton = styled(Link)`
 `;
 
 function MainPageButton() {
+  const { instance } = useMsal();
+  function login() {
+    instance.loginRedirect(loginRequest).catch((e) => {
+      console.log(e);
+    });
+  }
+
   return (
-    <StyledMainPageButton to='/learn'>
+    <StyledMainPageButton onClick={login}>
       <span className='glow-word'>LOG IN</span>
     </StyledMainPageButton>
   );

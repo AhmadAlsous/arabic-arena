@@ -2,6 +2,7 @@ import { NavLinkReset } from '../../utility/LinkReset';
 import styled from 'styled-components';
 
 const StyledButton = styled(NavLinkReset)`
+  color: ${(props) => (props.$isHomepage ? 'white' : 'black')};
   height: 27px;
   position: relative;
   display: inline-block;
@@ -15,11 +16,12 @@ const StyledButton = styled(NavLinkReset)`
     content: '';
     position: absolute;
     width: 0;
-    height: 2.5px;
+    height: ${(props) => (props.$isHomepage ? '2px' : '2.5px')};
     transition: width 0.4s;
     bottom: -5px;
     left: -2.5%;
-    background-color: var(--primary-blue-500);
+    background-color: ${(props) =>
+      props.$isHomepage ? 'white' : 'var(--primary-blue-500)'};
   }
 
   &:hover:not(.active)::after,
@@ -30,11 +32,12 @@ const StyledButton = styled(NavLinkReset)`
   transition: transform 0.5s;
 
   &:hover:not(.active) {
-    color: black;
+    color: ${(props) => (props.$isHomepage ? 'white' : 'black')};
   }
 
   &.active::after {
-    background-color: var(--primary-blue-500);
+    background-color: ${(props) =>
+      props.$isHomepage ? 'white' : 'var(--primary-blue-500)'};
   }
 `;
 
@@ -43,11 +46,12 @@ const Button = styled.div`
   letter-spacing: 1px;
 `;
 
-function NavBarButton({ name, navTo }) {
+function NavBarButton({ name, navTo, isHomepage = false }) {
   return (
     <StyledButton
       to={navTo}
       className={({ isActive }) => (isActive ? 'active' : '')}
+      $isHomepage={isHomepage}
     >
       <Button>{name}</Button>
     </StyledButton>
