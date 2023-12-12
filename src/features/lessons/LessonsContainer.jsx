@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import LessonBox from './lessonBox';
+import LessonBox from './LessonBox';
 import QuizStartConfirm from '../quizzes/QuizStartConfirm';
 
 const StyledLessonsContainer = styled.div`
