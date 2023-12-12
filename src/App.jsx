@@ -9,7 +9,7 @@ import Quiz from './features/quiz/Quiz';
 import GlobalStyle from './GlobalStyle';
 import PlacementTest from './features/PlacementTest';
 import Settings from './features/Settings';
-import Quizzes from './features/quizzes/quizzes';
+import Quizzes from './features/quizzes/Quizzes';
 
 const router = createBrowserRouter([
   { path: '/', element: <HomePage /> },
