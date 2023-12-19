@@ -13,7 +13,7 @@ const StyledLessonsBar = styled.div`
 const TypesContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 350px;
+  width: 500px;
   font-size: 0.9rem;
   margin-right: 30px;
   color: #555;
@@ -34,7 +34,16 @@ const Title = styled.h3`
   letter-spacing: 5px;
 `;
 
-function LessonsBar({ level, type, onChangeLevel, onChangeType, isQuiz }) {
+function LessonsBar({
+  status,
+  level,
+  type,
+  onChangeStatus,
+  onChangeLevel,
+  onChangeType,
+  isQuiz,
+}) {
+  const statusItems = ['All', 'Complete', 'Incomplete'];
   const typeItems = [
     'All',
     'Grammar',
@@ -49,6 +58,14 @@ function LessonsBar({ level, type, onChangeLevel, onChangeType, isQuiz }) {
     <StyledLessonsBar>
       <Title>{isQuiz ? 'QUIZZES' : 'LESSONS'}</Title>
       <TypesContainer type={type}>
+        <div>
+          Status
+          <MenuComponent
+            selectedValue={status}
+            onChange={onChangeStatus}
+            items={statusItems}
+          />
+        </div>
         <div>
           Type
           <MenuComponent

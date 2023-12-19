@@ -5,6 +5,7 @@ import { quizzes } from '../../data/DummyQuizzes';
 import Pagination from '../../UI/Pagination';
 
 function Quizzes() {
+  const [selectedStatus, setSelectedStatus] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
   const filteredQuizzes = quizzes.filter(
@@ -18,8 +19,10 @@ function Quizzes() {
       <LessonsBar
         level={selectedLevel}
         type={selectedType}
+        status={selectedStatus}
         onChangeLevel={setSelectedLevel}
         onChangeType={setSelectedType}
+        onChangeStatus={setSelectedStatus}
         isQuiz={true}
       />
       <LessonsContainer lessons={filteredQuizzes} isQuiz={true} />
