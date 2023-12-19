@@ -74,6 +74,7 @@
 // };
 
 export const greenTeaLesson = {
+  id: '11111',
   titleArabic: 'فوائد الشاي الأخضر',
   titleEnglish: 'Benefits of Green tea',
   level: 'Beginner',
