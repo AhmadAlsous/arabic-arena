@@ -1,37 +1,33 @@
-import { useState } from 'react';
-import { LinkReset } from '../../utility/LinkReset';
-import { replaceSpacesWithDashes } from '../../utility/stringOperations';
-import styled from 'styled-components';
-import SvgColor from '../../UI/svg-color';
+import { useState } from "react";
+import { LinkReset } from "../../utility/LinkReset";
+import { replaceSpacesWithDashes } from "../../utility/stringOperations";
+import styled from "styled-components";
+import SvgColor from "../../UI/svg-color";
 
 const StyledLessonBox = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 265px;
+  height: 265px;
   display: flex;
   position: relative;
   flex-direction: column;
   align-items: center;
+
   box-shadow: 0 5px 10px 2px #bbb;
   transition: transform 0.3s, box-shadow 0.3s;
+
+  @media (max-width: 1072px) {
+    width: 350px;
+    height: 300px;
+  }
+
+  @media (max-width: 500px) {
+    width: 300px;
+    height: 300px;
+  }
 
   &:hover {
     transform: translateY(-4px) scale(1.02);
     box-shadow: 0 7px 20px 5px #666666;
-  }
-
-  @media (max-width: 1157px) {
-    width: 500px;
-    height: 400px;
-  }
-
-  @media (max-width: 940px) {
-    width: 400px;
-    height: 300px;
-  }
-
-  @media (max-width: 850px) {
-    width: 300px;
-    height: 300px;
   }
 `;
 
@@ -52,11 +48,11 @@ const Title = styled.h3`
   margin: 7px 0;
   font-size: 1rem;
   text-align: center;
-  font-family: 'Feather';
+  font-family: "Feather";
 `;
 
 const Arabic = styled.span`
-  font-family: 'Al-Jazeera';
+  font-family: "Al-Jazeera";
   font-size: 1.15rem;
   text-align: center;
   display: block;
@@ -76,8 +72,8 @@ const LevelInfo = styled.div`
   padding: 10px 0;
   letter-spacing: 1px;
   background-color: var(--primary-blue-dark-500);
-  font-family: 'Din-round';
-  border-right: ${(props) => props.type && '0.5px solid #ffffff'};
+  font-family: "Din-round";
+  border-right: ${(props) => props.type && "0.5px solid #ffffff"};
 `;
 
 const TypeInfo = styled.div`
@@ -86,7 +82,7 @@ const TypeInfo = styled.div`
   padding: 10px 0;
   letter-spacing: 1px;
   background-color: var(--primary-blue-dark-500);
-  font-family: 'Din-round';
+  font-family: "Din-round";
   border-left: 0.5px solid #ffffff;
 `;
 
@@ -100,26 +96,22 @@ const ImageContainer = styled.div`
 
 const TitleImageContainer = styled.div`
   padding: 0 15%;
-  font-family: 'Arabic-bold', sans-serif;
+  font-family: "Arabic-bold", sans-serif;
   letter-spacing: 1px;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   opacity: 0.35;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
 
-  @media (max-width: 1157px) {
-    font-size: 4rem;
-  }
-
-  @media (max-width: 940px) {
-    font-size: 3rem;
-  }
-
-  @media (max-width: 850px) {
+  @media (max-width: 1072px) {
     font-size: 2.5rem;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 2rem;
   }
 `;
 
@@ -139,7 +131,7 @@ function LessonBox({ lesson }) {
       state={{ id }}
     >
       <StyledLessonBox>
-        <StyledCheckIcon2 src='/images/check.svg' />
+        <StyledCheckIcon2 src="/images/check.svg" />
         <TitleContainer>
           <Title>
             <Arabic>{titleArabic}</Arabic>
