@@ -1,8 +1,8 @@
-import { Outlet, useLocation } from "react-router-dom";
-import Footer from "../UI/footer/Footer";
-import NavBar from "../UI/header/NavBar";
-import styled from "styled-components";
-import { useIsAuthenticated } from "@azure/msal-react";
+import { Outlet, useLocation } from 'react-router-dom';
+import Footer from '../UI/footer/Footer';
+import NavBar from '../UI/header/NavBar';
+import styled from 'styled-components';
+import { useIsAuthenticated } from '@azure/msal-react';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -34,7 +34,7 @@ function Layout() {
   const isAuthenticated = useIsAuthenticated();
   const location = useLocation();
   const hasSearchBar =
-    location.pathname === "/learn" || location.pathname === "/quiz";
+    location.pathname === '/learn' || location.pathname === '/quiz';
   return (
     <AppWrapper>
       <Content>
