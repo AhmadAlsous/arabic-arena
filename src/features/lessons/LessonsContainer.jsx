@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import LessonBox from './LessonBox';
-import QuizStartConfirm from '../quizzes/QuizStartConfirm';
+import styled from "styled-components";
+import LessonBox from "./LessonBox";
+import QuizStartConfirm from "../quizzes/QuizStartConfirm";
 
 const StyledLessonsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(265px, 1fr));
   gap: 50px;
   justify-content: center;
   justify-items: center;
@@ -17,7 +17,7 @@ function LessonsContainer({ lessons, isQuiz }) {
     <StyledLessonsContainer>
       {lessons.map((lesson) =>
         isQuiz ? (
-          <QuizStartConfirm key={lesson.id} quiz={lesson} type={'confirm'} />
+          <QuizStartConfirm key={lesson.id} quiz={lesson} type={"confirm"} />
         ) : (
           <LessonBox key={lesson.id} lesson={lesson} />
         )
