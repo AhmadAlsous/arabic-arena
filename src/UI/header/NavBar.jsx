@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import NavBarButton from './NavBarButton';
 import Image from '../footer/Image';
-import SearchBar from './SearchBar';
 import AccountCircleList from './AccountCircleList';
 import MobileMenu from './MobileMenu';
 
@@ -26,6 +25,13 @@ const StyledNavBar = styled.div`
   }
 `;
 
+const Container = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+`;
+
 const ImageContainer = styled.div`
   margin-left: 15px;
 `;
@@ -33,23 +39,13 @@ const ImageContainer = styled.div`
 const ButtonsContainer = styled.div`
   display: flex;
   margin: 0 18% 0 25px;
-  width: 45%;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-
-  @media (max-width: 1000px) {
-    margin-right: 7%;
-    width: 75%;
-  }
+  width: 100%;
 
   @media (max-width: 757px) {
     display: none;
   }
-`;
-
-const SearchContainer = styled.div`
-  padding-right: 50px;
-  max-width: 30%;
 `;
 
 const ProfileContainer = styled.div`
@@ -60,9 +56,8 @@ const ProfileContainer = styled.div`
     display: none;
   }
 `;
+
 const MobileContainer = styled.div`
-  margin-top: 5px;
-  padding-right: 15px;
   display: none;
 
   @media (max-width: 757px) {
@@ -70,31 +65,28 @@ const MobileContainer = styled.div`
   }
 `;
 
-function NavBar({ isHomepage = false, hasSearchBar = false }) {
+function NavBar({ isHomepage = false }) {
   return (
     <StyledNavBar $isHomepage={isHomepage}>
-      <ImageContainer>
-        <Image
-          imageLink='../../images/logos/LanguageCenterLogo.png'
-          alt='Languages Center Logo'
-        />
-      </ImageContainer>
-      <ButtonsContainer>
-        <NavBarButton isHomepage={isHomepage} name='HOME' navTo='/' />
-        <NavBarButton isHomepage={isHomepage} name='LESSONS' navTo='/learn' />
-        <NavBarButton isHomepage={isHomepage} name='QUIZZES' navTo='/quiz' />
-        <NavBarButton
-          isHomepage={isHomepage}
-          name='PLACEMENT'
-          navTo='/placement'
-        />
-        {/* <NavBarButton name='ASK' navTo='/ask' /> */}
-      </ButtonsContainer>
-      {hasSearchBar && (
-        <SearchContainer>
-          <SearchBar />
-        </SearchContainer>
-      )}
+      <Container>
+        <ImageContainer>
+          <Image
+            imageLink='../../images/logos/LanguageCenterLogo.png'
+            alt='Languages Center Logo'
+          />
+        </ImageContainer>
+        <ButtonsContainer>
+          <NavBarButton isHomepage={isHomepage} name='HOME' navTo='/' />
+          <NavBarButton isHomepage={isHomepage} name='LESSONS' navTo='/learn' />
+          <NavBarButton isHomepage={isHomepage} name='QUIZZES' navTo='/quiz' />
+          <NavBarButton
+            isHomepage={isHomepage}
+            name='PLACEMENT'
+            navTo='/placement'
+          />
+          {/* <NavBarButton name='ASK' navTo='/ask' /> */}
+        </ButtonsContainer>
+      </Container>
       <ProfileContainer>
         <AccountCircleList isHomepage={isHomepage} />
       </ProfileContainer>

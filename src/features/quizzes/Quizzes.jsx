@@ -8,10 +8,14 @@ function Quizzes() {
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
+  const [searchWord, setSearchWord] = useState('');
   const filteredQuizzes = quizzes.filter(
     (lesson) =>
       (selectedLevel === 'All' || lesson.level === selectedLevel) &&
-      (selectedType === 'All' || lesson.type === selectedType)
+      (selectedType === 'All' || lesson.type === selectedType) &&
+      (searchWord === '' ||
+        lesson.titleArabic.includes(searchWord) ||
+        lesson.titleEnglish.toLowerCase().includes(searchWord.toLowerCase()))
   );
 
   return (
@@ -23,6 +27,8 @@ function Quizzes() {
         onChangeLevel={setSelectedLevel}
         onChangeType={setSelectedType}
         onChangeStatus={setSelectedStatus}
+        searchWord={searchWord}
+        setSearchWord={setSearchWord}
         isQuiz={true}
       />
       <LessonsContainer lessons={filteredQuizzes} isQuiz={true} />

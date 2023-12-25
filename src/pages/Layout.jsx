@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import Footer from '../UI/footer/Footer';
 import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
@@ -8,11 +8,13 @@ const AppWrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  overflow-x: hidden;
 `;
 
 const Content = styled.div`
   flex: 1;
   background-color: var(--homepage-blue);
+  overflow-x: hidden;
 `;
 
 const OutletContainer = styled.div`
@@ -20,6 +22,7 @@ const OutletContainer = styled.div`
   margin: 50px 15%;
   padding: 0 50px 20px 50px;
   box-shadow: 0 5px 20px 3px black;
+  overflow-x: hidden;
 
   @media (max-width: 757px) {
     margin: 0;
@@ -32,13 +35,10 @@ const OutletContainer = styled.div`
 
 function Layout() {
   const isAuthenticated = useIsAuthenticated();
-  const location = useLocation();
-  const hasSearchBar =
-    location.pathname === '/learn' || location.pathname === '/quiz';
   return (
     <AppWrapper>
       <Content>
-        <NavBar hasSearchBar={hasSearchBar} />
+        <NavBar />
         {
           <OutletContainer>
             <Outlet />

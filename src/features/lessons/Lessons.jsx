@@ -10,10 +10,14 @@ function Lessons() {
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
+  const [searchWord, setSearchWord] = useState('');
   const filteredLessons = lessons.filter(
     (lesson) =>
       (selectedLevel === 'All' || lesson.level === selectedLevel) &&
-      (selectedType === 'All' || lesson.type === selectedType)
+      (selectedType === 'All' || lesson.type === selectedType) &&
+      (searchWord === '' ||
+        lesson.titleArabic.includes(searchWord) ||
+        lesson.titleEnglish.toLowerCase().includes(searchWord.toLowerCase()))
   );
 
   return (
@@ -25,6 +29,8 @@ function Lessons() {
         onChangeLevel={setSelectedLevel}
         onChangeType={setSelectedType}
         onChangeStatus={setSelectedStatus}
+        searchWord={searchWord}
+        setSearchWord={setSearchWord}
       />
       <LessonsContainer lessons={filteredLessons} />
       <Pagination count={filteredLessons.length} />
