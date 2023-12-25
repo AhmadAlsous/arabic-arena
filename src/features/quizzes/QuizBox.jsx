@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const StyledQuizBox = styled.div`
-  width: 300px;
-  height: 300px;
+  width: 265px;
+  height: 265px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,17 +14,12 @@ const StyledQuizBox = styled.div`
     box-shadow: 0 7px 20px 5px #666666;
   }
 
-  @media (max-width: 1157px) {
-    width: 500px;
-    height: 400px;
-  }
-
-  @media (max-width: 940px) {
-    width: 400px;
+  @media (max-width: 1072px) {
+    width: 350px;
     height: 300px;
   }
 
-  @media (max-width: 850px) {
+  @media (max-width: 500px) {
     width: 300px;
     height: 300px;
   }
@@ -89,23 +84,19 @@ const TitleImageContainer = styled.div`
   font-family: 'Arabic-bold', sans-serif;
   letter-spacing: 1px;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
   opacity: 0.35;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
 
-  @media (max-width: 1157px) {
-    font-size: 4rem;
-  }
-
-  @media (max-width: 940px) {
-    font-size: 2.8rem;
-  }
-
-  @media (max-width: 850px) {
+  @media (max-width: 1072px) {
     font-size: 2.5rem;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 2rem;
   }
 `;
 
