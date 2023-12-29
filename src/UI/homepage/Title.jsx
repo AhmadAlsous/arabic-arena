@@ -6,6 +6,16 @@ const StyledTitle = styled.h3`
   color: #fffdf2;
   margin: 0;
   letter-spacing: 15px;
+
+  @media (max-width: 750px) {
+    font-size: 1.5rem;
+    letter-spacing: 10px;
+  }
+
+  @media (max-width: 550px) {
+    font-size: 1rem;
+    letter-spacing: 5px;
+  }
 `;
 
 function Title() {

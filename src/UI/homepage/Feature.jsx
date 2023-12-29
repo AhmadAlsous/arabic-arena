@@ -9,6 +9,10 @@ const Styledfeature = styled.div`
   @media (max-width: 900px) {
     text-align: center;
   }
+
+  @media (max-width: 900px) {
+    width: 70%;
+  }
 `;
 
 const FeatureTitle = styled.h4`

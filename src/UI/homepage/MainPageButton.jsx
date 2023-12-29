@@ -14,8 +14,13 @@ const StyledMainPageButton = styled.button`
   justify-content: center;
   position: relative;
 
-  @media (max-width: 1050px) {
+  @media (max-width: 750px) {
     font-size: 1rem;
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: 550px) {
+    font-size: 0.8rem;
     letter-spacing: 2px;
   }
 
