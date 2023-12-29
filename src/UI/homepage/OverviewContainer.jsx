@@ -18,6 +18,11 @@ const StyledOverviewContainer = styled.div`
     grid-template-columns: 1fr;
     width: 50%;
   }
+
+  @media (max-width: 550px) {
+    grid-template-columns: 1fr;
+    width: 70%;
+  }
 `;
 
 const OverviewBar = styled.div`

@@ -6,29 +6,29 @@ const ImageContainer = styled.div`
   justify-content: center;
   padding: 20px 0;
   width: 55%;
-  height: 400px;
+  height: 350px;
   overflow: hidden;
-  background-color: #f0f0f0;
+  background-color: white;
 
   @media (max-width: 1300px) {
-    width: 70%;
-  }
-
-  @media (max-width: 1100px) {
-    width: 100%;
+    width: 80%;
   }
 
   @media (max-width: 900px) {
-    height: 300px;
+    height: 350px;
     width: 60%;
     padding-bottom: 80px;
+  }
+
+  @media (max-width: 700px) {
+    height: 300px;
   }
 `;
 
 const ImageWrapper = styled.div`
   position: relative;
   width: 95%;
-  background-color: #f0f0f0;
+  background-color: white;
 `;
 
 const StyledImg = styled.img`

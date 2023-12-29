@@ -8,7 +8,7 @@ const StyledFeatures = styled.div`
   gap: 100px 30px;
   align-items: center;
   width: 100%;
-  background-color: #f0f0f0;
+  background-color: white;
   padding: 80px 0;
 
   & > :nth-child(odd) {
@@ -69,12 +69,12 @@ function Features() {
       </Feature>
       <FeatureImage
         className='feature-image'
-        src='../../images/testChar.png'
+        src='../../images/Placement.png'
         alt='Placement Test Character'
       />
       <FeatureImage
         className='feature-image'
-        src='../../images/lessonsChar.png'
+        src='../../images/Studying.jpg'
         alt='Lessons Character'
       />
       <Feature className='feature' title='Explore Various Lessons'>
@@ -84,12 +84,12 @@ function Features() {
         to mastering the Arabic language. Engage with interactive content and
         progress at your own pace on a journey of discovery.
       </Feature>
-      <Feature className='feature' title='Ask A Question'>
-        Stuck on a tricky grammar rule or need clarification on a cultural
-        nuance? Our 'Ask' feature connects you with a community of learners and
-        native speakers. Submit your queries and join the conversation,
-        enriching your understanding of the Arabic language through
-        collaborative learning and shared knowledge.
+      <Feature className='feature' title='Test Your Knowledge'>
+        Enhance your Arabic proficiency with our concise and targeted quizzes.
+        Designed for all levels – beginner to advanced – these quizzes provide a
+        quick yet effective way to assess and reinforce your learning. Our
+        quizzes will help you identify strengths and areas for improvement,
+        making your language journey both engaging and rewarding.
       </Feature>
       <FeatureImage
         className='feature-image'
