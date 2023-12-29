@@ -1,8 +1,6 @@
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { PAGE_SIZE } from '../config/constants';
+import { Button } from '@mui/material';
 
 const StyledPagination = styled.div`
   width: 100%;
@@ -25,44 +23,11 @@ const Buttons = styled.div`
   gap: 0.6rem;
 `;
 
-const PaginationButton = styled.button`
-  background-color: transparent;
-  color: ${(props) => (props.active ? '#eef2ff' : 'inherit')};
-  border: none;
-  font-weight: 500;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  padding: 0.6rem 1.2rem;
-  transition: all 0.3s;
-
-  &:has(span:last-child) {
-    padding-left: 0.4rem;
-  }
-
-  &:has(span:first-child) {
-    padding-right: 0.4rem;
-  }
-
-  & svg {
-    height: 1.8rem;
-    width: 1.8rem;
-  }
-
-  &:hover:not(:disabled) {
-    border-bottom: 2px solid var(--primary-blue-500);
-  }
-`;
-
-function Pagination({ count }) {
+function Pagination({ pageCount }) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = !searchParams.get('page')
     ? 1
     : Number(searchParams.get('page'));
-
-  const pageCount = Math.ceil(count / PAGE_SIZE);
 
   function nextPage() {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
@@ -83,26 +48,19 @@ function Pagination({ count }) {
   return (
     <StyledPagination>
       <P>
-        Showing <span>{(currentPage - 1) * PAGE_SIZE + 1}</span> to{' '}
-        <span>
-          {currentPage === pageCount ? count : currentPage * PAGE_SIZE}
-        </span>{' '}
-        of <span>{count}</span> results
+        page <span>{currentPage}</span> of <span>{pageCount}</span>
       </P>
 
       <Buttons>
-        <PaginationButton onClick={prevPage} disabled={currentPage === 1}>
-          <ChevronLeftIcon />
-          <span>Previous</span>
-        </PaginationButton>
+        {currentPage !== 1 && (
+          <Button onClick={prevPage} disabled={currentPage === 1}>
+            <span>Previous</span>
+          </Button>
+        )}
 
-        <PaginationButton
-          onClick={nextPage}
-          disabled={currentPage === pageCount}
-        >
+        <Button onClick={nextPage} disabled={currentPage === pageCount}>
           <span>Next</span>
-          <ChevronRightIcon />
-        </PaginationButton>
+        </Button>
       </Buttons>
     </StyledPagination>
   );

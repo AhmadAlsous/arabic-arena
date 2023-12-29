@@ -4,6 +4,7 @@ import Drawer from '@mui/material/Drawer';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import {
   Box,
+  Button,
   Divider,
   FormControl,
   FormControlLabel,
@@ -23,12 +24,21 @@ const StyledLessonsBar = styled.div`
   padding: 5px 20px 5px 10px;
   align-items: center;
   border-bottom: 1.5px solid #888888;
+
+  @media (max-width: 500px) {
+    padding: 5px 0px 5px 10px;
+  }
 `;
 
 const Title = styled.h3`
   font-size: 1.5rem;
   font-weight: 400;
   letter-spacing: 5px;
+
+  @media (max-width: 500px) {
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+  }
 `;
 
 const FilterTitle = styled.h3`
@@ -79,7 +89,13 @@ function LessonsBar({
         open={drawerOpen}
         onClose={toggleDrawer(false)}
         PaperProps={{
-          sx: { width: 280, border: 'none', overflow: 'hidden', pl: 1, pr: 1 },
+          sx: {
+            width: 280,
+            border: 'none',
+            overflow: 'hidden',
+            pl: 1,
+            pr: 1,
+          },
         }}
       >
         <Stack
@@ -94,7 +110,7 @@ function LessonsBar({
           </IconButton>
         </Stack>
         <Divider />
-        <Box sx={{ width: 250, padding: 2 }} role='presentation'>
+        <Box sx={{ overflowY: 'auto', padding: 2 }}>
           <TextField
             value={searchWord}
             onChange={(e) => setSearchWord(e.target.value)}
@@ -163,6 +179,10 @@ function LessonsBar({
             </FormControl>
           </Stack>
         </Box>
+        <Divider sx={{ mb: 1.5 }} />
+        <Button onClick={toggleDrawer(false)} sx={{ mb: 1.5 }}>
+          Confirm Selection
+        </Button>
       </Drawer>
     </StyledLessonsBar>
   );

@@ -1,4 +1,3 @@
-//import { useLocation } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { greenTeaLesson } from '../../data/GreenTea';
 import { lessons } from '../../data/lessons';
@@ -9,7 +8,6 @@ import ExerciseContainer from './ExerciseContainer';
 import TableBody from './TableBody';
 import { replaceSpacesWithDashes } from '../../utility/stringOperations';
 import { transformLesson } from '../../utility/transforms';
-//import PdfLesson from './PdfLesson';
 
 const header = [
   'Arabic Word',
@@ -29,8 +27,6 @@ const letterHeader = [
 ];
 
 function Lesson() {
-  // const { state } = useLocation();
-  // const lessonId = state?.id;
   const { lesson: lessonName } = useParams();
   const lesson =
     lessons.find(
@@ -51,7 +47,6 @@ function Lesson() {
           id={lesson.titleEnglish === 'Letters' ? 'letter' : 'arabicWord'}
         />
       )}
-      {/* <PdfLesson /> */}
       {lesson.exercises && (
         <ExerciseContainer
           exercises={lesson.exercises}

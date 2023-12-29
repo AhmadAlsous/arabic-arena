@@ -6,7 +6,6 @@ export const dummyLessons = [
     level: 'Beginner',
     type: 'Reading',
     imageLink: 'https://assets.rbl.ms/19152954/origin.jpg',
-    video: false,
   },
   {
     id: 0,
@@ -16,7 +15,6 @@ export const dummyLessons = [
     type: 'Vocabulary',
     imageLink:
       'https://www.lebanesearabicinstitute.com/wp-content/uploads/2017/02/Alphabet.jpg',
-    video: false,
   },
   {
     id: 1,
@@ -43,7 +41,6 @@ export const dummyLessons = [
     type: 'Writing',
     imageLink:
       'https://st.adda247.com/https://adda247jobs-wp-assets-adda247.s3.ap-south-1.amazonaws.com/jobs/wp-content/uploads/sites/2/2022/07/23130600/SmartSelect_20220723-125355_Office.jpg',
-    video: false,
   },
   {
     id: 55555,
@@ -52,7 +49,6 @@ export const dummyLessons = [
     level: 'Advanced',
     type: 'Grammar',
     imageLink: '',
-    video: false,
   },
   {
     id: 66666,
@@ -62,7 +58,6 @@ export const dummyLessons = [
     type: 'Listening',
     imageLink:
       'https://upload.wikimedia.org/wikipedia/commons/d/d9/Internal_organs.png',
-    video: false,
   },
   {
     id: 5,
@@ -98,7 +93,6 @@ export const dummyLessons = [
     level: 'Beginner',
     type: 'Reading',
     imageLink: '',
-    video: false,
   },
   {
     id: 88888,
@@ -107,7 +101,6 @@ export const dummyLessons = [
     level: 'Beginner',
     type: 'Grammar',
     imageLink: 'https://gsb.hse.ru/pubs/share/direct/408305373.png',
-    video: true,
   },
   {
     id: 99999,
@@ -117,7 +110,6 @@ export const dummyLessons = [
     type: 'Reading',
     imageLink:
       'https://suttonhighnews.net/wp-content/uploads/2022/03/Nash-History-Journal.png',
-    video: false,
   },
   {
     id: 100000,
@@ -127,7 +119,6 @@ export const dummyLessons = [
     type: 'Writing',
     imageLink:
       'https://www.whitehouse.gov/wp-content/uploads/2021/01/us-capitol.jpg',
-    video: false,
   },
   {
     id: 100001,
@@ -137,7 +128,6 @@ export const dummyLessons = [
     type: 'Listening',
     imageLink:
       'https://protium.co.in/wp-content/uploads/2022/09/how-does-lending-contribute-to-the-economy.jpg',
-    video: false,
   },
   {
     id: 100002,
@@ -147,7 +137,6 @@ export const dummyLessons = [
     type: 'Reading',
     imageLink:
       'https://images.theconversation.com/files/427100/original/file-20211018-17-7bf8no.jpg?ixlib=rb-1.1.0&rect=7%2C7%2C4985%2C3315&q=20&auto=format&w=320&fit=clip&dpr=2&usm=12&cs=strip',
-    video: true,
   },
   {
     id: 100003,
@@ -156,7 +145,6 @@ export const dummyLessons = [
     level: 'Advanced',
     type: 'Writing',
     imageLink: '',
-    video: false,
   },
   {
     id: 100004,
@@ -166,7 +154,6 @@ export const dummyLessons = [
     type: 'Writing',
     imageLink:
       'https://gurmentor.com/wp-content/uploads/2020/11/gurmentor.com-best-language-learning-methods-and-teaching-approaches-explained-2020-11-17_16-21-09_140956.png',
-    video: false,
   },
   {
     id: 100005,
@@ -176,7 +163,6 @@ export const dummyLessons = [
     type: 'Listening',
     imageLink:
       'https://teachyourkidscode.com/wp-content/uploads/2022/02/best-coding-language-for-games.jpg',
-    video: true,
   },
   {
     id: 8,
@@ -203,7 +189,6 @@ export const dummyLessons = [
     type: 'Grammar',
     imageLink:
       'https://images.inc.com/uploaded_files/image/1920x1080/getty_614138202_2000133520009280253_328692.jpg',
-    video: false,
   },
   {
     id: 100007,
@@ -213,7 +198,6 @@ export const dummyLessons = [
     type: 'Listening',
     imageLink:
       'https://www.simplilearn.com/ice9/free_resources_article_thumb/Proven_Time_Management_Tips_and_Strategies_for_students.jpg',
-    video: true,
   },
   {
     id: 100008,
@@ -223,7 +207,6 @@ export const dummyLessons = [
     type: 'Reading',
     imageLink:
       'https://ideas.darden.virginia.edu/sites/default/files/styles/large/public/2021-07/202107_Modica_Negotiation%404x.png?itok=kvFVo--I',
-    video: false,
   },
   {
     id: 100009,
@@ -233,7 +216,6 @@ export const dummyLessons = [
     type: 'Writing',
     imageLink:
       'https://s40424.pcdn.co/in/wp-content/uploads/2022/06/what-is-leadership.jpg.optimal.jpg',
-    video: true,
   },
   {
     id: 100010,
@@ -243,6 +225,5 @@ export const dummyLessons = [
     type: 'Grammar',
     imageLink:
       'https://unlockedpotentials.com/wp-content/uploads/2022/10/life-coach-in-dubai.jpg',
-    video: false,
   },
 ];
