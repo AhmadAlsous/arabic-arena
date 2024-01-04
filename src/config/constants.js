@@ -9,3 +9,5 @@ export const SPEECH_API_URL =
 export const TRANSLATE_API_URL =
   'https://translation.googleapis.com/language/translate/v2?key=' +
   GOOGLE_API_KEY;
+
+export const BACKEND_URL = 'https://arabicarena.azurewebsites.net';

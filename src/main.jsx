@@ -4,13 +4,23 @@ import App from './App.jsx';
 import { PublicClientApplication } from '@azure/msal-browser';
 import { MsalProvider } from '@azure/msal-react';
 import { msalConfig } from './config/authConfig.js';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Toaster } from 'react-hot-toast';
 
 const msalInstance = new PublicClientApplication(msalConfig);
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <MsalProvider instance={msalInstance}>
-      <App />
-    </MsalProvider>
+    <QueryClientProvider client={queryClient}>
+      <MsalProvider instance={msalInstance}>
+        <App />
+        <Toaster
+          containerStyle={{
+            top: 85,
+          }}
+        />
+      </MsalProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
