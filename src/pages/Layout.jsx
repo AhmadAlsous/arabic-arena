@@ -24,6 +24,15 @@ const OutletContainer = styled.div`
   box-shadow: 0 5px 20px 3px black;
   overflow-x: hidden;
 
+  @media (max-width: 1300px) {
+    margin: 50px 10%;
+  }
+
+  @media (max-width: 1000px) {
+    padding: 0 30px 20px 30px;
+    margin: 50px 8%;
+  }
+
   @media (max-width: 757px) {
     margin: 0;
     padding-top: 20px;
@@ -31,22 +40,28 @@ const OutletContainer = styled.div`
     box-shadow: 0 0 0 0 white;
     border: none;
   }
+
+  @media (max-width: 500px) {
+    padding: 0 10px 20px 10px;
+  }
 `;
 
 function Layout() {
   const isAuthenticated = useIsAuthenticated();
   return (
-    <AppWrapper>
-      <Content>
-        <NavBar />
-        {
-          <OutletContainer>
-            <Outlet />
-          </OutletContainer>
-        }
-      </Content>
-      {isAuthenticated ? <Footer /> : <Footer withAboutUs={false} />}
-    </AppWrapper>
+    <>
+      <NavBar />
+      <AppWrapper>
+        <Content>
+          {
+            <OutletContainer>
+              <Outlet />
+            </OutletContainer>
+          }
+        </Content>
+        {isAuthenticated ? <Footer /> : <Footer withAboutUs={false} />}
+      </AppWrapper>
+    </>
   );
 }
 

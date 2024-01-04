@@ -11,6 +11,20 @@ const StyledExerciseContainer = styled.div`
   border: 1px solid #bbb;
   box-shadow: 0 5px 20px 2px #ccc;
   background-color: #fff;
+
+  @media (max-width: 1200px) {
+    margin: 20px 3% 40px 3%;
+  }
+
+  @media (max-width: 757px) {
+    border: none;
+    padding: 20px 10px 15px 10px;
+    box-shadow: none;
+  }
+
+  @media (max-width: 600px) {
+    margin: 20px 0 40px 0;
+  }
 `;
 
 const QuestionNumber = styled.h3`
@@ -18,12 +32,30 @@ const QuestionNumber = styled.h3`
   font-weight: 500;
   margin: 0 0 20px 0;
   letter-spacing: 2px;
+
+  @media (max-width: 1200px) {
+    font-size: 1.2rem;
+  }
+
+  @media (max-width: 757px) {
+    padding-top: 17px;
+    border-top: 1px solid #999;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
 `;
 
 const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
+
+  @media (max-width: 757px) {
+    padding-bottom: 16px;
+    border-bottom: 1px solid #999;
+  }
 `;
 
 const NavButtonsContainer = styled.div`

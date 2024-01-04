@@ -9,13 +9,7 @@ import TableBody from './TableBody';
 import { replaceSpacesWithDashes } from '../../utility/stringOperations';
 import { transformLesson } from '../../utility/transforms';
 
-const header = [
-  'Arabic Word',
-  'English Word',
-  'Translation',
-  'Transcription',
-  'Pronunciation',
-];
+const header = ['Arabic', 'English', 'Translation', 'Transcription', 'Audio'];
 
 const letterHeader = [
   'Letter',
@@ -23,7 +17,7 @@ const letterHeader = [
   'Middle',
   'End',
   'Transcription',
-  'Pronunciation',
+  'Audio',
 ];
 
 function Lesson() {
@@ -37,7 +31,7 @@ function Lesson() {
 
   return (
     <>
-      <LessonBar lesson={lesson} />
+      <LessonBar />
       <LessonInfo lesson={lesson} />
       {lesson.text && <LessonText text={lesson.text} />}
       {lesson.table && (

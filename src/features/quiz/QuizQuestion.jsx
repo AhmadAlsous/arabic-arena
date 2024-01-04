@@ -28,6 +28,14 @@ const Question = styled.h3`
   font-size: 1.2rem;
   font-weight: 500;
   color: #222;
+
+  @media (max-width: 1000px) {
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
 `;
 
 const Arabic = styled.span`

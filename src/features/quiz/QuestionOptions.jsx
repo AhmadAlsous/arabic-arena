@@ -67,6 +67,10 @@ const StyledFormControlLabel = styled(FormControlLabel)`
       user-select: none;
       font-family: 'Greta';
       color: #222;
+
+      @media (max-width: 700px) {
+        font-size: 1rem;
+      }
     }
 
     .MuiRadio-root {

@@ -3,24 +3,38 @@ import { LinkReset } from '../../utility/LinkReset';
 import PhoneIcon from '@mui/icons-material/Phone';
 import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import EmailIcon from '@mui/icons-material/Email';
-import Image from './Image';
 import Modal from '../Modal';
 import FeedbackForm from './FeedbackForm';
 
 const StyledFooter = styled.footer`
   display: grid;
-  grid-template-columns: 7fr 4fr 4fr;
+  grid-template-columns: 8fr 4fr 4fr;
   gap: 20px;
   padding: 40px 20px;
   background-color: #555;
   color: #fff;
   letter-spacing: 1px;
   font-size: 1.1rem;
+  grid-template-areas: 'column1 column2 column3';
+
+  @media (max-width: 828px) {
+    grid-template-columns: ${(props) =>
+      props.$withAboutUs ? '1fr 1fr' : '1fr'};
+    grid-template-areas: ${(props) =>
+      props.$withAboutUs
+        ? "'column1 column1' 'column2 column3'"
+        : "'column1' 'column3'"};
+  }
 `;
 
 const LogoSection = styled.div`
+  grid-area: column1;
   display: flex;
   align-items: center;
+
+  @media (max-width: 828px) {
+    justify-content: center;
+  }
 `;
 
 const Title = styled.div`
@@ -36,26 +50,54 @@ const Top = styled.div`
   letter-spacing: 1.3px;
   font-family: 'Al-Jazeera';
   margin-bottom: -10px;
+
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Bottom = styled.div`
   font-size: 1.75rem;
   letter-spacing: 4px;
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Column1 = styled.div`
+  grid-area: column2;
   display: flex;
   flex-direction: column;
   margin-top: 5px;
   margin-bottom: -4px;
   justify-content: space-around;
   gap: 11px;
+
+  @media (max-width: 828px) {
+    align-items: center;
+  }
+
+  @media (max-width: 500px) {
+    font-size: 0.9rem;
+    align-items: flex-start;
+  }
 `;
 
 const Column2 = styled.div`
+  grid-area: column3;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: ${(props) => (props.$withAboutUs ? 'flex-start' : 'center')};
+
+  @media (max-width: 828px) {
+    align-items: center;
+  }
+
+  @media (max-width: 500px) {
+    font-size: ${(props) => (props.$withAboutUs ? '0.9rem' : '1.1rem')};
+    align-items: ${(props) => (props.$withAboutUs ? 'flex-end' : 'center')};
+  }
 `;
 
 const Icon = styled.div`
@@ -90,16 +132,28 @@ const Text = styled.p`
   line-height: 1.5;
 `;
 
+const FooterImage = styled.img`
+  height: 100px;
+
+  @media (max-width: 600px) {
+    height: 80px;
+  }
+`;
+
 function Footer({ withAboutUs = true }) {
   return (
-    <StyledFooter>
+    <StyledFooter $withAboutUs={withAboutUs}>
       <LogoSection>
-        <Image
-          imageLink='../../images/logos/LanguageCenterLogo.png'
+        <a
           href='https://centers.ju.edu.jo/ar/ujlc/'
-          alt='Languages Center Logo'
-          height={'100px'}
-        />
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <FooterImage
+            src='../../images/logos/LanguageCenterLogo.png'
+            alt='Languages Center Logo'
+          />
+        </a>
         <Title>
           <Top>مركز اللغات</Top>
           <Bottom>Language Center</Bottom>
@@ -154,7 +208,7 @@ function Footer({ withAboutUs = true }) {
         )}
       </Column1>
 
-      <Column2>
+      <Column2 $withAboutUs={withAboutUs}>
         <Item name={' (06) 535 5000'}>
           <PhoneIcon />
         </Item>

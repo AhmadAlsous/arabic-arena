@@ -17,6 +17,14 @@ const WholeContainer = styled.div`
 
 const Container = styled.div`
   width: 80%;
+
+  @media (max-width: 1200px) {
+    width: 85%;
+  }
+
+  @media (max-width: 600px) {
+    width: 92%;
+  }
 `;
 
 const StyledTableContainer = styled(TableContainer)`
@@ -30,6 +38,10 @@ const StyledTableCell = styled(TableCell)`
     @media (max-width: 1200px) {
       font-size: 1rem;
     }
+
+    @media (max-width: 600px) {
+      font-size: 0.8rem;
+    }
   }
 `;
 
@@ -41,6 +53,17 @@ const StyledTableHeadCell = styled(StyledTableCell)`
     color: #ffffff;
     @media (max-width: 1200px) {
       font-size: 1rem;
+    }
+    @media (max-width: 1600px) {
+      font-size: 0.9rem;
+    }
+  }
+`;
+
+const HiddenOnMobileTableCell = styled(StyledTableHeadCell)`
+  && {
+    @media (max-width: 600px) {
+      display: none;
     }
   }
 `;
@@ -63,11 +86,19 @@ function TableBody({ header, body, id }) {
           <Table>
             <TableHead>
               <TableRow>
-                {header.map((word) => (
-                  <StyledTableHeadCell key={word} align='center'>
-                    {word}
-                  </StyledTableHeadCell>
-                ))}
+                {header.map((word) =>
+                  word === 'Arabic' ||
+                  word === 'Translation' ||
+                  word === 'Audio' ? (
+                    <StyledTableHeadCell key={word} align='center'>
+                      {word}
+                    </StyledTableHeadCell>
+                  ) : (
+                    <HiddenOnMobileTableCell key={word} align='center'>
+                      {word}
+                    </HiddenOnMobileTableCell>
+                  )
+                )}
               </TableRow>
             </TableHead>
             <MuiTableBody>

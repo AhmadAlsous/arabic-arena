@@ -95,7 +95,7 @@ function Quiz({ isPlacement = false, results = false }) {
     blocker.proceed();
   };
 
-  const quizTitle = isPlacement ? 'Placement Test' : titleEnglish;
+  const quizTitle = isPlacement ? 'Placement Test' : 'Quizzes';
 
   return (
     <>

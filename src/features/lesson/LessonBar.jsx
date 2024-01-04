@@ -1,6 +1,5 @@
 import { LinkReset } from '../../utility/LinkReset';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import styled from 'styled-components';
 
 const StyledLessonBar = styled.div`
@@ -9,14 +8,13 @@ const StyledLessonBar = styled.div`
   padding: 15px 0;
   align-items: center;
   border-bottom: 1.5px solid #888888;
-  left: 10%;
 `;
 
 const TypesContainer = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
-  margin-right: 30px;
+  margin-right: 20px;
 `;
 
 const StyledLink = styled(LinkReset)`
@@ -33,25 +31,17 @@ const Title = styled.h3`
   font-size: 1rem;
   font-weight: 400;
   letter-spacing: 1.5px;
-  margin-left: 30px;
-
-  & > svg {
-    vertical-align: middle;
-  }
+  margin-left: 20px;
 `;
 
-function LessonBar({ lesson }) {
+function LessonBar() {
   return (
     <StyledLessonBar>
-      <Title>
-        Lessons
-        <ChevronRightIcon />
-        {lesson.titleEnglish}
-      </Title>
+      <Title>Lessons</Title>
       <TypesContainer>
         <StyledLink to={'/learn'}>
           <ChevronLeftIcon />
-          Back to Lessons
+          Back to lessons
         </StyledLink>
       </TypesContainer>
     </StyledLessonBar>

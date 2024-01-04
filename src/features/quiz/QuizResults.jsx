@@ -15,6 +15,20 @@ const StyledQuizResults = styled.div`
   border: 1px solid #bbb;
   box-shadow: 0px 2px 20px 3px #d9d9d9;
   background-color: #fff;
+
+  @media (max-width: 1200px) {
+    margin: 20px 3% 40px 3%;
+  }
+
+  @media (max-width: 757px) {
+    border: none;
+    padding: 20px 10px 15px 10px;
+    box-shadow: none;
+  }
+
+  @media (max-width: 600px) {
+    margin: 20px 0 40px 0;
+  }
 `;
 
 const QuizHeader = styled.div`
@@ -23,6 +37,19 @@ const QuizHeader = styled.div`
   padding: 10px 0 20px 0;
   text-align: center;
   border-bottom: 1px solid #999;
+
+  @media (max-width: 1200px) {
+    font-size: 1.3rem;
+  }
+
+  @media (max-width: 757px) {
+    padding-top: 17px;
+    border-top: 1px solid #999;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+  }
 `;
 
 const ResultsContainer = styled.div`
@@ -34,6 +61,10 @@ const Text = styled.p`
   font-size: 1.1rem;
   margin: 0 0 10px 0;
   letter-spacing: 1px;
+
+  @media (max-width: 1000px) {
+    font-size: 1rem;
+  }
 `;
 
 const Number = styled.p`
@@ -41,12 +72,28 @@ const Number = styled.p`
   margin: 25px 0 0 0;
   letter-spacing: 2px;
   margin-bottom: ${(props) => (props.$isPlacement ? '25px' : '0')};
+
+  @media (max-width: 1200px) {
+    font-size: 2.2rem;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 2rem;
+  }
 `;
 
 const Class = styled.p`
   font-size: 1.7rem;
   margin: 10px 0 0 0;
   letter-spacing: 2px;
+
+  @media (max-width: 1200px) {
+    font-size: 1.5rem;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const ButtonsContainer = styled.div`
@@ -55,6 +102,11 @@ const ButtonsContainer = styled.div`
   width: 100%;
   border-top: 1px solid #999;
   padding: 10px 0 0 0;
+
+  @media (max-width: 757px) {
+    padding-bottom: 13px;
+    border-bottom: 1px solid #999;
+  }
 `;
 
 const ConfirmContainer = styled.div`

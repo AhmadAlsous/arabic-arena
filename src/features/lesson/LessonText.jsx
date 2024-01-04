@@ -10,6 +10,14 @@ const StyledLessonText = styled.div`
   padding: 0 10%;
   margin: -10px 0 40px 0;
   color: #333;
+
+  @media (max-width: 1000px) {
+    padding: 0 7%;
+  }
+
+  @media (max-width: 500px) {
+    padding: 0 4%;
+  }
 `;
 
 function LessonText({ text }) {

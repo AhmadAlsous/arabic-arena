@@ -11,7 +11,7 @@ const StyledLessonBar = styled.div`
 
 const NavContainer = styled.div`
   font-size: 0.9rem;
-  margin-right: 30px;
+  margin-right: 10px;
 `;
 
 const Title = styled.h3`
