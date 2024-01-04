@@ -7,8 +7,7 @@ import { PAGE_SIZE } from '../../config/constants';
 import { fetchLessons } from '../../services/lessonService';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import { Button } from '@mui/base';
-import { Stack } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 
 function Lessons() {
   const { isLoading, data, error, refetch } = useQuery({
@@ -101,7 +100,11 @@ function Lessons() {
         searchWord={searchWord}
         setSearchWord={handleChangeSearch}
       />
-      <LessonsContainer lessons={pageLessons} isLoading={isLoading} />
+      <LessonsContainer
+        lessons={pageLessons}
+        isLoading={isLoading}
+        error={error}
+      />
       <Pagination pageCount={pageCount} />
     </>
   );

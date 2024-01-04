@@ -1,13 +1,16 @@
 import { useParams } from 'react-router-dom';
-import { greenTeaLesson } from '../../data/GreenTea';
-import { lessons } from '../../data/lessons';
 import LessonInfo from './LessonInfo';
 import LessonText from './LessonText';
 import LessonBar from './LessonBar';
 import ExerciseContainer from './ExerciseContainer';
 import TableBody from './TableBody';
-import { replaceSpacesWithDashes } from '../../utility/stringOperations';
+import { replaceDashesWithSpaces } from '../../utility/stringOperations';
 import { transformLesson } from '../../utility/transforms';
+import { fetchLesson } from '../../services/lessonService';
+import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { Button, Stack } from '@mui/material';
+import Spinner from '../../UI/Spinner';
 
 const header = ['Arabic', 'English', 'Translation', 'Transcription', 'Audio'];
 
@@ -22,31 +25,63 @@ const letterHeader = [
 
 function Lesson() {
   const { lesson: lessonName } = useParams();
-  const lesson =
-    lessons.find(
-      (lesson) =>
-        replaceSpacesWithDashes(lesson.titleEnglish.toLocaleLowerCase()) ===
-        lessonName
-    ) || transformLesson(greenTeaLesson);
+  const lessonTitle = replaceDashesWithSpaces(lessonName);
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: [lessonTitle],
+    queryFn: () => fetchLesson(lessonTitle),
+  });
+  const lesson = data ? transformLesson(data) : null;
+
+  if (error) {
+    toast.error(
+      <Stack direction='row' sx={{ mr: '-15px' }}>
+        <p>Error fetching lesson.</p>
+        <Button
+          sx={{
+            textTransform: 'none',
+            color: 'black',
+            fontSize: '0.95rem',
+          }}
+          onClick={() => {
+            refetch();
+            toast.remove();
+          }}
+        >
+          Try again?
+        </Button>
+      </Stack>,
+      { duration: 5000 }
+    );
+    return;
+  }
 
   return (
     <>
       <LessonBar />
-      <LessonInfo lesson={lesson} />
-      {lesson.text && <LessonText text={lesson.text} />}
-      {lesson.table && (
-        <TableBody
-          header={lesson.titleEnglish === 'Letters' ? letterHeader : header}
-          body={lesson.table}
-          id={lesson.titleEnglish === 'Letters' ? 'letter' : 'arabicWord'}
-        />
+      {isLoading && (
+        <Stack justifyContent='center' alignItems='center' height={400}>
+          <Spinner />
+        </Stack>
       )}
-      {lesson.exercises && (
-        <ExerciseContainer
-          exercises={lesson.exercises}
-          lessonName={lesson.titleEnglish}
-          lesson={lesson}
-        />
+      {!isLoading && (
+        <>
+          <LessonInfo lesson={lesson} />
+          {lesson.text && <LessonText text={lesson.text} />}
+          {lesson.table && (
+            <TableBody
+              header={lesson.titleEnglish === 'Letters' ? letterHeader : header}
+              body={lesson.table}
+              id={lesson.titleEnglish === 'Letters' ? 'letter' : 'arabicWord'}
+            />
+          )}
+          {lesson.exercises && (
+            <ExerciseContainer
+              exercises={lesson.exercises}
+              lessonName={lesson.titleEnglish}
+              lesson={lesson}
+            />
+          )}
+        </>
       )}
     </>
   );

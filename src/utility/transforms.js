@@ -45,5 +45,7 @@ export const transformLesson = (lesson) => {
     });
   }
 
+  console.log(transformedLesson);
+
   return transformedLesson;
 };

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import LessonBox from './LessonBox';
 import QuizStartConfirm from '../quizzes/QuizStartConfirm';
-import { Skeleton } from '@mui/material';
+import LessonSkeleton from './LessonSkeleton';
 
 const StyledLessonsContainer = styled.div`
   display: grid;
@@ -21,18 +21,13 @@ const StyledLessonsContainer = styled.div`
   }
 `;
 
-function LessonsContainer({ lessons, isQuiz, isLoading }) {
-  const content = isLoading ? [0, 1, 2, 3, 4, 5, 6, 7, 8] : lessons;
+function LessonsContainer({ lessons, isQuiz, isLoading, error }) {
+  const content = isLoading || error ? [0, 1, 2, 3, 4, 5, 6, 7, 8] : lessons;
   return (
     <StyledLessonsContainer>
       {content.map((lesson) =>
-        isLoading ? (
-          <Skeleton
-            key={lesson}
-            variant='rectangular'
-            width={265}
-            height={265}
-          />
+        isLoading || error ? (
+          <LessonSkeleton key={lesson} />
         ) : isQuiz ? (
           <QuizStartConfirm key={lesson.id} quiz={lesson} type={'confirm'} />
         ) : (
