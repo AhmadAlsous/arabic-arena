@@ -67,7 +67,7 @@ function Lesson() {
         <>
           <LessonInfo lesson={lesson} />
           {lesson.text && <LessonText text={lesson.text} />}
-          {lesson.table && (
+          {lesson.table && lesson.table.length > 0 && (
             <TableBody
               header={lesson.titleEnglish === 'Letters' ? letterHeader : header}
               body={lesson.table}
