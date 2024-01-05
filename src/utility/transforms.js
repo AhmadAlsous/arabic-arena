@@ -10,6 +10,9 @@ export const transformLesson = (lesson) => {
     text,
     table,
     exercises,
+    video,
+    hasTable,
+    hasExercises,
   } = lesson;
 
   const transformedLesson = {
@@ -43,6 +46,19 @@ export const transformLesson = (lesson) => {
         correctAnswer: newCorrectAnswer,
       };
     });
+  }
+
+  if (!video) {
+    transformedLesson.videoLink = '';
+    transformedLesson.videoText = '';
+  }
+
+  if (!hasTable) {
+    transformedLesson.table = [];
+  }
+
+  if (!hasExercises) {
+    transformedLesson.exercises = [];
   }
 
   console.log(transformedLesson);

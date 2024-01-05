@@ -28,9 +28,7 @@ const Summary = styled.h4`
 
 const Text = styled(AccordionDetails)`
   margin: 10px 0 0 0;
-  direction: rtl;
   font-family: 'Greta', 'Arial', 'Helvetica', sans-serif;
-  text-align: right;
   line-height: 1.6;
   font-size: 1.1rem;
   color: #333;
@@ -55,7 +53,7 @@ function Transcript({ children }) {
           <Divider />
           <Text
             dangerouslySetInnerHTML={{
-              __html: replaceNewLinesWithBreaks(children),
+              __html: children,
             }}
           />
         </Accordion>
