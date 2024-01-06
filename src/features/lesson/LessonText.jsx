@@ -9,6 +9,11 @@ const StyledLessonText = styled.div`
   margin: -10px 0 40px 0;
   color: #333;
 
+  & img {
+    max-width: 100%;
+    height: auto;
+  }
+
   @media (max-width: 1000px) {
     padding: 0 7%;
   }

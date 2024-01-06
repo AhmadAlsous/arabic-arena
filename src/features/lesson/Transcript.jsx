@@ -5,7 +5,6 @@ import Divider from '@mui/material/Divider';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { replaceNewLinesWithBreaks } from '../../utility/stringOperations';
 
 const StyledTranscript = styled.div`
   margin-top: 20px;
