@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { useMsal } from '@azure/msal-react';
 import { loginRequest } from '../../config/authConfig';
-import { useState } from 'react';
+import { useContext } from 'react';
 import { callMsGraph } from '../../services/graph';
+import { UserContext } from '../../features/UserContext';
 
 const StyledMainPageButton = styled.button`
   border: none;
@@ -84,7 +85,7 @@ const StyledMainPageButton = styled.button`
 
 function MainPageButton() {
   const { instance, accounts } = useMsal();
-  const [graphData, setGraphData] = useState(null);
+  const { user, setUser } = useContext(UserContext);
   function login() {
     instance.loginRedirect(loginRequest).catch((e) => {
       console.log(e);
@@ -96,12 +97,14 @@ function MainPageButton() {
       })
       .then((response) => {
         callMsGraph(response.accessToken).then((response) =>
-          setGraphData(response)
+          setUser({
+            ...user,
+            id: response.userPrincipalName,
+            firstName: response.givenName,
+            lastName: response.surname,
+          })
         );
       });
-    setTimeout(() => {
-      console.log(graphData);
-    }, 2000);
   }
 
   return (
