@@ -2,7 +2,12 @@ import { Outlet } from 'react-router-dom';
 import Footer from '../UI/footer/Footer';
 import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
-import { useIsAuthenticated } from '@azure/msal-react';
+import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import { useContext, useEffect } from 'react';
+import { UserContext } from '../features/UserContext';
+import { getFirstName, getLastName } from '../utility/stringOperations';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { addUser, fetchUser } from '../services/userServices';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -47,7 +52,33 @@ const OutletContainer = styled.div`
 `;
 
 function Layout() {
+  const createUser = useMutation({
+    mutationFn: (user) => addUser(user),
+  });
+  const { instance } = useMsal();
+  const { user, setUser } = useContext(UserContext);
   const isAuthenticated = useIsAuthenticated();
+  const account = isAuthenticated ? instance.getAllAccounts()[0] : null;
+  const email = account?.username;
+  const { data, error } = useQuery({
+    queryKey: ['user', email],
+    queryFn: () => fetchUser(email),
+    enabled: !!email,
+  });
+  useEffect(() => {
+    if (error) {
+      const newUser = {
+        ...user,
+        id: account.username,
+        firstName: getFirstName(account.name),
+        lastName: getLastName(account.name),
+      };
+      createUser.mutate(newUser);
+      setUser(newUser);
+    } else if (data) {
+      setUser(data);
+    }
+  }, [data, error]);
   return (
     <>
       <NavBar />
