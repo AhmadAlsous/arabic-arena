@@ -147,7 +147,7 @@ function QuizResults({
 
   const handleReview = () => {
     setIsAnswerChecked(true);
-    navigate(isPlacement ? `/placement/test/review` : `/quiz/${quiz}/review`);
+    navigate(`/quiz/${quiz}/review`);
   };
 
   const handleTryAgain = () => {
@@ -208,7 +208,7 @@ function QuizResults({
             </ConfirmContainer>
           </Modal>
         )}
-        <Button onClick={handleReview}>Review</Button>
+        {!isPlacement && <Button onClick={handleReview}>Review</Button>}
       </ButtonsContainer>
     </StyledQuizResults>
   );

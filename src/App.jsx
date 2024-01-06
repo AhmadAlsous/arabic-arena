@@ -4,7 +4,6 @@ import HomePage from './pages/HomePage';
 import Layout from './pages/Layout';
 import Lessons from './features/lessons/Lessons';
 import Lesson from './features/lesson/Lesson';
-import Forum from './features/Forum';
 import Quiz from './features/quiz/Quiz';
 import GlobalStyle from './GlobalStyle';
 import PlacementTest from './features/PlacementTest';
@@ -29,7 +28,6 @@ const router = createBrowserRouter([
         element: <Quiz isPlacement={true} results={true} />,
       },
       { path: '/placement/test/review', element: <Quiz isPlacement={true} /> },
-      { path: '/ask', element: <Forum /> },
       { path: '/settings', element: <Settings /> },
     ],
   },
