@@ -35,7 +35,7 @@ function Quiz({ isPlacement = false, results = false }) {
   });
   console.log(data);
   const quiz = data
-    ? transformQuiz(data)
+    ? data
     : {
         titleArabic: '',
         titleEnglish: '',
