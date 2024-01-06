@@ -41,7 +41,16 @@ function Quiz({ isPlacement = false, results = false }) {
         level: '',
         type: '',
         time: 0,
-        questions: [],
+        questions: [
+          {
+            questionArabic: '',
+            questionEnglish: '',
+            questionType: 'multipleChoice',
+            audioWord: '',
+            options: [{ optionId: '', option: '' }],
+            correctAnswer: [],
+          },
+        ],
       };
   const { time, questions } = quiz;
 
@@ -51,7 +60,7 @@ function Quiz({ isPlacement = false, results = false }) {
     const savedAnswers = localStorage.getItem(`${name}-answers`);
     return savedAnswers
       ? JSON.parse(savedAnswers)
-      : Array.from({ length: questions.length }, () => []);
+      : Array.from({ length: 100 }, () => []);
   });
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();

@@ -51,7 +51,6 @@ function QuizStartConfirm({ quiz }) {
           to={`/quiz/${replaceSpacesWithDashes(
             quiz.titleEnglish.toLowerCase()
           )}`}
-          state={{ quizId: quiz.quizId }}
         >
           <Button variant='contained'>Start</Button>
         </LinkReset>

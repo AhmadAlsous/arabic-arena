@@ -29,7 +29,7 @@ function LessonsContainer({ lessons, isQuiz, isLoading, error }) {
         isLoading || error ? (
           <LessonSkeleton key={lesson} />
         ) : isQuiz ? (
-          <QuizStartConfirm key={lesson.id} quiz={lesson} type={'confirm'} />
+          <QuizStartConfirm key={lesson.id} quiz={lesson} />
         ) : (
           <LessonBox key={lesson.id} lesson={lesson} />
         )
