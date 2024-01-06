@@ -33,6 +33,7 @@ function Quiz({ isPlacement = false, results = false }) {
         ? fetchPlacementTest()
         : fetchQuiz(replaceDashesWithSpaces(name)),
   });
+  console.log(data);
   const quiz = data
     ? transformQuiz(data)
     : {
@@ -60,7 +61,7 @@ function Quiz({ isPlacement = false, results = false }) {
     const savedAnswers = localStorage.getItem(`${name}-answers`);
     return savedAnswers
       ? JSON.parse(savedAnswers)
-      : Array.from({ length: 100 }, () => []);
+      : Array.from({ length: questions.length }, () => []);
   });
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();

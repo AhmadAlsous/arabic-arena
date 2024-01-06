@@ -82,7 +82,7 @@ function QuizQuestion({
   };
 
   const modifySelectedValue = (optionId) => {
-    if (questionType === 'AllThatApply') {
+    if (questionType === 'allThatApply') {
       setSelectedValue((currentSelected) => {
         const newValue = currentSelected.includes(optionId)
           ? currentSelected.filter((id) => id !== optionId)
@@ -124,7 +124,7 @@ function QuizQuestion({
         )}
       </QuestionTextContainer>
       <FormControl>
-        {questionType === 'AllThatApply' ? (
+        {questionType === 'allThatApply' ? (
           renderOptions()
         ) : (
           <RadioGroup

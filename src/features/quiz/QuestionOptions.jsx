@@ -92,7 +92,7 @@ function QuestionOptions({
   isSelected,
 }) {
   const { options, questionType } = question;
-  const Control = questionType === 'AllThatApply' ? Checkbox : Radio;
+  const Control = questionType === 'allThatApply' ? Checkbox : Radio;
 
   return options.map((option) => (
     <Option
