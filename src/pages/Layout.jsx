@@ -3,7 +3,6 @@ import Footer from '../UI/footer/Footer';
 import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
 import { useIsAuthenticated } from '@azure/msal-react';
-import { UserProvider } from '../features/UserContext';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -50,7 +49,7 @@ const OutletContainer = styled.div`
 function Layout() {
   const isAuthenticated = useIsAuthenticated();
   return (
-    <UserProvider>
+    <>
       <NavBar />
       <AppWrapper>
         <Content>
@@ -62,7 +61,7 @@ function Layout() {
         </Content>
         {isAuthenticated ? <Footer /> : <Footer withAboutUs={false} />}
       </AppWrapper>
-    </UserProvider>
+    </>
   );
 }
 
