@@ -43,3 +43,16 @@ export function getPlacementActive(url) {
     !url.includes('/review')
   );
 }
+
+export function formatName(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+}
+
+export function getFirstName(name) {
+  return formatName(name.split(' ')[0]);
+}
+
+export function getLastName(name) {
+  const splitName = name.split(' ');
+  return formatName(splitName[splitName.length - 1]);
+}

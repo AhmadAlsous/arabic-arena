@@ -4,6 +4,7 @@ import { loginRequest } from '../../config/authConfig';
 import { useContext } from 'react';
 import { callMsGraph } from '../../services/graph';
 import { UserContext } from '../../features/UserContext';
+import { getFirstName, getLastName } from '../../utility/stringOperations';
 
 const StyledMainPageButton = styled.button`
   border: none;
@@ -84,12 +85,20 @@ const StyledMainPageButton = styled.button`
 `;
 
 function MainPageButton() {
-  const { instance, accounts } = useMsal();
-  const { user, setUser } = useContext(UserContext);
+  const { instance } = useMsal();
+  const { setUser } = useContext(UserContext);
   function login() {
     instance.loginRedirect(loginRequest).catch((e) => {
       console.log(e);
     });
+    const account = instance.getAllAccounts()[0];
+    console.log(account);
+    setUser((user) => ({
+      ...user,
+      id: account.username,
+      firstName: getFirstName(account.name),
+      lastName: getLastName(account.name),
+    }));
     // instance
     //   .acquireTokenSilent({
     //     ...loginRequest,

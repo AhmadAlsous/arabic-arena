@@ -9,7 +9,6 @@ import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { Button, Stack } from '@mui/material';
 import { UserContext } from '../UserContext';
-import { useMsal } from '@azure/msal-react';
 
 function Lessons() {
   const { isLoading, data, error, refetch } = useQuery({
@@ -91,14 +90,11 @@ function Lessons() {
   };
 
   const { user } = useContext(UserContext);
-  const { instance } = useMsal();
 
   return (
     <>
       <button
         onClick={() => {
-          const account = instance.getAllAccounts()[0];
-          console.log(account);
           console.log(user);
         }}
       >
