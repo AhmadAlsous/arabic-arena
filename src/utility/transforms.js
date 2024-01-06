@@ -1,5 +1,6 @@
 export const transformLesson = (lesson) => {
   const {
+    id,
     titleEnglish,
     titleArabic,
     level,
@@ -16,6 +17,7 @@ export const transformLesson = (lesson) => {
   } = lesson;
 
   const transformedLesson = {
+    id,
     titleEnglish,
     titleArabic,
     level,
@@ -64,4 +66,27 @@ export const transformLesson = (lesson) => {
   console.log(transformedLesson);
 
   return transformedLesson;
+};
+
+export const transformQuiz = (quiz) => {
+  quiz.questions = quiz.questions.map((question) => {
+    const newOptions = question.options.map((option, index) => ({
+      optionId: String(index + 1),
+      option,
+    }));
+
+    const newCorrectAnswer = question.correctAnswer.map(
+      (answer) => newOptions.find((option) => option.option === answer).optionId
+    );
+
+    return {
+      ...question,
+      options: newOptions,
+      correctAnswer: newCorrectAnswer,
+    };
+  });
+
+  console.log(quiz);
+
+  return quiz;
 };

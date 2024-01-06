@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const StyledTranscript = styled.div`
   margin-top: 20px;
   padding: 0 10%;
-  width: 100%;
+  width: 90%;
 
   @media (max-width: 1000px) {
     padding: 0 7%;

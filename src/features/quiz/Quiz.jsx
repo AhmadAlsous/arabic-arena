@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import QuizHeader from './QuizHeader';
-import { quiz as dummyQuiz } from '../../data/DummyQuiz';
-import { DummyPlacement } from '../../data/DummyPlacement';
 import QuizQuestionContainer from './QuizQuestionContainer';
 import QuizResults from './QuizResults';
 import {
@@ -14,17 +12,40 @@ import {
 import {
   getPlacementActive,
   getQuizActive,
+  replaceDashesWithSpaces,
 } from '../../utility/stringOperations';
 import BlockerModal from '../../UI/BlockerModal';
+import { fetchPlacementTest, fetchQuiz } from '../../services/quizServices';
+import { useQuery } from '@tanstack/react-query';
+import { transformQuiz } from '../../utility/transforms';
+import toast from 'react-hot-toast';
+import { Button, Stack } from '@mui/material';
+import Spinner from '../../UI/Spinner';
 
 function Quiz({ isPlacement = false, results = false }) {
-  const quiz = isPlacement ? DummyPlacement : dummyQuiz;
-  const hasTakenPlacementTest = localStorage.getItem('placement');
-
-  const { titleEnglish, questions, time } = quiz;
   const { quiz: quizName } = useParams();
   const name = isPlacement ? 'placement' : quizName;
 
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: [replaceDashesWithSpaces(name)],
+    queryFn: () =>
+      isPlacement
+        ? fetchPlacementTest()
+        : fetchQuiz(replaceDashesWithSpaces(name)),
+  });
+  const quiz = data
+    ? transformQuiz(data)
+    : {
+        titleArabic: '',
+        titleEnglish: '',
+        level: '',
+        type: '',
+        time: 0,
+        questions: [],
+      };
+  const { time, questions } = quiz;
+
+  const hasTakenPlacementTest = localStorage.getItem('placement');
   const [selectedValue, setSelectedValue] = useState([]);
   const [answers, setAnswers] = useState(() => {
     const savedAnswers = localStorage.getItem(`${name}-answers`);
@@ -56,6 +77,29 @@ function Quiz({ isPlacement = false, results = false }) {
     const isAnswered = answers[cur - 1] != null;
     setSelectedValue(isAnswered ? answers[cur - 1] : '');
   }, [location]);
+
+  if (error) {
+    toast.error(
+      <Stack direction='row' sx={{ mr: '-15px' }}>
+        <p>{`Error fetching ${isPlacement ? 'placement test' : 'quiz'}.`}</p>
+        <Button
+          sx={{
+            textTransform: 'none',
+            color: 'black',
+            fontSize: '0.95rem',
+          }}
+          onClick={() => {
+            refetch();
+            toast.remove();
+          }}
+        >
+          Try again?
+        </Button>
+      </Stack>,
+      { duration: 5000 }
+    );
+    return;
+  }
 
   const handleQuestionChange = (questionNumber) => {
     searchParams.set('question', questionNumber);
@@ -99,51 +143,60 @@ function Quiz({ isPlacement = false, results = false }) {
 
   return (
     <>
-      <QuizHeader
-        quizTitle={quizTitle}
-        questions={questions}
-        handleQuestionChange={handleQuestionChange}
-        handleSubmit={handleSubmit}
-        selectedValue={selectedValue}
-        results={results}
-        isAnswerChecked={isAnswerChecked}
-        answers={answers}
-        currentQuestion={currentQuestion}
-      />
-      {!results && (
-        <QuizQuestionContainer
-          time={time}
-          questions={questions}
-          selectedValue={selectedValue}
-          setSelectedValue={setSelectedValue}
-          isAnswerChecked={
-            isPlacement && hasTakenPlacementTest ? true : isAnswerChecked
-          }
-          handleQuestionChange={handleQuestionChange}
-          handleClear={handleClear}
-          handleSubmit={handleSubmit}
-          handleFinishReview={handleFinishReview}
-          handleChangeAnswer={handleChangeAnswer}
-          currentQuestion={currentQuestion}
-          quizId={quiz.id}
-        />
+      {isLoading && (
+        <Stack justifyContent='center' alignItems='center' height={400}>
+          <Spinner />
+        </Stack>
       )}
-      {results && (
-        <QuizResults
-          isPlacement={isPlacement}
-          setIsAnswerChecked={setIsAnswerChecked}
-          questions={questions}
-          answers={answers}
-          quizId={quiz.id}
-          setAnswers={setAnswers}
-        />
+      {!isLoading && (
+        <>
+          <QuizHeader
+            quizTitle={quizTitle}
+            questions={questions}
+            handleQuestionChange={handleQuestionChange}
+            handleSubmit={handleSubmit}
+            selectedValue={selectedValue}
+            results={results}
+            isAnswerChecked={isAnswerChecked}
+            answers={answers}
+            currentQuestion={currentQuestion}
+          />
+          {!results && (
+            <QuizQuestionContainer
+              time={time}
+              questions={questions}
+              selectedValue={selectedValue}
+              setSelectedValue={setSelectedValue}
+              isAnswerChecked={
+                isPlacement && hasTakenPlacementTest ? true : isAnswerChecked
+              }
+              handleQuestionChange={handleQuestionChange}
+              handleClear={handleClear}
+              handleSubmit={handleSubmit}
+              handleFinishReview={handleFinishReview}
+              handleChangeAnswer={handleChangeAnswer}
+              currentQuestion={currentQuestion}
+              quizId={quiz.id}
+            />
+          )}
+          {results && (
+            <QuizResults
+              isPlacement={isPlacement}
+              setIsAnswerChecked={setIsAnswerChecked}
+              questions={questions}
+              answers={answers}
+              quizId={quiz.id}
+              setAnswers={setAnswers}
+            />
+          )}
+          {blocker.state === 'blocked' ? (
+            <BlockerModal
+              cancel={() => blocker.reset()}
+              proceed={handleLeaveQuiz}
+            />
+          ) : null}
+        </>
       )}
-      {blocker.state === 'blocked' ? (
-        <BlockerModal
-          cancel={() => blocker.reset()}
-          proceed={handleLeaveQuiz}
-        />
-      ) : null}
     </>
   );
 }

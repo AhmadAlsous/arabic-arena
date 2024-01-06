@@ -1,24 +1,37 @@
 import { useState } from 'react';
 import LessonsBar from '../lessons/LessonsBar';
 import LessonsContainer from '../lessons/LessonsContainer';
-import { quizzes } from '../../data/DummyQuizzes';
 import Pagination from '../../UI/Pagination';
 import { useSearchParams } from 'react-router-dom';
 import { PAGE_SIZE } from '../../config/constants';
+import { fetchQuizzes } from '../../services/quizServices';
+import { useQuery } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { Button, Stack } from '@mui/material';
 
 function Quizzes() {
+  const { isLoading, data, error, refetch } = useQuery({
+    queryKey: ['quizzes'],
+    queryFn: fetchQuizzes,
+  });
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
   const [searchWord, setSearchWord] = useState('');
-  const filteredQuizzes = quizzes.filter(
-    (lesson) =>
-      (selectedLevel === 'All' || lesson.level === selectedLevel) &&
-      (selectedType === 'All' || lesson.type === selectedType) &&
-      (searchWord === '' ||
-        lesson.titleArabic.includes(searchWord) ||
-        lesson.titleEnglish.toLowerCase().includes(searchWord.toLowerCase()))
-  );
+  const filteredQuizzes = data
+    ? data
+        .reverse()
+        .filter(
+          (lesson) =>
+            (selectedLevel === 'All' || lesson.level === selectedLevel) &&
+            (selectedType === 'All' || lesson.type === selectedType) &&
+            (searchWord === '' ||
+              lesson.titleArabic.includes(searchWord) ||
+              lesson.titleEnglish
+                .toLowerCase()
+                .includes(searchWord.toLowerCase()))
+        )
+    : [];
 
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = !searchParams.get('page')
@@ -29,6 +42,28 @@ function Quizzes() {
     (currentPage - 1) * PAGE_SIZE,
     currentPage === pageCount ? filteredQuizzes.length : currentPage * PAGE_SIZE
   );
+
+  if (error) {
+    toast.error(
+      <Stack direction='row' sx={{ mr: '-15px' }}>
+        <p>Error fetching quizzes.</p>
+        <Button
+          sx={{
+            textTransform: 'none',
+            color: 'black',
+            fontSize: '0.95rem',
+          }}
+          onClick={() => {
+            refetch();
+            toast.dismiss();
+          }}
+        >
+          Try again?
+        </Button>
+      </Stack>,
+      { duration: 5000 }
+    );
+  }
 
   const goToFirstPage = () => {
     if (currentPage !== 1) {
@@ -66,7 +101,12 @@ function Quizzes() {
         setSearchWord={handleChangeSearch}
         isQuiz={true}
       />
-      <LessonsContainer lessons={pageQuizzes} isQuiz={true} />
+      <LessonsContainer
+        lessons={pageQuizzes}
+        isQuiz={true}
+        isLoading={isLoading}
+        error={error}
+      />
       <Pagination pageCount={pageCount} />
     </>
   );
