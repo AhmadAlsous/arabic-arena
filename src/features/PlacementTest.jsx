@@ -45,7 +45,7 @@ function Placement() {
           <Spinner />
         </Stack>
       )}
-      {
+      {!isLoading && (
         <>
           <Bar>PLACEMENT TEST</Bar>
           <TextContainer>
@@ -68,7 +68,7 @@ function Placement() {
             </Link>
           </ButtonContainer>
         </>
-      }
+      )}
     </>
   );
 }
