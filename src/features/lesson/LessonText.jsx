@@ -14,6 +14,12 @@ const StyledLessonText = styled.div`
     height: auto;
   }
 
+  & iframe {
+    width: 100%;
+    height: auto;
+    border: none;
+  }
+
   @media (max-width: 1000px) {
     padding: 0 7%;
   }

@@ -74,7 +74,7 @@ function Lesson() {
               id={lesson.titleEnglish === 'Letters' ? 'letter' : 'arabicWord'}
             />
           )}
-          {lesson.exercises && (
+          {lesson.exercises && lesson.exercises.length > 0 && (
             <ExerciseContainer
               exercises={lesson.exercises}
               lessonName={lesson.titleEnglish}

@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 const StyledTranscript = styled.div`
   margin-top: 20px;
   padding: 0 5%;
+  width: 100%;
 
   @media (min-width: 1792px) {
     padding: 0 7%;
@@ -28,7 +29,7 @@ const Summary = styled.h4`
 const Text = styled(AccordionDetails)`
   margin: 10px 0 0 0;
   font-family: 'Greta', 'Arial', 'Helvetica', sans-serif;
-  line-height: 1.6;
+  line-height: 1.4;
   font-size: 1.1rem;
   color: #333;
 `;
