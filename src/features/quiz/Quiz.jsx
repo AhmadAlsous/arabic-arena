@@ -41,7 +41,7 @@ function Quiz({ isPlacement = false, results = false }) {
         titleEnglish: '',
         level: '',
         type: '',
-        time: 1,
+        time: 0,
         questions: [],
       };
   const { time, questions } = quiz;

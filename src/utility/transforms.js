@@ -63,8 +63,6 @@ export const transformLesson = (lesson) => {
     transformedLesson.exercises = [];
   }
 
-  console.log(transformedLesson);
-
   return transformedLesson;
 };
 
@@ -86,8 +84,6 @@ export const transformQuiz = (quiz) => {
       correctAnswer: newCorrectAnswer,
     };
   });
-
-  console.log(newQuiz);
 
   return newQuiz;
 };

@@ -1,8 +1,10 @@
-import { Button } from '@mui/material';
+import { Button, Stack } from '@mui/material';
 import styled from 'styled-components';
-import { DummyPlacement } from '../data/DummyPlacement';
 import { Link } from 'react-router-dom';
 import Quiz from './quiz/Quiz';
+import { fetchPlacementTest } from '../services/quizServices';
+import { useQuery } from '@tanstack/react-query';
+import Spinner from '../UI/Spinner';
 
 const Bar = styled.div`
   padding: 30px;
@@ -27,33 +29,46 @@ const ButtonContainer = styled.div`
 `;
 
 function Placement() {
-  const hasTakenPlacementTest = localStorage.getItem('placement');
+  const { data, isLoading } = useQuery({
+    queryKey: ['placement'],
+    queryFn: fetchPlacementTest,
+  });
+  const hasTakenPlacementTest = localStorage.getItem('1');
   if (hasTakenPlacementTest) {
     return <Quiz isPlacement={true} results={true} />;
   }
 
   return (
     <>
-      <Bar>PLACEMENT TEST</Bar>
-      <TextContainer>
-        <p>
-          This is a placement test. It will help us determine your current level
-          of Arabic.
-        </p>
-        <p>
-          After you complete the test, you will be classified into one of the
-          following levels: Beginner, Intermediate, or Advanced.
-        </p>
-        <p>
-          The test consists of {DummyPlacement.questions.length} questions. You
-          will have {DummyPlacement.time} minutes to complete it.
-        </p>
-      </TextContainer>
-      <ButtonContainer>
-        <Link to='/placement/test'>
-          <Button sx={{ fontSize: '18px' }}>Start Placement Test</Button>
-        </Link>
-      </ButtonContainer>
+      {isLoading && (
+        <Stack justifyContent='center' alignItems='center' height={400}>
+          <Spinner />
+        </Stack>
+      )}
+      {
+        <>
+          <Bar>PLACEMENT TEST</Bar>
+          <TextContainer>
+            <p>
+              This is a placement test. It will help us determine your current
+              level of Arabic.
+            </p>
+            <p>
+              After you complete the test, you will be classified into one of
+              the following levels: Beginner, Intermediate, or Advanced.
+            </p>
+            <p>
+              The test consists of {data.questions.length} questions. You will
+              have {data.time} minutes to complete it.
+            </p>
+          </TextContainer>
+          <ButtonContainer>
+            <Link to='/placement/test'>
+              <Button sx={{ fontSize: '18px' }}>Start Placement Test</Button>
+            </Link>
+          </ButtonContainer>
+        </>
+      }
     </>
   );
 }
