@@ -8,11 +8,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const StyledTranscript = styled.div`
   margin-top: 20px;
-  padding: 0 5%;
+  padding: 0 10%;
   width: 100%;
 
-  @media (min-width: 1792px) {
+  @media (max-width: 1000px) {
     padding: 0 7%;
+  }
+
+  @media (max-width: 500px) {
+    padding: 0 4%;
   }
 `;
 
