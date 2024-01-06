@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { replaceNewLinesWithBreaks } from '../../utility/stringOperations';
 
 const StyledLessonText = styled.div`
   font-family: 'Greta', 'Arial', 'Helvetica', sans-serif;
@@ -16,7 +15,7 @@ const StyledLessonText = styled.div`
 
   & iframe {
     width: 100%;
-    height: auto;
+    height: 100%;
     border: none;
   }
 
@@ -33,7 +32,7 @@ function LessonText({ text }) {
   return (
     <StyledLessonText
       dangerouslySetInnerHTML={{
-        __html: replaceNewLinesWithBreaks(text),
+        __html: text,
       }}
     />
   );
