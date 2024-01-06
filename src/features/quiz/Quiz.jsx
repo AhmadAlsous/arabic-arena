@@ -35,23 +35,14 @@ function Quiz({ isPlacement = false, results = false }) {
   });
   console.log(data);
   const quiz = data
-    ? data
+    ? transformQuiz(data)
     : {
         titleArabic: '',
         titleEnglish: '',
         level: '',
         type: '',
-        time: 0,
-        questions: [
-          {
-            questionArabic: '',
-            questionEnglish: '',
-            questionType: 'multipleChoice',
-            audioWord: '',
-            options: [{ optionId: '', option: '' }],
-            correctAnswer: [],
-          },
-        ],
+        time: 1,
+        questions: [],
       };
   const { time, questions } = quiz;
 

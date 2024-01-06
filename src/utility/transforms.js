@@ -69,7 +69,8 @@ export const transformLesson = (lesson) => {
 };
 
 export const transformQuiz = (quiz) => {
-  quiz.questions = quiz.questions.map((question) => {
+  const newQuiz = { ...quiz };
+  newQuiz.questions = quiz.questions.map((question) => {
     const newOptions = question.options.map((option, index) => ({
       optionId: String(index + 1),
       option,
@@ -86,7 +87,7 @@ export const transformQuiz = (quiz) => {
     };
   });
 
-  console.log(quiz);
+  console.log(newQuiz);
 
-  return quiz;
+  return newQuiz;
 };
