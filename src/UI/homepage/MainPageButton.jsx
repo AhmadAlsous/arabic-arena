@@ -90,21 +90,21 @@ function MainPageButton() {
     instance.loginRedirect(loginRequest).catch((e) => {
       console.log(e);
     });
-    instance
-      .acquireTokenSilent({
-        ...loginRequest,
-        account: accounts[0],
-      })
-      .then((response) => {
-        callMsGraph(response.accessToken).then((response) =>
-          setUser({
-            ...user,
-            id: response.userPrincipalName,
-            firstName: response.givenName,
-            lastName: response.surname,
-          })
-        );
-      });
+    // instance
+    //   .acquireTokenSilent({
+    //     ...loginRequest,
+    //     account: accounts[0],
+    //   })
+    //   .then((response) => {
+    //     callMsGraph(response.accessToken).then((response) =>
+    //       setUser({
+    //         ...user,
+    //         id: response.userPrincipalName,
+    //         firstName: response.givenName,
+    //         lastName: response.surname,
+    //       })
+    //     );
+    //   });
   }
 
   return (
