@@ -80,7 +80,7 @@ function Settings() {
       lastName: data.lastName,
       language: data.language,
     };
-    setUser(updateUser);
+    setUser(updatedUser);
     editUser.mutate(updatedUser, {
       onSuccess: () => {
         reset({
