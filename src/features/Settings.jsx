@@ -13,6 +13,9 @@ import { languages } from '../data/languages';
 import InfoIcon from '@mui/icons-material/Info';
 import { UserContext } from './UserContext';
 import { useContext } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { updateUser } from '../services/userServices';
+import toast from 'react-hot-toast';
 
 const SettingsBar = styled.div`
   padding: 30px 0;
@@ -36,12 +39,26 @@ const ErrorMessage = styled.div`
 `;
 
 function Settings() {
+  const editUser = useMutation({
+    mutationFn: (user) => updateUser(user),
+    onMutate: () => {
+      toast.loading('Updating settings...');
+    },
+    onSuccess: () => {
+      toast.remove();
+      toast.success('Settings updated successfully!');
+    },
+    onError: () => {
+      toast.remove();
+      toast.error('Something went wrong. Please try again.');
+    },
+  });
   const { user, setUser } = useContext(UserContext);
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm({
     defaultValues: {
       firstName: user.firstName,
@@ -51,7 +68,16 @@ function Settings() {
     },
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    const updatedUser = {
+      ...user,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      language: data.language,
+    };
+    setUser(updateUser);
+    editUser.mutate(updatedUser);
+  };
 
   return (
     <>
@@ -70,6 +96,7 @@ function Settings() {
                 size='normal'
                 error={!!errors.firstName}
                 {...register('firstName', {
+                  required: 'This field is required',
                   pattern: {
                     value: /^[A-Za-z]+$/i,
                     message: 'Please enter a valid first name',
@@ -92,6 +119,7 @@ function Settings() {
                 size='normal'
                 error={!!errors.lastName}
                 {...register('lastName', {
+                  required: 'This field is required',
                   pattern: {
                     value: /^[A-Za-z]+$/i,
                     message: 'Please enter a valid last name',
@@ -158,7 +186,12 @@ function Settings() {
           justifyContent='flex-end'
           pb={5}
         >
-          <Button variant='contained' color='primary' type='submit'>
+          <Button
+            variant='contained'
+            color='primary'
+            type='submit'
+            disabled={!isDirty}
+          >
             Update Settings
           </Button>
         </Stack>

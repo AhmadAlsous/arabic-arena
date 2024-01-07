@@ -97,13 +97,30 @@ function Layout() {
             navigate('/placement');
           }}
         >
-          We highly recommend you take the placement test before starting.
+          <span
+            style={{
+              fontSize: '30px',
+              position: 'absolute',
+              left: '10px',
+            }}
+          >
+            ❗
+          </span>
+          We highly recommend that you take the placement test before starting.
         </span>
       ),
       {
-        duration: 4000,
+        duration: 15000,
         style: {
+          textAlign: 'center',
           cursor: 'pointer',
+          fontSize: '16px',
+          fontWeight: 'bold',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '10px',
+          paddingLeft: '40px',
+          borderRadius: '5px',
         },
       }
     );
@@ -118,8 +135,9 @@ function Layout() {
               <Outlet />
               {isWelcomeModalOpen && (
                 <NewUserModal
-                  onClose={() => setIsWelcomeModalOpen(false)}
+                  open={isWelcomeModalOpen}
                   onSaveLanguage={handleSaveUser}
+                  name={account?.name}
                 />
               )}
             </OutletContainer>

@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import { Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import HandlerButton from '@mui/material/Button';
-import { FormControl, MenuItem, Select } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { languages } from '../data/languages';
 
 const ButtonContainer = styled.div`
@@ -20,32 +20,33 @@ const ModalTitle = styled.h4`
   font-size: 1.75rem;
   letter-spacing: 1px;
   font-weight: 700;
+  text-align: center;
 `;
 
 const Text = styled.p`
   line-height: 1.5;
+  text-align: center;
 `;
 
-function NewUserModal({ onSaveLanguage, onClose }) {
+function NewUserModal({ open, onSaveLanguage, name }) {
   const [selectedLanguage, setSelectedLanguage] = useState('English');
 
   const handleChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
   return (
-    <StyledModal
-      open={open}
-      onClose={onClose}
-      slots={{ backdrop: StyledBackdrop }}
-    >
+    <StyledModal open={open} slots={{ backdrop: StyledBackdrop }}>
       <ModalContent sx={{ width: 600 }}>
-        <ModalTitle>Welcome!</ModalTitle>
+        <ModalTitle>Welcome, {name}</ModalTitle>
         <Text>
-          Welcome to Arabic Arena. Let's start this enriching and engaging path
-          to mastring Arabic together. Before you get started, please select
-          your language.
+          Welcome to Arabic Arena! Our platform is designed for learners of all
+          levels, offering tailored lessons and quizzes to enhance your skills.
+          Let's start this enriching and engaging path to language mastery
+          together. Explore, learn, and grow with Arabic Arena! Before you get
+          started, please select your language.
         </Text>
-        <FormControl fullWidth variant='outlined'>
+        <FormControl fullWidth variant='outlined' sx={{ mt: 3 }}>
+          <InputLabel id='language-label'>Your Language</InputLabel>
           <Select
             labelId='language-label'
             value={selectedLanguage}
@@ -76,9 +77,10 @@ function NewUserModal({ onSaveLanguage, onClose }) {
         <ButtonContainer>
           <HandlerButton
             variant='contained'
-            onClick={() => onSaveLanguage(selectedLanguage)}
+            onClick={onSaveLanguage}
+            sx={{ mt: 4 }}
           >
-            Choose
+            Confirm
           </HandlerButton>
         </ButtonContainer>
       </ModalContent>
@@ -125,7 +127,7 @@ const ModalContent = styled(Box)`
   border-radius: 8px;
   border: 1px solid #dae2ed;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
+  padding: 30px;
   color: #1c2025;
   font-family: IBM Plex Sans, sans-serif;
   font-weight: 500;

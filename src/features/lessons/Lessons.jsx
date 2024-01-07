@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import LessonsBar from './LessonsBar';
 import LessonsContainer from './LessonsContainer';
 import Pagination from '../../UI/Pagination';
@@ -8,7 +8,6 @@ import { fetchLessons } from '../../services/lessonService';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { Button, Stack } from '@mui/material';
-import { UserContext } from '../UserContext';
 
 function Lessons() {
   const { isLoading, data, error, refetch } = useQuery({
@@ -89,17 +88,8 @@ function Lessons() {
     setSearchWord(search);
   };
 
-  const { user } = useContext(UserContext);
-
   return (
     <>
-      <button
-        onClick={() => {
-          console.log(user);
-        }}
-      >
-        Click me
-      </button>
       <LessonsBar
         level={selectedLevel}
         type={selectedType}
