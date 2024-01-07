@@ -12,7 +12,7 @@ import styled from 'styled-components';
 import { languages } from '../data/languages';
 import InfoIcon from '@mui/icons-material/Info';
 import { UserContext } from './UserContext';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { updateUser } from '../services/userServices';
 import toast from 'react-hot-toast';
@@ -39,25 +39,13 @@ const ErrorMessage = styled.div`
 `;
 
 function Settings() {
-  const editUser = useMutation({
-    mutationFn: (user) => updateUser(user),
-    onMutate: () => {
-      toast.loading('Updating settings...');
-    },
-    onSuccess: () => {
-      toast.remove();
-      toast.success('Settings updated successfully!');
-    },
-    onError: () => {
-      toast.remove();
-      toast.error('Something went wrong. Please try again.');
-    },
-  });
+  const [isLoading, setIsLoading] = useState(false);
   const { user, setUser } = useContext(UserContext);
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors, isDirty },
   } = useForm({
     defaultValues: {
@@ -65,6 +53,23 @@ function Settings() {
       lastName: user.lastName,
       email: user.id,
       language: user.language,
+    },
+  });
+  const editUser = useMutation({
+    mutationFn: (user) => updateUser(user),
+    onMutate: () => {
+      setIsLoading(true);
+      toast.loading('Updating settings...');
+    },
+    onSuccess: () => {
+      setIsLoading(false);
+      toast.remove();
+      toast.success('Settings updated successfully!');
+    },
+    onError: () => {
+      setIsLoading(false);
+      toast.remove();
+      toast.error('Something went wrong. Please try again.');
     },
   });
 
@@ -76,7 +81,15 @@ function Settings() {
       language: data.language,
     };
     setUser(updateUser);
-    editUser.mutate(updatedUser);
+    editUser.mutate(updatedUser, {
+      onSuccess: () => {
+        reset({
+          firstName: updatedUser.firstName,
+          lastName: updatedUser.lastName,
+          language: updatedUser.language,
+        });
+      },
+    });
   };
 
   return (
@@ -190,7 +203,7 @@ function Settings() {
             variant='contained'
             color='primary'
             type='submit'
-            disabled={!isDirty}
+            disabled={!isDirty || isLoading}
           >
             Update Settings
           </Button>

@@ -6,7 +6,7 @@ import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../features/UserContext';
 import { getFirstName, getLastName } from '../utility/stringOperations';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addUser, fetchUser } from '../services/userServices';
 import NewUserModal from '../UI/NewUserModal';
 import toast from 'react-hot-toast';
@@ -54,10 +54,8 @@ const OutletContainer = styled.div`
 `;
 
 function Layout() {
+  const queryClient = useQueryClient();
   const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
-  const createUser = useMutation({
-    mutationFn: (user) => addUser(user),
-  });
   const navigate = useNavigate();
   const { instance } = useMsal();
   const { user, setUser } = useContext(UserContext);
@@ -68,6 +66,14 @@ function Layout() {
     queryKey: ['user', email],
     queryFn: () => fetchUser(email),
     enabled: !!email,
+  });
+  const createUser = useMutation({
+    mutationFn: (user) => addUser(user),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['user', email],
+      });
+    },
   });
 
   useEffect(() => {
@@ -137,7 +143,7 @@ function Layout() {
                 <NewUserModal
                   open={isWelcomeModalOpen}
                   onSaveLanguage={handleSaveUser}
-                  name={account?.name}
+                  name={getFirstName(account.name)}
                 />
               )}
             </OutletContainer>

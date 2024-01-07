@@ -33,7 +33,6 @@ function Quiz({ isPlacement = false, results = false }) {
         ? fetchPlacementTest()
         : fetchQuiz(replaceDashesWithSpaces(name)),
   });
-  console.log(data);
   const quiz = data
     ? transformQuiz(data)
     : {
