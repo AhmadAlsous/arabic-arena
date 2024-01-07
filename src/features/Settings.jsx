@@ -11,6 +11,8 @@ import { Controller, useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { languages } from '../data/languages';
 import InfoIcon from '@mui/icons-material/Info';
+import { UserContext } from './UserContext';
+import { useContext } from 'react';
 
 const SettingsBar = styled.div`
   padding: 30px 0;
@@ -34,12 +36,20 @@ const ErrorMessage = styled.div`
 `;
 
 function Settings() {
+  const { user, setUser } = useContext(UserContext);
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.id,
+      language: user.language,
+    },
+  });
 
   const onSubmit = (data) => console.log(data);
 
@@ -103,7 +113,6 @@ function Settings() {
             fullWidth
             size='normal'
             error={!!errors.email}
-            defaultValue={'exm0201234@ju.edu.jo'}
             disabled
             {...register('email')}
           />
@@ -118,7 +127,6 @@ function Settings() {
                 <Select
                   labelId='language-label'
                   label='Your Language'
-                  defaultValue={'English'}
                   MenuProps={{
                     PaperProps: {
                       style: {

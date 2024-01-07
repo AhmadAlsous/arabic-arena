@@ -1,13 +1,15 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Footer from '../UI/footer/Footer';
 import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../features/UserContext';
 import { getFirstName, getLastName } from '../utility/stringOperations';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { addUser, fetchUser } from '../services/userServices';
+import NewUserModal from '../UI/NewUserModal';
+import toast from 'react-hot-toast';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -52,9 +54,11 @@ const OutletContainer = styled.div`
 `;
 
 function Layout() {
+  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const createUser = useMutation({
     mutationFn: (user) => addUser(user),
   });
+  const navigate = useNavigate();
   const { instance } = useMsal();
   const { user, setUser } = useContext(UserContext);
   const isAuthenticated = useIsAuthenticated();
@@ -65,20 +69,45 @@ function Layout() {
     queryFn: () => fetchUser(email),
     enabled: !!email,
   });
+
   useEffect(() => {
     if (error) {
-      const newUser = {
-        ...user,
-        id: account.username,
-        firstName: getFirstName(account.name),
-        lastName: getLastName(account.name),
-      };
-      createUser.mutate(newUser);
-      setUser(newUser);
+      setIsWelcomeModalOpen(true);
     } else if (data) {
       setUser(data);
     }
   }, [data, error]);
+
+  const handleSaveUser = (selectedLanguage) => {
+    const newUser = {
+      ...user,
+      id: account.username,
+      firstName: getFirstName(account.name),
+      lastName: getLastName(account.name),
+      language: selectedLanguage,
+    };
+    createUser.mutate(newUser);
+    setUser(newUser);
+    setIsWelcomeModalOpen(false);
+    toast(
+      (t) => (
+        <span
+          onClick={() => {
+            toast.dismiss(t.id);
+            navigate('/placement');
+          }}
+        >
+          We highly recommend you take the placement test before starting.
+        </span>
+      ),
+      {
+        duration: 4000,
+        style: {
+          cursor: 'pointer',
+        },
+      }
+    );
+  };
   return (
     <>
       <NavBar />
@@ -87,6 +116,12 @@ function Layout() {
           {
             <OutletContainer>
               <Outlet />
+              {isWelcomeModalOpen && (
+                <NewUserModal
+                  onClose={() => setIsWelcomeModalOpen(false)}
+                  onSaveLanguage={handleSaveUser}
+                />
+              )}
             </OutletContainer>
           }
         </Content>
