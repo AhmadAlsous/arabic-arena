@@ -8,6 +8,8 @@ import {
 } from '../../utility/quizCalculations';
 import { useNavigate, useParams } from 'react-router-dom';
 import Modal from '../../UI/Modal';
+import { UserContext } from '../UserContext';
+import { useContext } from 'react';
 
 const StyledQuizResults = styled.div`
   margin: 40px 10%;
@@ -146,6 +148,7 @@ function QuizResults({
 }) {
   const navigate = useNavigate();
   const { quiz } = useParams();
+  const { user } = useContext(UserContext);
 
   const handleReview = () => {
     setIsAnswerChecked(true);
@@ -160,9 +163,14 @@ function QuizResults({
     navigate(`/quiz/${quiz}`);
   };
 
-  const numCorrectAnswers = getResult(questions, answers);
-  const percentage = getPercentage(numCorrectAnswers, questions.length);
-  const studentLevel = getPlacement(percentage, intermediate, advanced);
+  const hasSavedAnswers = localStorage.getItem(`${quiz}-answers`);
+  const studentLevel = user.level
+    ? user.level
+    : getPlacement(
+        getPercentage(getResult(questions, answers), questions.length),
+        intermediate,
+        advanced
+      );
 
   return (
     <StyledQuizResults>
@@ -170,11 +178,20 @@ function QuizResults({
         {isPlacement ? 'Placement Results' : 'Quiz Results'}
       </QuizHeader>
       <ResultsContainer>
-        <Text>
-          You answered {numCorrectAnswers} / {questions.length} questions right,
-        </Text>
-        <Text>which is a score of</Text>
-        <Number $isPlacement={isPlacement}>{percentage}%</Number>
+        {hasSavedAnswers ? (
+          <>
+            <Text>
+              You answered {getResult(questions, answers)} / {questions.length}{' '}
+              questions right,
+            </Text>
+            <Text>which is a score of</Text>
+            <Number $isPlacement={isPlacement}>
+              {getPercentage(getResult(questions, answers), questions.length)}%
+            </Number>
+          </>
+        ) : (
+          <Text>You have already completed this quiz.</Text>
+        )}
         {isPlacement && (
           <>
             <Text>You have been placed at</Text>
@@ -211,7 +228,9 @@ function QuizResults({
             </ConfirmContainer>
           </Modal>
         )}
-        {!isPlacement && <Button onClick={handleReview}>Review</Button>}
+        {!isPlacement && hasSavedAnswers && (
+          <Button onClick={handleReview}>Review</Button>
+        )}
       </ButtonsContainer>
     </StyledQuizResults>
   );

@@ -5,6 +5,8 @@ import Quiz from './quiz/Quiz';
 import { fetchPlacementTest } from '../services/quizServices';
 import { useQuery } from '@tanstack/react-query';
 import Spinner from '../UI/Spinner';
+import { UserContext } from './UserContext';
+import { useContext } from 'react';
 
 const Bar = styled.div`
   padding: 30px;
@@ -29,12 +31,14 @@ const ButtonContainer = styled.div`
 `;
 
 function Placement() {
+  const { user } = useContext(UserContext);
   const { data, isLoading } = useQuery({
     queryKey: ['placement'],
     queryFn: fetchPlacementTest,
+    enabled: !user.level,
   });
   const hasTakenPlacementTest = localStorage.getItem('1');
-  if (hasTakenPlacementTest) {
+  if (hasTakenPlacementTest || user.level) {
     return <Quiz isPlacement={true} results={true} />;
   }
 
