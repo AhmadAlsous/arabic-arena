@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { LinkReset } from '../../utility/LinkReset';
 import { replaceSpacesWithDashes } from '../../utility/stringOperations';
 import styled from 'styled-components';
 import SvgColor from '../../UI/svg-color';
+import { UserContext } from '../UserContext';
 
 const StyledLessonBox = styled.div`
   width: 265px;
@@ -123,15 +124,16 @@ const Image = styled.img`
 
 function LessonBox({ lesson }) {
   const { id, titleEnglish, titleArabic, level, type, imageLink } = lesson;
+  const { user } = useContext(UserContext);
   const [imageLoaded, setImageLoaded] = useState(!!imageLink);
+  const hasTakenLesson = user.completedLessons.includes(id);
 
   return (
     <LinkReset
       to={`/learn/${replaceSpacesWithDashes(titleEnglish.toLowerCase())}`}
-      state={{ id }}
     >
       <StyledLessonBox>
-        <StyledCheckIcon2 src='/images/check.svg' />
+        {hasTakenLesson && <StyledCheckIcon2 src='/images/check.svg' />}
         <TitleContainer>
           <Title>
             <Arabic>{titleArabic}</Arabic>

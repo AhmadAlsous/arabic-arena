@@ -76,6 +76,7 @@ function Lesson() {
           )}
           {lesson.exercises && lesson.exercises.length > 0 && (
             <ExerciseContainer
+              id={lesson.id}
               exercises={lesson.exercises}
               lessonName={lesson.titleEnglish}
               lesson={lesson}

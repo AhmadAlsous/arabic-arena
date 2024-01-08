@@ -113,12 +113,11 @@ const TitleImageContainer = styled.div`
 function QuizBox({ quiz }) {
   const { user } = useContext(UserContext);
   const { id, titleEnglish, titleArabic, level, type } = quiz;
+  const hasTakenQuiz = user.completedQuizzes.includes(id);
 
   return (
     <StyledQuizBox>
-      {user.completedQuizzes.includes(id) && (
-        <StyledCheckIcon2 src='/images/check.svg' />
-      )}
+      {hasTakenQuiz && <StyledCheckIcon2 src='/images/check.svg' />}
       <TitleContainer>
         <Title>
           <Arabic>{titleArabic}</Arabic>

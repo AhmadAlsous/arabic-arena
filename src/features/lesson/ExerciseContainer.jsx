@@ -1,9 +1,12 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import QuizQuestion from '../quiz/QuizQuestion';
 import Modal from '../../UI/Modal';
 import { findLastAnsweredQuestion } from '../../utility/quizCalculations';
+import { UserContext } from '../UserContext';
+import { useMutation } from '@tanstack/react-query';
+import { updateUser } from '../../services/userServices';
 
 const StyledExerciseContainer = styled.div`
   margin: 20px 10% 40px 10%;
@@ -89,7 +92,8 @@ const ConfirmText = styled.p`
   letter-spacing: 0.5px;
 `;
 
-function ExerciseContainer({ exercises, lessonName, lesson }) {
+function ExerciseContainer({ id, exercises, lessonName, lesson }) {
+  const { user, setUser } = useContext(UserContext);
   const savedAnswers = JSON.parse(
     localStorage.getItem(`${lessonName}-answers`)
   );
@@ -106,6 +110,10 @@ function ExerciseContainer({ exercises, lessonName, lesson }) {
       : Array.from({ length: exercises.length }, () => [])
   );
 
+  const editUser = useMutation({
+    mutationFn: (user) => updateUser(user),
+  });
+
   if (exercises.length === 0) return null;
 
   const handleQuestionChange = (questionNumber) => {
@@ -117,6 +125,14 @@ function ExerciseContainer({ exercises, lessonName, lesson }) {
 
   const handleCheckAnswer = () => {
     setIsAnswerChecked(true);
+    if (currentQuestion === exercises.length - 1) {
+      const updatedUser = {
+        ...user,
+        completedLessons: [...user.completedLessons, id],
+      };
+      setUser(updatedUser);
+      editUser.mutate(updatedUser);
+    }
   };
 
   const handleChangeAnswer = (selectedValue) => {
