@@ -1,5 +1,3 @@
-import { DummyPlacement } from '../data/DummyPlacement';
-
 export const getResult = (questions, answers) => {
   const correctAnswers = questions.map((question) => question.correctAnswer);
   const score = correctAnswers.reduce((acc, curr, index) => {
@@ -24,10 +22,9 @@ export const getPercentage = (result, numQuestions) => {
   return Math.round((result / numQuestions) * 100);
 };
 
-export const getPlacement = (percentage) => {
-  if (percentage >= parseInt(DummyPlacement.advanced)) return 'Advanced';
-  if (percentage >= parseInt(DummyPlacement.intermediate))
-    return 'Intermediate';
+export const getPlacement = (percentage, advanced, intermediate) => {
+  if (percentage >= parseInt(advanced)) return 'Advanced';
+  if (percentage >= parseInt(intermediate)) return 'Intermediate';
   return 'Beginner';
 };
 

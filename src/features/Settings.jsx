@@ -111,7 +111,7 @@ function Settings() {
                 {...register('firstName', {
                   required: 'This field is required',
                   pattern: {
-                    value: /^[A-Za-z]+$/i,
+                    value: /^[A-Za-z\u0621-\u064A ]+$/i,
                     message: 'Please enter a valid first name',
                   },
                 })}
@@ -134,7 +134,7 @@ function Settings() {
                 {...register('lastName', {
                   required: 'This field is required',
                   pattern: {
-                    value: /^[A-Za-z]+$/i,
+                    value: /^[A-Za-z\u0621-\u064A ]+$/i,
                     message: 'Please enter a valid last name',
                   },
                 })}

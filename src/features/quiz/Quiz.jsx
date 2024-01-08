@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import QuizHeader from './QuizHeader';
 import QuizQuestionContainer from './QuizQuestionContainer';
 import QuizResults from './QuizResults';
@@ -16,13 +16,21 @@ import {
 } from '../../utility/stringOperations';
 import BlockerModal from '../../UI/BlockerModal';
 import { fetchPlacementTest, fetchQuiz } from '../../services/quizServices';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { transformQuiz } from '../../utility/transforms';
 import toast from 'react-hot-toast';
 import { Button, Stack } from '@mui/material';
 import Spinner from '../../UI/Spinner';
+import { UserContext } from '../UserContext';
+import { updateUser } from '../../services/userServices';
+import {
+  getPercentage,
+  getPlacement,
+  getResult,
+} from '../../utility/quizCalculations';
 
 function Quiz({ isPlacement = false, results = false }) {
+  const { user, setUser } = useContext(UserContext);
   const { quiz: quizName } = useParams();
   const name = isPlacement ? 'placement' : quizName;
 
@@ -45,7 +53,7 @@ function Quiz({ isPlacement = false, results = false }) {
       };
   const { time, questions } = quiz;
 
-  const hasTakenPlacementTest = localStorage.getItem('placement');
+  const hasTakenPlacementTest = localStorage.getItem('1');
   const [selectedValue, setSelectedValue] = useState([]);
   const [answers, setAnswers] = useState(() => {
     const savedAnswers = localStorage.getItem(`${name}-answers`);
@@ -77,6 +85,10 @@ function Quiz({ isPlacement = false, results = false }) {
     const isAnswered = answers[cur - 1] != null;
     setSelectedValue(isAnswered ? answers[cur - 1] : '');
   }, [location]);
+
+  const editUser = useMutation({
+    mutationFn: (user) => updateUser(user),
+  });
 
   if (error) {
     toast.error(
@@ -112,6 +124,23 @@ function Quiz({ isPlacement = false, results = false }) {
   };
 
   const handleSubmit = () => {
+    let updatedUser = { ...user };
+    if (isPlacement) {
+      const numCorrectAnswers = getResult(questions, answers);
+      const percentage = getPercentage(numCorrectAnswers, questions.length);
+      const studentLevel = getPlacement(percentage, intermediate, advanced);
+      updatedUser = {
+        ...updatedUser,
+        level: studentLevel,
+      };
+    } else {
+      updatedUser = {
+        ...updatedUser,
+        completedQuizzes: [...updatedUser.completedQuizzes, quiz.id],
+      };
+    }
+    setUser(updatedUser);
+    editUser.mutate(updatedUser);
     localStorage.setItem(quiz.id, 'true');
     localStorage.removeItem(`${quiz.id}-time`);
     searchParams.delete('question');
@@ -140,6 +169,8 @@ function Quiz({ isPlacement = false, results = false }) {
   };
 
   const quizTitle = isPlacement ? 'Placement Test' : 'Quizzes';
+  const intermediate = data && isPlacement ? data.intermediate : 0;
+  const advanced = data && isPlacement ? data.advanced : 0;
 
   return (
     <>
@@ -182,6 +213,8 @@ function Quiz({ isPlacement = false, results = false }) {
           {results && (
             <QuizResults
               isPlacement={isPlacement}
+              intermediate={intermediate}
+              advanced={advanced}
               setIsAnswerChecked={setIsAnswerChecked}
               questions={questions}
               answers={answers}

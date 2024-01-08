@@ -72,7 +72,7 @@ function AccountCircleList({ isHomepage }) {
       >
         <AccountInfo />
         <Divider />
-        <MenuElement name='Settings' navTo='/Settings' onClick={handleClose}>
+        <MenuElement name='Settings' navTo='/settings' onClick={handleClose}>
           <Settings fontSize='small' />
         </MenuElement>
         <MenuElement name='Log out' onClick={handleLogout}>

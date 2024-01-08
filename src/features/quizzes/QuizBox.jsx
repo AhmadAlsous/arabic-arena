@@ -1,4 +1,7 @@
 import styled from 'styled-components';
+import SvgColor from '../../UI/svg-color';
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
 const StyledQuizBox = styled.div`
   width: 265px;
@@ -79,6 +82,13 @@ const ImageContainer = styled.div`
   background-color: #3aafa9;
 `;
 
+const StyledCheckIcon2 = styled(SvgColor)`
+  position: absolute;
+  color: #44bd22;
+  top: -15px;
+  left: -7px;
+`;
+
 const TitleImageContainer = styled.div`
   padding: 0 15%;
   font-family: 'Arabic-bold', sans-serif;
@@ -101,10 +111,14 @@ const TitleImageContainer = styled.div`
 `;
 
 function QuizBox({ quiz }) {
-  const { titleEnglish, titleArabic, level, type } = quiz;
+  const { user } = useContext(UserContext);
+  const { id, titleEnglish, titleArabic, level, type } = quiz;
 
   return (
     <StyledQuizBox>
+      {user.completedQuizzes.includes(id) && (
+        <StyledCheckIcon2 src='/images/check.svg' />
+      )}
       <TitleContainer>
         <Title>
           <Arabic>{titleArabic}</Arabic>

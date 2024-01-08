@@ -2,6 +2,8 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import Progress from './Progress';
 import styled from 'styled-components';
+import { UserContext } from '../../features/UserContext';
+import { useContext } from 'react';
 
 const StyledAccountInfo = styled.div`
   display: flex;
@@ -36,21 +38,26 @@ const Word = styled.p`
 `;
 
 function AccountInfo() {
+  const { user } = useContext(UserContext);
   return (
     <StyledAccountInfo>
       <InfoContainer>
         <StyledInfoElement>
           <PersonOutlineOutlinedIcon fontSize='medium' />
-          <Word>Nizar Dabouqi</Word>
+          <Word>{user.firstName}</Word>
         </StyledInfoElement>
-        <StyledInfoElement>
-          <SchoolOutlinedIcon fontSize='medium' />
-          <Word>Beginner</Word>
-        </StyledInfoElement>
+        {user.level && (
+          <StyledInfoElement>
+            <SchoolOutlinedIcon fontSize='medium' />
+            <Word>{user.level}</Word>
+          </StyledInfoElement>
+        )}
       </InfoContainer>
-      <ProgressContainer>
-        <Progress value={30} />
-      </ProgressContainer>
+      {user.level && (
+        <ProgressContainer>
+          <Progress value={30} />
+        </ProgressContainer>
+      )}
     </StyledAccountInfo>
   );
 }

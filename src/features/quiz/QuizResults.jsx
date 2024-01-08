@@ -141,6 +141,8 @@ function QuizResults({
   questions,
   answers,
   setAnswers,
+  intermediate,
+  advanced,
 }) {
   const navigate = useNavigate();
   const { quiz } = useParams();
@@ -160,6 +162,7 @@ function QuizResults({
 
   const numCorrectAnswers = getResult(questions, answers);
   const percentage = getPercentage(numCorrectAnswers, questions.length);
+  const studentLevel = getPlacement(percentage, intermediate, advanced);
 
   return (
     <StyledQuizResults>
@@ -175,7 +178,7 @@ function QuizResults({
         {isPlacement && (
           <>
             <Text>You have been placed at</Text>
-            <Class>{getPlacement(percentage)}</Class>
+            <Class>{studentLevel}</Class>
           </>
         )}
       </ResultsContainer>
