@@ -163,7 +163,9 @@ function QuizResults({
     navigate(`/quiz/${quiz}`);
   };
 
-  const hasSavedAnswers = localStorage.getItem(`${quiz}-answers`);
+  const hasSavedAnswers = isPlacement
+    ? localStorage.getItem('placement-answers')
+    : localStorage.getItem(`${quiz}-answers`);
   const studentLevel = user.level
     ? user.level
     : getPlacement(

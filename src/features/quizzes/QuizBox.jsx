@@ -8,6 +8,7 @@ const StyledQuizBox = styled.div`
   height: 265px;
   display: flex;
   flex-direction: column;
+  position: relative;
   align-items: center;
   box-shadow: 0 5px 10px 2px #bbb;
   transition: transform 0.3s, box-shadow 0.3s;
