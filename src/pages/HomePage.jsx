@@ -25,7 +25,7 @@ function HomePage() {
       <AppWrapper>
         <Content>
           <NavBar isHomepage={true} />
-          <LazyImage src='../images/homePageImage.jpg' alt='coverPhoto' />
+          <LazyImage src='../images/cover.png' alt='coverPhoto' />
           <OverviewContainer />
           <Features />
         </Content>
@@ -35,7 +35,7 @@ function HomePage() {
   ) : (
     <>
       <HomePageBar />
-      <LazyImage src='../images/homePageImage.jpg' alt='coverPhoto' />
+      <LazyImage src='../images/cover.png' alt='coverPhoto' />
       <OverviewContainer />
       <Features />
       <Footer withAboutUs={false} />

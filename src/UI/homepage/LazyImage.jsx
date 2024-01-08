@@ -4,16 +4,16 @@ import styled from 'styled-components';
 const ImageContainer = styled.div`
   display: flex;
   justify-content: center;
-  padding: 20px 0 20px 0;
+  padding: 0;
   width: 100%;
   overflow: hidden;
-  background-color: var(--homepage-grey);
+  background-color: #3879a3;
 `;
 
 const ImageWrapper = styled.div`
   position: relative;
-  width: 90%;
-  background-color: var(--homepage-grey);
+  width: 100%;
+  background-color: #3879a3;
 
   &::before {
     content: '';

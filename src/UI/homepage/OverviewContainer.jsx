@@ -7,7 +7,7 @@ const StyledOverviewContainer = styled.div`
   gap: 10px 60px;
   justify-items: center;
   width: 85%;
-  background-color: var(--homepage-grey);
+  background: transparent;
 
   @media (max-width: 1100px) {
     grid-template-columns: repeat(2, 1fr);
@@ -28,8 +28,15 @@ const StyledOverviewContainer = styled.div`
 const OverviewBar = styled.div`
   display: flex;
   justify-content: center;
-  background-color: var(--homepage-grey);
-  padding: 10px 0 40px 0;
+  background: linear-gradient(
+    to right,
+    #599bb9,
+    #9ecad4,
+    #cde6e4,
+    #8cbecd,
+    #63a2bf
+  );
+  padding: 0px 0 40px 0;
 `;
 
 function OverviewContainer() {

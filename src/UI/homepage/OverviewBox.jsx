@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const StyledOverviewBox = styled.div`
-  color: #123444;
   width: 100%;
   text-align: center;
 `;
@@ -10,6 +9,7 @@ const StyledTitle = styled.h3`
   font-size: 1.3rem;
   letter-spacing: 2px;
   margin-bottom: 7px;
+  margin-top: 15px;
   font-family: 'Feather';
 `;
 

@@ -192,7 +192,10 @@ function QuizResults({
             </Number>
           </>
         ) : (
-          <Text>You have already completed this quiz.</Text>
+          <Text>
+            You have already completed{' '}
+            {isPlacement ? 'the placement test' : 'this quiz'}.
+          </Text>
         )}
         {isPlacement && (
           <>
