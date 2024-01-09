@@ -62,7 +62,7 @@ function QuizStartConfirm({ quiz }) {
         <ConfirmText>
           <Text>Are you sure you want to start this quiz?</Text>
           <Text>Time limit: {quiz.time} mins</Text>
-          <Text>Number of questions: {quiz?.QuestionsCount}</Text>
+          <Text>Number of questions: {quiz.questionsCount}</Text>
         </ConfirmText>
       </ConfirmContainer>
     </Modal>
