@@ -9,6 +9,10 @@ import Paper from '@mui/material/Paper';
 import { generateTableCells } from '../../utility/tableOperations';
 import { readText } from '../../services/textToSpeech';
 import SoundButton from '../../UI/SoundButton';
+import { useQueries } from '@tanstack/react-query';
+import { fetchWord } from '../../services/lessonService';
+import { UserContext } from '../UserContext';
+import { useContext } from 'react';
 
 const WholeContainer = styled.div`
   display: flex;
@@ -79,6 +83,31 @@ const StyledTableRow = styled(TableRow)`
 `;
 
 function TableBody({ header, body, id }) {
+  const { user } = useContext(UserContext);
+  const userLanguage = user.language.toLowerCase();
+  const wordQueries = useQueries({
+    queries: body.map((item) => ({
+      queryKey: ['word', item.arabicWord],
+      queryFn: () => fetchWord(item.arabicWord),
+    })),
+    combine: (results) => {
+      return {
+        data: results.map((result) => ({
+          ...result.originalArgs[0],
+          english: result.data.english,
+          ...(userLanguage !== 'english' && {
+            [userLanguage]: result.data[userLanguage],
+          }),
+        })),
+        pending: results.some((result) => result.isFetching),
+      };
+    },
+  });
+
+  if (!wordQueries.pending) {
+    const combinedData = wordQueries.data;
+    console.log(combinedData);
+  }
   return (
     <WholeContainer>
       <Container>

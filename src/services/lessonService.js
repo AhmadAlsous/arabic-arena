@@ -18,3 +18,12 @@ export const fetchLesson = async (titleEnglish) => {
   }
   return await response.json();
 };
+
+export const fetchWord = async (word) => {
+  const response = await fetch(`${BACKEND_URL}/words/${word}`);
+  if (!response.ok) {
+    console.log(response);
+    throw new Error();
+  }
+  return await response.json();
+};

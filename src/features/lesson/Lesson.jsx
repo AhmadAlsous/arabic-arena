@@ -11,8 +11,8 @@ import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { Button, Stack } from '@mui/material';
 import Spinner from '../../UI/Spinner';
-
-const header = ['Arabic', 'English', 'Translation', 'Transcription', 'Audio'];
+import { useContext } from 'react';
+import { UserContext } from '../UserContext';
 
 const letterHeader = [
   'Letter',
@@ -24,6 +24,11 @@ const letterHeader = [
 ];
 
 function Lesson() {
+  const { user } = useContext(UserContext);
+  const header =
+    user.language === 'English'
+      ? ['Arabic', 'English', 'Transcription', 'Audio']
+      : ['Arabic', 'English', user.language, 'Transcription', 'Audio'];
   const { lesson: lessonName } = useParams();
   const lessonTitle = replaceDashesWithSpaces(lessonName);
   const { data, isLoading, error, refetch } = useQuery({
