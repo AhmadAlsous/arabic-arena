@@ -66,6 +66,7 @@ function Layout() {
     queryKey: ['user', email],
     queryFn: () => fetchUser(email),
     enabled: !!email,
+    retry: false,
   });
   const createUser = useMutation({
     mutationFn: (user) => addUser(user),
