@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import LessonsBar from '../lessons/LessonsBar';
 import LessonsContainer from '../lessons/LessonsContainer';
 import Pagination from '../../UI/Pagination';
@@ -8,12 +8,14 @@ import { fetchQuizzes } from '../../services/quizServices';
 import { useQuery } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { Button, Stack } from '@mui/material';
+import { UserContext } from '../UserContext';
 
 function Quizzes() {
   const { isLoading, data, error, refetch } = useQuery({
     queryKey: ['quizzes'],
     queryFn: fetchQuizzes,
   });
+  const { user } = useContext(UserContext);
   const [selectedStatus, setSelectedStatus] = useState('All');
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
@@ -25,6 +27,11 @@ function Quizzes() {
           (lesson) =>
             (selectedLevel === 'All' || lesson.level === selectedLevel) &&
             (selectedType === 'All' || lesson.type === selectedType) &&
+            (selectedStatus === 'All' ||
+              (selectedStatus === 'complete' &&
+                user.completedQuizzes.includes(lesson.id)) ||
+              (selectedStatus === 'incomplete' &&
+                !user.completedQuizzes.includes(lesson.id))) &&
             (searchWord === '' ||
               lesson.titleArabic.includes(searchWord) ||
               lesson.titleEnglish
