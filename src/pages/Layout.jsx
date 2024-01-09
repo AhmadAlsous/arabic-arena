@@ -3,7 +3,7 @@ import Footer from '../UI/footer/Footer';
 import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
 import { UserContext } from '../features/UserContext';
 import { getFirstName, getLastName } from '../utility/stringOperations';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -55,17 +55,17 @@ const OutletContainer = styled.div`
 
 function Layout() {
   const queryClient = useQueryClient();
-  const [isWelcomeModalOpen, setIsWelcomeModalOpen] = useState(false);
   const navigate = useNavigate();
   const { instance } = useMsal();
   const { user, setUser } = useContext(UserContext);
+  console.log(user);
   const isAuthenticated = useIsAuthenticated();
   const account = isAuthenticated ? instance.getAllAccounts()[0] : null;
   const email = account?.username;
   const { data, error } = useQuery({
     queryKey: ['user', email],
     queryFn: () => fetchUser(email),
-    enabled: !!email,
+    enabled: !!email || !user.language,
     retry: false,
   });
   const createUser = useMutation({
@@ -78,12 +78,10 @@ function Layout() {
   });
 
   useEffect(() => {
-    if (error && !user.language) {
-      setIsWelcomeModalOpen(true);
-    } else if (data) {
+    if (data) {
       setUser(data);
     }
-  }, [data, error, user.language]);
+  }, [data, setUser]);
 
   const handleSaveUser = (selectedLanguage) => {
     const newUser = {
@@ -95,7 +93,6 @@ function Layout() {
     };
     createUser.mutate(newUser);
     setUser(newUser);
-    setIsWelcomeModalOpen(false);
     toast(
       (t) => (
         <span
@@ -140,9 +137,8 @@ function Layout() {
           {
             <OutletContainer>
               <Outlet />
-              {isWelcomeModalOpen && (
+              {error && !user.language && (
                 <NewUserModal
-                  open={isWelcomeModalOpen}
                   onSaveLanguage={handleSaveUser}
                   name={getFirstName(account.name)}
                 />

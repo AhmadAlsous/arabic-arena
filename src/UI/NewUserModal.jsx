@@ -28,16 +28,16 @@ const Text = styled.p`
   text-align: center;
 `;
 
-function NewUserModal({ open, onSaveLanguage, name }) {
+function NewUserModal({ onSaveLanguage, name }) {
   const [selectedLanguage, setSelectedLanguage] = useState('English');
 
   const handleChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
   return (
-    <StyledModal open={open} slots={{ backdrop: StyledBackdrop }}>
+    <StyledModal slots={{ backdrop: StyledBackdrop }}>
       <ModalContent sx={{ width: 600 }}>
-        <ModalTitle>Welcome, {name}</ModalTitle>
+        <ModalTitle>Welcome, {name}!</ModalTitle>
         <Text>
           Welcome to Arabic Arena! Our platform is designed for learners of all
           levels, offering tailored lessons and quizzes to enhance your skills.
