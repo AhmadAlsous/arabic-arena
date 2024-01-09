@@ -37,6 +37,7 @@ const NoneButton = styled.button`
 `;
 
 function QuizStartConfirm({ quiz }) {
+  console.log(quiz);
   const firstTime = localStorage.getItem(quiz.id) === null;
 
   return firstTime ? (

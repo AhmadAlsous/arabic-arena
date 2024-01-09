@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import SvgColor from '../../UI/svg-color';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { UserContext } from '../UserContext';
 
 const StyledQuizBox = styled.div`
@@ -111,9 +111,16 @@ const TitleImageContainer = styled.div`
   }
 `;
 
+const Image = styled.img`
+  display: block;
+  width: 100%;
+  height: 100%;
+`;
+
 function QuizBox({ quiz }) {
   const { user } = useContext(UserContext);
-  const { id, titleEnglish, titleArabic, level, type } = quiz;
+  const { id, titleEnglish, titleArabic, level, type, imageLink } = quiz;
+  const [imageLoaded, setImageLoaded] = useState(!!imageLink);
   const hasTakenQuiz = user.completedQuizzes.includes(id);
 
   return (
@@ -130,7 +137,15 @@ function QuizBox({ quiz }) {
         <TypeInfo>{type}</TypeInfo>
       </InfoConatiner>
       <ImageContainer>
-        <TitleImageContainer>{titleArabic}</TitleImageContainer>
+        {imageLoaded ? (
+          <Image
+            onError={() => setImageLoaded(false)}
+            src={imageLink}
+            alt={titleEnglish}
+          />
+        ) : (
+          <TitleImageContainer>{titleArabic}</TitleImageContainer>
+        )}
       </ImageContainer>
     </StyledQuizBox>
   );
