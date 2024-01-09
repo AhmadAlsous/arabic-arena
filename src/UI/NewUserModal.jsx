@@ -28,14 +28,14 @@ const Text = styled.p`
   text-align: center;
 `;
 
-function NewUserModal({ onSaveLanguage, name }) {
+function NewUserModal({ open, onSaveLanguage, name }) {
   const [selectedLanguage, setSelectedLanguage] = useState('English');
 
   const handleChange = (event) => {
     setSelectedLanguage(event.target.value);
   };
   return (
-    <StyledModal slots={{ backdrop: StyledBackdrop }}>
+    <StyledModal open={open} slots={{ backdrop: StyledBackdrop }}>
       <ModalContent sx={{ width: 600 }}>
         <ModalTitle>Welcome, {name}!</ModalTitle>
         <Text>

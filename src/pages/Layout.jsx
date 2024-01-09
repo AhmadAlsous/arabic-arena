@@ -139,6 +139,7 @@ function Layout() {
               <Outlet />
               {error && !user.language && (
                 <NewUserModal
+                  open={error && !user.language}
                   onSaveLanguage={handleSaveUser}
                   name={getFirstName(account.name)}
                 />
