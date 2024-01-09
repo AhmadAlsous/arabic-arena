@@ -28,9 +28,9 @@ function Quizzes() {
             (selectedLevel === 'All' || lesson.level === selectedLevel) &&
             (selectedType === 'All' || lesson.type === selectedType) &&
             (selectedStatus === 'All' ||
-              (selectedStatus === 'complete' &&
+              (selectedStatus === 'Complete' &&
                 user.completedQuizzes.includes(lesson.id)) ||
-              (selectedStatus === 'incomplete' &&
+              (selectedStatus === 'Incomplete' &&
                 !user.completedQuizzes.includes(lesson.id))) &&
             (searchWord === '' ||
               lesson.titleArabic.includes(searchWord) ||
