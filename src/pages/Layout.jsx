@@ -77,12 +77,12 @@ function Layout() {
   });
 
   useEffect(() => {
-    if (error) {
-      // setIsWelcomeModalOpen(true);
+    if (error && !user.language) {
+      setIsWelcomeModalOpen(true);
     } else if (data) {
       setUser(data);
     }
-  }, [data, error]);
+  }, [data, error, user.language]);
 
   const handleSaveUser = (selectedLanguage) => {
     const newUser = {
