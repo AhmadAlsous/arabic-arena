@@ -86,14 +86,15 @@ function TableBody({ header, body, id }) {
   const { user } = useContext(UserContext);
   const userLanguage = user.language.toLowerCase();
   const wordQueries = useQueries({
-    queries: body.map((item) => ({
-      queryKey: ['word', item.arabicWord],
+    queries: body.map((item, index) => ({
+      queryKey: ['word', item.arabicWord, index],
       queryFn: () => fetchWord(item.arabicWord),
     })),
     combine: (results) => {
+      console.log(results);
       return {
-        data: results.map((result) => ({
-          ...result.originalArgs[0],
+        data: results.map((result, index) => ({
+          ...body[index],
           english: result.data.english,
           ...(userLanguage !== 'english' && {
             [userLanguage]: result.data[userLanguage],
