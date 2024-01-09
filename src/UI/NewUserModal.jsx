@@ -50,7 +50,7 @@ function NewUserModal({ open, onSaveLanguage, name }) {
           <Select
             labelId='language-label'
             value={selectedLanguage}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             label='Your Language'
             MenuProps={{
               PaperProps: {
@@ -77,7 +77,7 @@ function NewUserModal({ open, onSaveLanguage, name }) {
         <ButtonContainer>
           <HandlerButton
             variant='contained'
-            onClick={onSaveLanguage}
+            onClick={() => onSaveLanguage(selectedLanguage)}
             sx={{ mt: 4 }}
           >
             Confirm
