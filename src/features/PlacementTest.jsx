@@ -30,17 +30,6 @@ const ButtonContainer = styled.div`
   text-align: center;
 `;
 
-const Title = styled.h3`
-  font-size: 1.5rem;
-  font-weight: 400;
-  letter-spacing: 5px;
-
-  @media (max-width: 500px) {
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-  }
-`;
-
 function Placement() {
   const { user } = useContext(UserContext);
   const { data, isLoading } = useQuery({

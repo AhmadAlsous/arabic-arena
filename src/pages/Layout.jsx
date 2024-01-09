@@ -78,7 +78,7 @@ function Layout() {
 
   useEffect(() => {
     if (error) {
-      setIsWelcomeModalOpen(true);
+      // setIsWelcomeModalOpen(true);
     } else if (data) {
       setUser(data);
     }
