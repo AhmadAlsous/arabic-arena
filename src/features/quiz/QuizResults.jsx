@@ -166,10 +166,15 @@ function QuizResults({
   const hasSavedAnswers = isPlacement
     ? localStorage.getItem('placement-answers')
     : localStorage.getItem(`${quiz}-answers`);
+  const studentAnswers = answers
+    ? answers
+    : hasSavedAnswers
+    ? JSON.parse(hasSavedAnswers)
+    : [];
   const studentLevel = user.level
     ? user.level
     : getPlacement(
-        getPercentage(getResult(questions, answers), questions.length),
+        getPercentage(getResult(questions, studentAnswers), questions.length),
         intermediate,
         advanced
       );
@@ -183,12 +188,16 @@ function QuizResults({
         {hasSavedAnswers ? (
           <>
             <Text>
-              You answered {getResult(questions, answers)} / {questions.length}{' '}
-              questions right,
+              You answered {getResult(questions, studentAnswers)} /{' '}
+              {questions.length} questions right,
             </Text>
             <Text>which is a score of</Text>
             <Number $isPlacement={isPlacement}>
-              {getPercentage(getResult(questions, answers), questions.length)}%
+              {getPercentage(
+                getResult(questions, studentAnswers),
+                questions.length
+              )}
+              %
             </Number>
           </>
         ) : (
