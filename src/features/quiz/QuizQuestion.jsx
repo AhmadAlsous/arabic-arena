@@ -113,7 +113,7 @@ function QuizQuestion({
         <Question>
           <Arabic>{questionArabic}</Arabic>
         </Question>
-        <Question>{questionEnglish}</Question>
+        {questionEnglish && <Question>{questionEnglish}</Question>}
         {audioWord && (
           <ButtonContainer>
             <SoundButton
