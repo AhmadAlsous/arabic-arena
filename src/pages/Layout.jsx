@@ -10,6 +10,8 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addUser, fetchUser } from '../services/userServices';
 import NewUserModal from '../UI/NewUserModal';
 import toast from 'react-hot-toast';
+import { getLessonCount } from '../services/lessonService';
+import { getQuizCount } from '../services/quizServices';
 
 const AppWrapper = styled.div`
   display: flex;
@@ -62,7 +64,7 @@ function Layout() {
   const isAuthenticated = useIsAuthenticated();
   const account = isAuthenticated ? instance.getAllAccounts()[0] : null;
   const email = account?.username;
-  const { data, error } = useQuery({
+  const { data: fetchedUser, error } = useQuery({
     queryKey: ['user', email],
     queryFn: () => fetchUser(email),
     enabled: !!email || !user.language,
@@ -77,11 +79,20 @@ function Layout() {
     },
   });
 
+  const { data: lessonCount } = useQuery({
+    queryKey: ['lessonCount'],
+    queryFn: () => getLessonCount(),
+  });
+  const { data: quizCount } = useQuery({
+    queryKey: ['quizCount'],
+    queryFn: () => getQuizCount(),
+  });
+
   useEffect(() => {
-    if (data) {
-      setUser(data);
+    if (fetchedUser) {
+      setUser(fetchedUser);
     }
-  }, [data, setUser]);
+  }, [fetchedUser, setUser]);
 
   const handleSaveUser = (selectedLanguage) => {
     const newUser = {

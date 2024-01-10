@@ -27,3 +27,12 @@ export const fetchWord = async (word) => {
   }
   return await response.json();
 };
+
+export const getLessonCount = async () => {
+  const response = await fetch(`${BACKEND_URL}/lessons/count`);
+  if (!response.ok) {
+    console.log(response);
+    throw new Error();
+  }
+  return await response.json();
+};

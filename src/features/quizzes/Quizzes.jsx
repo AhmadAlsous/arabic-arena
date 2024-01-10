@@ -75,6 +75,14 @@ function Quizzes() {
     );
   }
 
+  if (filteredQuizzes.length === 0) {
+    return (
+      <Stack justifyContent='center' alignItems='center' height={400}>
+        <p>No lessons found matching your filters.</p>
+      </Stack>
+    );
+  }
+
   const goToFirstPage = () => {
     if (currentPage !== 1) {
       searchParams.set('page', 1);
