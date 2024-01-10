@@ -25,9 +25,11 @@ const HiddenOnMobileTableCell = styled(StyledTableCell)`
 `;
 
 // fix for letters later
-export const generateTableCells = (obj) => {
+export const generateTableCells = (obj, userLanguage) => {
   return Object.entries(obj).map(([key, value]) =>
-    key === 'arabicWord' || key === 'translation' ? (
+    Object.entries(obj).length === 3 ||
+    (key !== 'transcription' && key !== 'english') ||
+    (key === 'english' && userLanguage === 'English') ? (
       <StyledTableCell
         $isArabic={key === 'arabicWord'}
         key={key}

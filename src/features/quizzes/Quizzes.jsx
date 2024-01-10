@@ -75,14 +75,6 @@ function Quizzes() {
     );
   }
 
-  if (filteredQuizzes.length === 0) {
-    return (
-      <Stack justifyContent='center' alignItems='center' height={400}>
-        <p>No lessons found matching your filters.</p>
-      </Stack>
-    );
-  }
-
   const goToFirstPage = () => {
     if (currentPage !== 1) {
       searchParams.set('page', 1);
@@ -119,13 +111,21 @@ function Quizzes() {
         setSearchWord={handleChangeSearch}
         isQuiz={true}
       />
-      <LessonsContainer
-        lessons={pageQuizzes}
-        isQuiz={true}
-        isLoading={isLoading}
-        error={error}
-      />
-      <Pagination pageCount={pageCount} />
+      {filteredQuizzes.length === 0 ? (
+        <Stack justifyContent='center' alignItems='center' height={400}>
+          <p>No quizzes found matching your filters.</p>
+        </Stack>
+      ) : (
+        <>
+          <LessonsContainer
+            lessons={pageQuizzes}
+            isLoading={isLoading}
+            error={error}
+            isQuiz={true}
+          />
+          <Pagination pageCount={pageCount} />
+        </>
+      )}
     </>
   );
 }

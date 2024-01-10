@@ -115,10 +115,7 @@ function TableBody({ header, body, id }) {
     },
   });
 
-  if (!wordQueries.pending) {
-    const combinedData = wordQueries.data;
-    console.log(combinedData);
-  }
+  const words = wordQueries.data ? wordQueries.data : body;
 
   return (
     <WholeContainer>
@@ -128,9 +125,9 @@ function TableBody({ header, body, id }) {
             <TableHead>
               <TableRow>
                 {header.map((word) =>
-                  word === 'Arabic' ||
-                  word === 'Translation' ||
-                  word === 'Audio' ? (
+                  header.length === 4 ||
+                  (word !== 'Transcription' && word !== 'English') ||
+                  (word === 'English' && userLanguage === 'English') ? (
                     <StyledTableHeadCell key={word} align='center'>
                       {word}
                     </StyledTableHeadCell>
@@ -143,12 +140,12 @@ function TableBody({ header, body, id }) {
               </TableRow>
             </TableHead>
             <MuiTableBody>
-              {body.map((obj) => (
+              {words.map((obj) => (
                 <StyledTableRow
                   key={obj[id]}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                  {generateTableCells(obj)}
+                  {generateTableCells(obj, userLanguage)}
                   <StyledTableCell align='center'>
                     <SoundButton onClick={() => readText(obj[id])} />
                   </StyledTableCell>

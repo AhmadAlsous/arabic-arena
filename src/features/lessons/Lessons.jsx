@@ -75,14 +75,6 @@ function Lessons() {
     );
   }
 
-  if (filteredLessons.length === 0) {
-    return (
-      <Stack justifyContent='center' alignItems='center' height={400}>
-        <p>No lessons found matching your filters.</p>
-      </Stack>
-    );
-  }
-
   const goToFirstPage = () => {
     if (currentPage !== 1) {
       searchParams.set('page', 1);
@@ -118,12 +110,20 @@ function Lessons() {
         searchWord={searchWord}
         setSearchWord={handleChangeSearch}
       />
-      <LessonsContainer
-        lessons={pageLessons}
-        isLoading={isLoading}
-        error={error}
-      />
-      <Pagination pageCount={pageCount} />
+      {filteredLessons.length === 0 ? (
+        <Stack justifyContent='center' alignItems='center' height={400}>
+          <p>No lessons found matching your filters.</p>
+        </Stack>
+      ) : (
+        <>
+          <LessonsContainer
+            lessons={pageLessons}
+            isLoading={isLoading}
+            error={error}
+          />
+          <Pagination pageCount={pageCount} />
+        </>
+      )}
     </>
   );
 }
