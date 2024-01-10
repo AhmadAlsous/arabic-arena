@@ -27,8 +27,8 @@ function Lesson() {
   const { user } = useContext(UserContext);
   const header =
     user.language === 'English'
-      ? ['Arabic', 'English', 'Transcription', 'Audio']
-      : ['Arabic', 'English', user.language, 'Transcription', 'Audio'];
+      ? ['Arabic', 'Transcription', 'English', 'Audio']
+      : ['Arabic', 'Transcription', user.language, 'English', 'Audio'];
   const { lesson: lessonName } = useParams();
   const lessonTitle = replaceDashesWithSpaces(lessonName);
   const { data, isLoading, error, refetch } = useQuery({

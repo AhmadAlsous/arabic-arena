@@ -96,20 +96,18 @@ function TableBody({ header, body, id }) {
           if (result.data && 'english' in result.data) {
             return {
               ...body[index],
-              english: result.data.english,
               ...(userLanguage !== 'english' && {
                 [userLanguage]: result.data[userLanguage],
               }),
-              transcription: body[index].transcription,
+              english: result.data.english,
             };
           }
           return {
             ...body[index],
-            english: '-',
             ...(userLanguage !== 'english' && {
               [userLanguage]: '-',
             }),
-            transcription: body[index].transcription,
+            english: '-',
           };
         }),
         pending: results.some((result) => result.isFetching),
