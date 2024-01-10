@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import LessonsBar from '../lessons/LessonsBar';
 import LessonsContainer from '../lessons/LessonsContainer';
 import Pagination from '../../UI/Pagination';
@@ -20,24 +20,27 @@ function Quizzes() {
   const [selectedLevel, setSelectedLevel] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
   const [searchWord, setSearchWord] = useState('');
+  useEffect(() => {
+    if (user.level) {
+      setSelectedLevel(user.level);
+    }
+  }, [user.level]);
   const filteredQuizzes = data
-    ? data
-        .reverse()
-        .filter(
-          (lesson) =>
-            (selectedLevel === 'All' || lesson.level === selectedLevel) &&
-            (selectedType === 'All' || lesson.type === selectedType) &&
-            (selectedStatus === 'All' ||
-              (selectedStatus === 'Complete' &&
-                user.completedQuizzes.includes(lesson.id)) ||
-              (selectedStatus === 'Incomplete' &&
-                !user.completedQuizzes.includes(lesson.id))) &&
-            (searchWord === '' ||
-              lesson.titleArabic.includes(searchWord) ||
-              lesson.titleEnglish
-                .toLowerCase()
-                .includes(searchWord.toLowerCase()))
-        )
+    ? data.filter(
+        (lesson) =>
+          (selectedLevel === 'All' || lesson.level === selectedLevel) &&
+          (selectedType === 'All' || lesson.type === selectedType) &&
+          (selectedStatus === 'All' ||
+            (selectedStatus === 'Complete' &&
+              user.completedQuizzes.includes(lesson.id)) ||
+            (selectedStatus === 'Incomplete' &&
+              !user.completedQuizzes.includes(lesson.id))) &&
+          (searchWord === '' ||
+            lesson.titleArabic.includes(searchWord) ||
+            lesson.titleEnglish
+              .toLowerCase()
+              .includes(searchWord.toLowerCase()))
+      )
     : [];
 
   const [searchParams, setSearchParams] = useSearchParams();

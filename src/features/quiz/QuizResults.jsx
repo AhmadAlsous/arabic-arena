@@ -1,12 +1,8 @@
 import { Button } from '@mui/material';
 import { LinkReset } from '../../utility/LinkReset';
 import styled from 'styled-components';
-import {
-  getPercentage,
-  getPlacement,
-  getResult,
-} from '../../utility/quizCalculations';
-import { useNavigate, useParams } from 'react-router-dom';
+import { getPercentage, getResult } from '../../utility/quizCalculations';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Modal from '../../UI/Modal';
 import { UserContext } from '../UserContext';
 import { useContext } from 'react';
@@ -143,12 +139,12 @@ function QuizResults({
   questions,
   answers,
   setAnswers,
-  intermediate,
-  advanced,
 }) {
   const navigate = useNavigate();
   const { quiz } = useParams();
   const { user } = useContext(UserContext);
+  const location = useLocation();
+  const calculatedLevel = location.state?.calculatedLevel;
 
   const handleReview = () => {
     setIsAnswerChecked(true);
@@ -163,41 +159,21 @@ function QuizResults({
     navigate(`/quiz/${quiz}`);
   };
 
-  const hasSavedAnswers = isPlacement
-    ? localStorage.getItem('placement-answers')
-    : localStorage.getItem(`${quiz}-answers`);
-  const studentAnswers = answers
-    ? answers
-    : hasSavedAnswers
-    ? JSON.parse(hasSavedAnswers)
-    : [];
-  const studentLevel = user.level
-    ? user.level
-    : getPlacement(
-        getPercentage(getResult(questions, studentAnswers), questions.length),
-        intermediate,
-        advanced
-      );
-
   return (
     <StyledQuizResults>
       <QuizHeader>
         {isPlacement ? 'Placement Results' : 'Quiz Results'}
       </QuizHeader>
       <ResultsContainer>
-        {hasSavedAnswers ? (
+        {answers && ((isPlacement && calculatedLevel) || !isPlacement) ? (
           <>
             <Text>
-              You answered {getResult(questions, studentAnswers)} /{' '}
-              {questions.length} questions right,
+              You answered {getResult(questions, answers)} / {questions.length}{' '}
+              questions right,
             </Text>
             <Text>which is a score of</Text>
             <Number $isPlacement={isPlacement}>
-              {getPercentage(
-                getResult(questions, studentAnswers),
-                questions.length
-              )}
-              %
+              {getPercentage(getResult(questions, answers), questions.length)}%
             </Number>
           </>
         ) : (
@@ -209,7 +185,7 @@ function QuizResults({
         {isPlacement && (
           <>
             <Text>You have been placed at</Text>
-            <Class>{studentLevel}</Class>
+            <Class>{calculatedLevel ? calculatedLevel : user.level}</Class>
           </>
         )}
       </ResultsContainer>
@@ -242,7 +218,7 @@ function QuizResults({
             </ConfirmContainer>
           </Modal>
         )}
-        {!isPlacement && hasSavedAnswers && (
+        {!isPlacement && answers && (
           <Button onClick={handleReview}>Review</Button>
         )}
       </ButtonsContainer>

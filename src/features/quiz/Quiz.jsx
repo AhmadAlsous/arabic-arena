@@ -125,10 +125,11 @@ function Quiz({ isPlacement = false, results = false }) {
 
   const handleSubmit = () => {
     let updatedUser = { ...user };
+    let studentLevel;
     if (isPlacement) {
       const numCorrectAnswers = getResult(questions, answers);
       const percentage = getPercentage(numCorrectAnswers, questions.length);
-      const studentLevel = getPlacement(percentage, intermediate, advanced);
+      studentLevel = getPlacement(percentage, intermediate, advanced);
       updatedUser = {
         ...updatedUser,
         level: studentLevel,
@@ -145,7 +146,7 @@ function Quiz({ isPlacement = false, results = false }) {
     localStorage.removeItem(`${quiz.id}-time`);
     searchParams.delete('question');
     setSearchParams(searchParams);
-    navigate('./results');
+    navigate('./results', { state: { calculatedLevel: studentLevel } });
   };
 
   const handleFinishReview = () => {
