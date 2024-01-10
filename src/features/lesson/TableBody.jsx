@@ -83,32 +83,32 @@ const StyledTableRow = styled(TableRow)`
 `;
 
 function TableBody({ header, body, id }) {
-  const { user } = useContext(UserContext);
-  const userLanguage = user.language.toLowerCase();
-  const wordQueries = useQueries({
-    queries: body.map((item, index) => ({
-      queryKey: ['word', item.arabicWord, index],
-      queryFn: () => fetchWord(item.arabicWord),
-    })),
-    combine: (results) => {
-      console.log(results);
-      return {
-        data: results.map((result, index) => ({
-          ...body[index],
-          english: result.data.english,
-          ...(userLanguage !== 'english' && {
-            [userLanguage]: result.data[userLanguage],
-          }),
-        })),
-        pending: results.some((result) => result.isFetching),
-      };
-    },
-  });
+  // const { user } = useContext(UserContext);
+  // const userLanguage = user.language.toLowerCase();
+  // const wordQueries = useQueries({
+  //   queries: body.map((item, index) => ({
+  //     queryKey: ['word', item.arabicWord, index],
+  //     queryFn: () => fetchWord(item.arabicWord),
+  //   })),
+  //   combine: (results) => {
+  //     console.log(results);
+  //     return {
+  //       data: results.map((result, index) => ({
+  //         ...body[index],
+  //         english: result.data.english,
+  //         ...(userLanguage !== 'english' && {
+  //           [userLanguage]: result.data[userLanguage],
+  //         }),
+  //       })),
+  //       pending: results.some((result) => result.isFetching),
+  //     };
+  //   },
+  // });
 
-  if (!wordQueries.pending) {
-    const combinedData = wordQueries.data;
-    console.log(combinedData);
-  }
+  // if (!wordQueries.pending) {
+  //   const combinedData = wordQueries.data;
+  //   console.log(combinedData);
+  // }
   return (
     <WholeContainer>
       <Container>
