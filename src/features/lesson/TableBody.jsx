@@ -100,6 +100,7 @@ function TableBody({ header, body, id }) {
               ...(userLanguage !== 'english' && {
                 [userLanguage]: result.data[userLanguage],
               }),
+              transcription: body[index].transcription,
             };
           }
           return {
@@ -108,6 +109,7 @@ function TableBody({ header, body, id }) {
             ...(userLanguage !== 'english' && {
               [userLanguage]: '-',
             }),
+            transcription: body[index].transcription,
           };
         }),
         pending: results.some((result) => result.isFetching),
