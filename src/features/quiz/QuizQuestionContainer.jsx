@@ -126,7 +126,8 @@ function QuizQuestionContainer({
                 Previous
               </Button>
             )}
-            {currentQuestion === questions.length && !isAnswerChecked ? (
+            {(currentQuestion === questions.length || questions.length === 1) &&
+            !isAnswerChecked ? (
               <QuizSubmitModal btn={'Submit'} onSubmit={handleSubmit} />
             ) : (
               <Button

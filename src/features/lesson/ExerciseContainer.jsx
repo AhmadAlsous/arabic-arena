@@ -183,7 +183,8 @@ function ExerciseContainer({ id, exercises, lessonName, lesson }) {
                 Previous
               </Button>
             )}
-            {currentQuestion === exercises.length - 1 ? (
+            {currentQuestion === exercises.length - 1 ||
+            exercises.length === 1 ? (
               <Modal
                 trigger={<Button disabled={!isAnswerChecked}>Restart</Button>}
                 btn='Restart'
