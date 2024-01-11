@@ -121,7 +121,8 @@ function QuizBox({ quiz }) {
   const { user } = useContext(UserContext);
   const { id, titleEnglish, titleArabic, level, type, imageLink } = quiz;
   const [imageLoaded, setImageLoaded] = useState(!!imageLink);
-  const hasTakenQuiz = user.completedQuizzes.includes(id);
+  const hasTakenQuiz =
+    user.completedQuizzes.filter((quiz) => quiz.id === id).length > 0;
 
   return (
     <StyledQuizBox>

@@ -43,6 +43,14 @@ function AccountInfo() {
   const completedLevelLessons = user.completedLessons.filter(
     (lesson) => lesson.level === user.level
   );
+  const completedLevelQuizzes = user.completedQuizzes.filter(
+    (quiz) => quiz.level === user.level
+  );
+  const userProgress = Math.round(
+    ((completedLevelLessons.length + completedLevelQuizzes.length) /
+      progress[user.level]) *
+      100
+  );
   return (
     <StyledAccountInfo>
       <InfoContainer>
@@ -59,7 +67,7 @@ function AccountInfo() {
       </InfoContainer>
       {user.level && (
         <ProgressContainer>
-          <Progress value={30} />
+          <Progress value={userProgress} />
         </ProgressContainer>
       )}
     </StyledAccountInfo>

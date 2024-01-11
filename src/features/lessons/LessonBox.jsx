@@ -126,7 +126,8 @@ function LessonBox({ lesson }) {
   const { id, titleEnglish, titleArabic, level, type, imageLink } = lesson;
   const { user } = useContext(UserContext);
   const [imageLoaded, setImageLoaded] = useState(!!imageLink);
-  const hasTakenLesson = user.completedLessons.includes(id);
+  const hasTakenLesson =
+    user.completedLessons.filter((lesson) => lesson.id === id).length > 0;
 
   return (
     <LinkReset
