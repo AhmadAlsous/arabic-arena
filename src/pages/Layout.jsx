@@ -4,9 +4,14 @@ import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
 import { useIsAuthenticated, useMsal } from '@azure/msal-react';
 import { useContext, useEffect } from 'react';
-import { UserContext } from '../features/UserContext';
+import { ProgressContext, UserContext } from '../features/UserContext';
 import { getFirstName, getLastName } from '../utility/stringOperations';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+  useMutation,
+  useQueries,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 import { addUser, fetchUser } from '../services/userServices';
 import NewUserModal from '../UI/NewUserModal';
 import toast from 'react-hot-toast';
@@ -60,6 +65,7 @@ function Layout() {
   const navigate = useNavigate();
   const { instance } = useMsal();
   const { user, setUser } = useContext(UserContext);
+  const { progress, setProgress } = useContext(ProgressContext);
   console.log(user);
   const isAuthenticated = useIsAuthenticated();
   const account = isAuthenticated ? instance.getAllAccounts()[0] : null;
@@ -79,13 +85,24 @@ function Layout() {
     },
   });
 
-  const { data: lessonCount } = useQuery({
-    queryKey: ['lessonCount'],
-    queryFn: () => getLessonCount(),
-  });
-  const { data: quizCount } = useQuery({
-    queryKey: ['quizCount'],
-    queryFn: () => getQuizCount(),
+  const combinedCounts = useQueries({
+    queries: [
+      { queryKey: ['lessonCount'], queryFn: getLessonCount },
+      { queryKey: ['quizCount'], queryFn: getQuizCount },
+    ],
+    combine: (results) => {
+      if (results.every((result) => result.isSuccess)) {
+        const totalCounts = { Beginner: 0, Intermediate: 0, Advanced: 0 };
+        results.forEach((result) => {
+          Object.keys(result.data).forEach((level) => {
+            totalCounts[level] += result.data[level];
+          });
+        });
+
+        return { data: totalCounts };
+      }
+      return { data: null };
+    },
   });
 
   useEffect(() => {
@@ -93,6 +110,13 @@ function Layout() {
       setUser(fetchedUser);
     }
   }, [fetchedUser, setUser]);
+
+  useEffect(() => {
+    if (combinedCounts.every((result) => result.isSuccess)) {
+      setProgress(combinedCounts.data);
+      console.log(combinedCounts.data);
+    }
+  }, [combinedCounts, setProgress]);
 
   const handleSaveUser = (selectedLanguage) => {
     const newUser = {
