@@ -4,6 +4,8 @@ import Progress from './Progress';
 import styled from 'styled-components';
 import { ProgressContext, UserContext } from '../../features/UserContext';
 import { useContext, useEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { updateUser } from '../../services/userServices';
 
 const StyledAccountInfo = styled.div`
   display: flex;
@@ -40,6 +42,9 @@ const Word = styled.p`
 function AccountInfo() {
   const { user, setUser } = useContext(UserContext);
   const { progress } = useContext(ProgressContext);
+  const editUser = useMutation({
+    mutationFn: (user) => updateUser(user),
+  });
   const completedLevelLessons = user.completedLessons.filter(
     (lesson) => lesson.level === user.level
   );
@@ -55,6 +60,7 @@ function AccountInfo() {
     if (userProgress === 100 && user.level !== 'Advanced') {
       const newLevel = user.level === 'Beginner' ? 'Intermediate' : 'Advanced';
       setUser({ ...user, level: newLevel });
+      editUser.mutate({ ...user, level: newLevel });
     }
   }, [userProgress]);
   return (
