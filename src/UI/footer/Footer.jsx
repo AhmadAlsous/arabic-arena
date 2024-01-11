@@ -159,7 +159,7 @@ function Footer({ withAboutUs = true }) {
       return;
     }
     const feedback = {
-      id: Date.now(),
+      id: Date.now().toString(),
       name: `${user.firstName} ${user.lastName}`,
       type,
       text: type === 'feedback' ? feedbackText : problemText,
