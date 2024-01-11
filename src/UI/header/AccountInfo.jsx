@@ -3,7 +3,7 @@ import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import Progress from './Progress';
 import styled from 'styled-components';
 import { ProgressContext, UserContext } from '../../features/UserContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 const StyledAccountInfo = styled.div`
   display: flex;
@@ -38,7 +38,7 @@ const Word = styled.p`
 `;
 
 function AccountInfo() {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const { progress } = useContext(ProgressContext);
   const completedLevelLessons = user.completedLessons.filter(
     (lesson) => lesson.level === user.level
@@ -51,6 +51,12 @@ function AccountInfo() {
       progress[user.level]) *
       100
   );
+  useEffect(() => {
+    if (userProgress === 100 && user.level !== 'Advanced') {
+      const newLevel = user.level === 'Beginner' ? 'Intermediate' : 'Advanced';
+      setUser({ ...user, level: newLevel });
+    }
+  }, [userProgress]);
   return (
     <StyledAccountInfo>
       <InfoContainer>
