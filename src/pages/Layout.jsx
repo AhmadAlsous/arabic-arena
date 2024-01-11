@@ -112,7 +112,7 @@ function Layout() {
   }, [fetchedUser, setUser]);
 
   useEffect(() => {
-    if (combinedCounts.every((result) => result.isSuccess)) {
+    if (combinedCounts.data) {
       setProgress(combinedCounts.data);
       console.log(combinedCounts.data);
     }
