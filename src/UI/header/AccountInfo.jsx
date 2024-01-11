@@ -2,7 +2,7 @@ import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 import Progress from './Progress';
 import styled from 'styled-components';
-import { UserContext } from '../../features/UserContext';
+import { ProgressContext, UserContext } from '../../features/UserContext';
 import { useContext } from 'react';
 
 const StyledAccountInfo = styled.div`
@@ -39,6 +39,10 @@ const Word = styled.p`
 
 function AccountInfo() {
   const { user } = useContext(UserContext);
+  const { progress } = useContext(ProgressContext);
+  const completedLevelLessons = user.completedLessons.filter(
+    (lesson) => lesson.level === user.level
+  );
   return (
     <StyledAccountInfo>
       <InfoContainer>

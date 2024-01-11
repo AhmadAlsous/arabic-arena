@@ -134,10 +134,15 @@ function Quiz({ isPlacement = false, results = false }) {
         ...updatedUser,
         level: studentLevel,
       };
-    } else {
+    } else if (
+      user.completedQuizzes.filter((quiz) => quiz === quiz.id).length === 0
+    ) {
       updatedUser = {
         ...updatedUser,
-        completedQuizzes: [...updatedUser.completedQuizzes, quiz.id],
+        completedQuizzes: [
+          ...updatedUser.completedQuizzes,
+          { id: quiz.id, level: quiz.level },
+        ],
       };
     }
     setUser(updatedUser);

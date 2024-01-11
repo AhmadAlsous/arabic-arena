@@ -125,10 +125,16 @@ function ExerciseContainer({ id, exercises, lessonName, lesson }) {
 
   const handleCheckAnswer = () => {
     setIsAnswerChecked(true);
-    if (currentQuestion === exercises.length - 1) {
+    if (
+      currentQuestion === exercises.length - 1 &&
+      user.completedLessons.filter((lesson) => lesson.id === id).length === 0
+    ) {
       const updatedUser = {
         ...user,
-        completedLessons: [...user.completedLessons, id],
+        completedLessons: [
+          ...user.completedLessons,
+          { id: id, level: lesson.level },
+        ],
       };
       setUser(updatedUser);
       editUser.mutate(updatedUser);
