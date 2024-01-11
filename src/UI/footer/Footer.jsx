@@ -5,6 +5,11 @@ import FacebookRoundedIcon from '@mui/icons-material/FacebookRounded';
 import EmailIcon from '@mui/icons-material/Email';
 import Modal from '../Modal';
 import FeedbackForm from './FeedbackForm';
+import { useMutation } from '@tanstack/react-query';
+import { createFeedback } from '../../services/userServices';
+import { UserContext } from '../../features/UserContext';
+import { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const StyledFooter = styled.footer`
   display: grid;
@@ -141,6 +146,26 @@ const FooterImage = styled.img`
 `;
 
 function Footer({ withAboutUs = true }) {
+  const [feedbackText, setFeedbackText] = useState('');
+  const [problemText, setProblemText] = useState('');
+  const { user } = useContext(UserContext);
+  const addFeedback = useMutation({
+    mutationFn: (feedback) => createFeedback(feedback),
+  });
+  const handleSubmit = (type) => {
+    const text = type === 'feedback' ? feedbackText : problemText;
+    if (!text) {
+      toast.error(`Invalid ${type} text`);
+      return;
+    }
+    const feedback = {
+      id: Date.now(),
+      name: `${user.firstName} ${user.lastName}`,
+      type,
+      text: type === 'feedback' ? feedbackText : problemText,
+    };
+    addFeedback.mutate(feedback);
+  };
   return (
     <StyledFooter $withAboutUs={withAboutUs}>
       <LogoSection>
@@ -170,8 +195,14 @@ function Footer({ withAboutUs = true }) {
               trigger={<Button>Submit Feedback</Button>}
               width={'600px'}
               btn='Submit'
+              onClose={() => setFeedbackText('')}
+              onSubmit={() => handleSubmit('feedback')}
             >
-              <FeedbackForm type='feedback'>
+              <FeedbackForm
+                type='feedback'
+                text={feedbackText}
+                setText={setFeedbackText}
+              >
                 <ModalTitle>Share Your Feedback</ModalTitle>
                 <Text>
                   Thank you for sending us your feedback. We can't respond
@@ -189,8 +220,14 @@ function Footer({ withAboutUs = true }) {
               trigger={<Button>Report Problems</Button>}
               width={'600px'}
               btn='Submit'
+              onClose={() => setProblemText('')}
+              onSubmit={() => handleSubmit('problem')}
             >
-              <FeedbackForm type='problem'>
+              <FeedbackForm
+                type='problem'
+                text={problemText}
+                setText={setProblemText}
+              >
                 <ModalTitle>Report a Problem</ModalTitle>
                 <Text>
                   Thank you for taking the time to report a problem. We can't

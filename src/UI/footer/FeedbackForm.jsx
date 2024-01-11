@@ -29,7 +29,7 @@ const Textarea = styled(TextareaAutosize)`
   }
 `;
 
-function FeedbackForm({ children, type }) {
+function FeedbackForm({ children, type, text, setText }) {
   return (
     <StyledFeedbackForm>
       {children}
@@ -37,6 +37,8 @@ function FeedbackForm({ children, type }) {
         placeholder={`Enter your ${type} here`}
         minRows={5}
         maxRows={10}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
       />
     </StyledFeedbackForm>
   );

@@ -38,3 +38,17 @@ export const updateUser = async (user) => {
   const text = await response.text();
   return text ? JSON.parse(text) : {};
 };
+
+export const createFeedback = async (feedback) => {
+  const response = await fetch(`${BACKEND_URL}/feedback`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(feedback),
+  });
+  if (!response.ok) {
+    throw new Error();
+  }
+  return await response.json();
+};
