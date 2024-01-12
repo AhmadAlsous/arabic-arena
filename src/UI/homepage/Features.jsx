@@ -93,7 +93,7 @@ function Features() {
       </Feature>
       <FeatureImage
         className='feature-image'
-        src='../../images/QuestionChar.png'
+        src='../../images/Test.webp'
         alt='Question Character'
       />
     </StyledFeatures>

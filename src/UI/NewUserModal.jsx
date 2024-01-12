@@ -5,7 +5,7 @@ import { Box } from '@mui/system';
 import { Modal as BaseModal } from '@mui/base/Modal';
 import HandlerButton from '@mui/material/Button';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { languages } from '../data/languages';
+import { languages } from '../config/languages';
 
 const ButtonContainer = styled.div`
   display: flex;

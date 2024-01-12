@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { languages } from '../data/languages';
+import { languages } from '../config/languages';
 import InfoIcon from '@mui/icons-material/Info';
 import { UserContext } from './UserContext';
 import { useContext, useState } from 'react';

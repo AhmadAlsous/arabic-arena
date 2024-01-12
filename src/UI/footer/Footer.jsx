@@ -165,6 +165,7 @@ function Footer({ withAboutUs = true }) {
       text: type === 'feedback' ? feedbackText : problemText,
     };
     addFeedback.mutate(feedback);
+    toast.success(`${type} submitted successfully`);
   };
   return (
     <StyledFooter $withAboutUs={withAboutUs}>
