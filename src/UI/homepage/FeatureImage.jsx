@@ -23,6 +23,10 @@ const ImageContainer = styled.div`
   @media (max-width: 700px) {
     height: 300px;
   }
+
+  @media (max-width: 550px) {
+    height: 250px;
+  }
 `;
 
 const ImageWrapper = styled.div`
