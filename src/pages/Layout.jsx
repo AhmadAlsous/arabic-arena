@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../UI/footer/Footer';
 import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
@@ -118,9 +118,10 @@ function Layout() {
     }
   }, [combinedCounts, setProgress]);
 
+  const location = useLocation();
   useEffect(() => {
     const handleRouteChange = () => {
-      if (!window.location.pathname.includes('/quiz')) {
+      if (!location.pathname.includes('/quiz/')) {
         for (let key in localStorage) {
           if (!key.includes('lesson')) {
             localStorage.removeItem(key);
@@ -132,7 +133,7 @@ function Layout() {
     return () => {
       window.removeEventListener('popstate', handleRouteChange);
     };
-  }, []);
+  }, [location]);
 
   const handleSaveUser = (selectedLanguage) => {
     const newUser = {
