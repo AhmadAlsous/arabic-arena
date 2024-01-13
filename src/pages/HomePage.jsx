@@ -36,7 +36,7 @@ function HomePage() {
     <>
       <HomePageBar />
       <LazyImage src='../images/Home Page.png' alt='coverPhoto' />
-      <OverviewContainer />
+      {/* <OverviewContainer /> */}
       <Features />
       <Footer withAboutUs={false} />
     </>

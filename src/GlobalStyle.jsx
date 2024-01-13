@@ -26,6 +26,11 @@ const GlobalStyle = createGlobalStyle`
   src: url('/fonts/Greta Arabic Regular.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'YesevaOne';
+  src: url('/fonts/YesevaOne-Regular.ttf') format('truetype');
+}
+
 :root {
   --primary-blue-500: #43a0d8;
   --primary-blue-400: #3680ad;
