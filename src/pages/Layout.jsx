@@ -120,7 +120,7 @@ function Layout() {
 
   const location = useLocation();
   useEffect(() => {
-    const handleRouteChange = () => {
+    const handleBeforeUnload = () => {
       if (!location.pathname.includes('/quiz/')) {
         for (let key in localStorage) {
           if (!key.includes('lesson')) {
@@ -129,9 +129,11 @@ function Layout() {
         }
       }
     };
-    window.addEventListener('popstate', handleRouteChange);
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
     return () => {
-      window.removeEventListener('popstate', handleRouteChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, [location]);
 
