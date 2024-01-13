@@ -2,10 +2,15 @@ import { Button } from '@mui/material';
 import { LinkReset } from '../../utility/LinkReset';
 import styled from 'styled-components';
 import { getPercentage, getResult } from '../../utility/quizCalculations';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import {
+  unstable_useBlocker,
+  useLocation,
+  useNavigate,
+  useParams,
+} from 'react-router-dom';
 import Modal from '../../UI/Modal';
 import { UserContext } from '../UserContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 const StyledQuizResults = styled.div`
   margin: 40px 10%;
@@ -144,6 +149,19 @@ function QuizResults({
   const { user } = useContext(UserContext);
   const location = useLocation();
   const calculatedLevel = location.state?.calculatedLevel;
+
+  let blocker = unstable_useBlocker(
+    ({ currentLocation, nextLocation }) =>
+      currentLocation.pathname !== nextLocation.pathname &&
+      !nextLocation.pathname.includes('/quiz/')
+  );
+
+  useEffect(() => {
+    if (blocker.state === 'blocked') {
+      localStorage.removeItem(`${user.id}${quiz}-answers`);
+      blocker.proceed();
+    }
+  }, [blocker, quiz, user.id]);
 
   const handleReview = () => {
     setIsAnswerChecked(true);

@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Footer from '../UI/footer/Footer';
 import NavBar from '../UI/header/NavBar';
 import styled from 'styled-components';
@@ -117,25 +117,6 @@ function Layout() {
       console.log(combinedCounts.data);
     }
   }, [combinedCounts, setProgress]);
-
-  const location = useLocation();
-  useEffect(() => {
-    const handleBeforeUnload = () => {
-      if (!location.pathname.includes('/quiz/')) {
-        for (let key in localStorage) {
-          if (!key.includes('lesson')) {
-            localStorage.removeItem(key);
-          }
-        }
-      }
-    };
-
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, [location]);
 
   const handleSaveUser = (selectedLanguage) => {
     const newUser = {
