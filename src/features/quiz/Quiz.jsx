@@ -59,7 +59,7 @@ function Quiz({ isPlacement = false, results = false }) {
     const savedAnswers = localStorage.getItem(`${user.id}${name}-answers`);
     return savedAnswers
       ? JSON.parse(savedAnswers)
-      : Array.from({ length: questions.length }, () => []);
+      : Array.from({ length: 200 }, () => []);
   });
   const [isAnswerChecked, setIsAnswerChecked] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
