@@ -65,7 +65,7 @@ function Layout() {
   const navigate = useNavigate();
   const { instance } = useMsal();
   const { user, setUser } = useContext(UserContext);
-  const { progress, setProgress } = useContext(ProgressContext);
+  const { setProgress } = useContext(ProgressContext);
   console.log(user);
   const isAuthenticated = useIsAuthenticated();
   const account = isAuthenticated ? instance.getAllAccounts()[0] : null;
@@ -117,6 +117,22 @@ function Layout() {
       console.log(combinedCounts.data);
     }
   }, [combinedCounts, setProgress]);
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (!window.location.pathname.includes('/quiz')) {
+        for (let key in localStorage) {
+          if (!key.includes('lesson')) {
+            localStorage.removeItem(key);
+          }
+        }
+      }
+    };
+    window.addEventListener('popstate', handleRouteChange);
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, []);
 
   const handleSaveUser = (selectedLanguage) => {
     const newUser = {

@@ -5,7 +5,7 @@ import { getPercentage, getResult } from '../../utility/quizCalculations';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Modal from '../../UI/Modal';
 import { UserContext } from '../UserContext';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 const StyledQuizResults = styled.div`
   margin: 40px 10%;
@@ -156,18 +156,6 @@ function QuizResults({
     localStorage.removeItem(`${user.id}${quiz}-answers`);
     navigate(`/quiz/${quiz}`);
   };
-
-  useEffect(() => {
-    const handleRouteChange = () => {
-      if (!window.location.pathname.includes('/quiz')) {
-        localStorage.removeItem(`${user.id}${quiz}-answers`);
-      }
-    };
-    window.addEventListener('popstate', handleRouteChange);
-    return () => {
-      window.removeEventListener('popstate', handleRouteChange);
-    };
-  }, [user.id, quiz]);
 
   return (
     <StyledQuizResults>
