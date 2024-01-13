@@ -148,7 +148,6 @@ function Quiz({ isPlacement = false, results = false }) {
     setUser(updatedUser);
     editUser.mutate(updatedUser);
     localStorage.removeItem(`${user.id}${quiz.id}-time`);
-    localStorage.removeItem(`${user.id}${name}-answers`);
     searchParams.delete('question');
     setSearchParams(searchParams);
     navigate('./results', { state: { calculatedLevel: studentLevel } });
@@ -226,7 +225,6 @@ function Quiz({ isPlacement = false, results = false }) {
               setIsAnswerChecked={setIsAnswerChecked}
               questions={questions}
               answers={answers}
-              quizId={quiz.id}
               setAnswers={setAnswers}
             />
           )}

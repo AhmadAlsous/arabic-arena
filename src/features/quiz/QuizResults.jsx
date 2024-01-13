@@ -5,7 +5,7 @@ import { getPercentage, getResult } from '../../utility/quizCalculations';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Modal from '../../UI/Modal';
 import { UserContext } from '../UserContext';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 const StyledQuizResults = styled.div`
   margin: 40px 10%;
@@ -133,7 +133,6 @@ const ConfirmText = styled.p`
 `;
 
 function QuizResults({
-  quizId,
   isPlacement,
   setIsAnswerChecked,
   questions,
@@ -155,9 +154,20 @@ function QuizResults({
     setIsAnswerChecked(false);
     setAnswers(Array.from({ length: questions.length }, () => []));
     localStorage.removeItem(`${user.id}${quiz}-answers`);
-    localStorage.removeItem(user.id + quizId);
     navigate(`/quiz/${quiz}`);
   };
+
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (!window.location.pathname.includes('/quiz')) {
+        localStorage.removeItem(`${user.id}${quiz}-answers`);
+      }
+    };
+    window.addEventListener('popstate', handleRouteChange);
+    return () => {
+      window.removeEventListener('popstate', handleRouteChange);
+    };
+  }, [user.id, quiz]);
 
   return (
     <StyledQuizResults>
@@ -184,7 +194,7 @@ function QuizResults({
         )}
         {isPlacement && (
           <>
-            <Text>You have been placed at</Text>
+            <Text>Your level</Text>
             <Class>{calculatedLevel ? calculatedLevel : user.level}</Class>
           </>
         )}
