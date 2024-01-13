@@ -37,8 +37,7 @@ function Placement() {
     queryFn: fetchPlacementTest,
     enabled: !user.level,
   });
-  const hasTakenPlacementTest = localStorage.getItem('1');
-  if (hasTakenPlacementTest || user.level) {
+  if (user.level) {
     return <Quiz isPlacement={true} results={true} />;
   }
 

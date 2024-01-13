@@ -3,6 +3,8 @@ import Button from '@mui/material/Button';
 import QuizQuestion from './QuizQuestion';
 import QuizTimer from './QuizTimer';
 import QuizSubmitModal from './QuizSubmitModal';
+import { UserContext } from '../UserContext';
+import { useContext } from 'react';
 
 const QuizContainer = styled.div`
   margin: 40px 10%;
@@ -83,9 +85,10 @@ function QuizQuestionContainer({
   quizId,
 }) {
   const time = new Date();
+  const { user } = useContext(UserContext);
   time.setSeconds(time.getSeconds() + timeLimit * 60);
-  if (!localStorage.getItem(`${quizId}-time`) && !isAnswerChecked)
-    localStorage.setItem(`${quizId}-time`, time);
+  if (!localStorage.getItem(`${user.id}${quizId}-time`) && !isAnswerChecked)
+    localStorage.setItem(`${user.id}${quizId}-time`, time);
 
   if (questions.length === 0) return null;
 

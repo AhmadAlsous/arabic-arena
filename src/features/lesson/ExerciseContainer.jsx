@@ -95,7 +95,7 @@ const ConfirmText = styled.p`
 function ExerciseContainer({ id, exercises, lessonName, lesson }) {
   const { user, setUser } = useContext(UserContext);
   const savedAnswers = JSON.parse(
-    localStorage.getItem(`${lessonName}-answers`)
+    localStorage.getItem(`${user.id}${lessonName}-answers`)
   );
   const [currentQuestion, setCurrentQuestion] = useState(
     savedAnswers ? findLastAnsweredQuestion(savedAnswers) : 0
@@ -145,12 +145,15 @@ function ExerciseContainer({ id, exercises, lessonName, lesson }) {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = selectedValue;
     setAnswers(newAnswers);
-    localStorage.setItem(`${lessonName}-answers`, JSON.stringify(newAnswers));
+    localStorage.setItem(
+      `${user.id}${lessonName}-answers`,
+      JSON.stringify(newAnswers)
+    );
   };
 
   const handleRestart = () => {
     setAnswers(Array.from({ length: exercises.length }, () => []));
-    localStorage.removeItem(`${lessonName}-answers`);
+    localStorage.removeItem(`${user.id}${lessonName}-answers`);
     setCurrentQuestion(0);
     setIsAnswerChecked(false);
     setSelectedValue([]);

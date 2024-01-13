@@ -4,6 +4,8 @@ import { LinkReset } from '../../utility/LinkReset';
 import { replaceSpacesWithDashes } from '../../utility/stringOperations';
 import Modal from '../../UI/Modal';
 import { Button } from '@mui/material';
+import { UserContext } from '../UserContext';
+import { useContext } from 'react';
 
 const ConfirmContainer = styled.div`
   display: flex;
@@ -37,9 +39,13 @@ const NoneButton = styled.button`
 `;
 
 function QuizStartConfirm({ quiz }) {
-  const firstTime = localStorage.getItem(quiz.id) === null;
+  const { user } = useContext(UserContext);
+  const firstTime =
+    user.completedQuizzes.filter(
+      (completedQuiz) => completedQuiz.id === quiz.id
+    ).length === 0;
 
-  return firstTime ? (
+  return (
     <Modal
       trigger={
         <NoneButton>
@@ -59,20 +65,15 @@ function QuizStartConfirm({ quiz }) {
       <ConfirmContainer>
         <Title>Confirmation</Title>
         <ConfirmText>
-          <Text>Are you sure you want to start this quiz?</Text>
+          <Text>
+            Are you sure you want to{' '}
+            {firstTime ? 'start this quiz?' : 'take this quiz again?'}
+          </Text>
           <Text>Time limit: {quiz.time} mins</Text>
           <Text>Number of questions: {quiz.questionsCount}</Text>
         </ConfirmText>
       </ConfirmContainer>
     </Modal>
-  ) : (
-    <LinkReset
-      to={`/quiz/${replaceSpacesWithDashes(
-        quiz.titleEnglish.toLowerCase()
-      )}/results`}
-    >
-      <QuizBox quiz={quiz} />
-    </LinkReset>
   );
 }
 

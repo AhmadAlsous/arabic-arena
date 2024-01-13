@@ -53,10 +53,10 @@ function Quiz({ isPlacement = false, results = false }) {
       };
   const { time, questions } = quiz;
 
-  const hasTakenPlacementTest = localStorage.getItem('1');
+  const hasTakenPlacementTest = user.level;
   const [selectedValue, setSelectedValue] = useState([]);
   const [answers, setAnswers] = useState(() => {
-    const savedAnswers = localStorage.getItem(`${name}-answers`);
+    const savedAnswers = localStorage.getItem(`${user.id}${name}-answers`);
     return savedAnswers
       ? JSON.parse(savedAnswers)
       : Array.from({ length: questions.length }, () => []);
@@ -147,8 +147,8 @@ function Quiz({ isPlacement = false, results = false }) {
     }
     setUser(updatedUser);
     editUser.mutate(updatedUser);
-    localStorage.setItem(quiz.id, 'true');
-    localStorage.removeItem(`${quiz.id}-time`);
+    localStorage.removeItem(`${user.id}${quiz.id}-time`);
+    localStorage.removeItem(`${user.id}${name}-answers`);
     searchParams.delete('question');
     setSearchParams(searchParams);
     navigate('./results', { state: { calculatedLevel: studentLevel } });
@@ -164,13 +164,15 @@ function Quiz({ isPlacement = false, results = false }) {
     const newAnswers = [...answers];
     newAnswers[currentQuestion - 1] = selectedValue;
     setAnswers(newAnswers);
-    localStorage.setItem(`${name}-answers`, JSON.stringify(newAnswers));
+    localStorage.setItem(
+      `${user.id}${name}-answers`,
+      JSON.stringify(newAnswers)
+    );
   };
 
   const handleLeaveQuiz = () => {
-    localStorage.removeItem(`${name}-answers`);
-    localStorage.removeItem(quiz.id);
-    localStorage.removeItem(`${quiz.id}-time`);
+    localStorage.removeItem(`${user.id}${name}-answers`);
+    localStorage.removeItem(`${user.id}${quiz.id}-time`);
     blocker.proceed();
   };
 

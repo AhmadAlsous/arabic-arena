@@ -154,8 +154,8 @@ function QuizResults({
   const handleTryAgain = () => {
     setIsAnswerChecked(false);
     setAnswers(Array.from({ length: questions.length }, () => []));
-    localStorage.removeItem(`${quiz}-answers`);
-    localStorage.removeItem(quizId);
+    localStorage.removeItem(`${user.id}${quiz}-answers`);
+    localStorage.removeItem(user.id + quizId);
     navigate(`/quiz/${quiz}`);
   };
 
