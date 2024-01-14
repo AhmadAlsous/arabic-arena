@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { toHtml } from '../../utility/transforms';
 
 const StyledLessonText = styled.div`
   font-family: 'Greta', 'Arial', 'Helvetica', sans-serif;
@@ -11,12 +12,6 @@ const StyledLessonText = styled.div`
   & img {
     max-width: 100%;
     height: auto;
-  }
-
-  & iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
   }
 
   @media (max-width: 1000px) {
@@ -32,7 +27,7 @@ function LessonText({ text }) {
   return (
     <StyledLessonText
       dangerouslySetInnerHTML={{
-        __html: text,
+        __html: toHtml(text),
       }}
     />
   );
