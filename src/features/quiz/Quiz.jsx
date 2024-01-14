@@ -123,6 +123,11 @@ function Quiz({ isPlacement = false, results = false }) {
     handleChangeAnswer([]);
   };
 
+  const quizTitle = isPlacement ? 'Placement Test' : 'Quizzes';
+  const intermediate = data && isPlacement ? data.intermediate : 0;
+  const advanced = data && isPlacement ? data.advanced : 0;
+  console.log(intermediate, advanced);
+
   const handleSubmit = () => {
     let updatedUser = { ...user };
     let studentLevel;
@@ -176,10 +181,6 @@ function Quiz({ isPlacement = false, results = false }) {
     localStorage.removeItem(`${user.id}${quiz.id}-time`);
     blocker.proceed();
   };
-
-  const quizTitle = isPlacement ? 'Placement Test' : 'Quizzes';
-  const intermediate = data && isPlacement ? data.intermediate : 0;
-  const advanced = data && isPlacement ? data.advanced : 0;
 
   return (
     <>
