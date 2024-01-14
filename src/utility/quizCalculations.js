@@ -23,6 +23,7 @@ export const getPercentage = (result, numQuestions) => {
 };
 
 export const getPlacement = (percentage, advanced, intermediate) => {
+  console.log(percentage, advanced, intermediate);
   if (percentage >= parseInt(advanced)) return 'Advanced';
   if (percentage >= parseInt(intermediate)) return 'Intermediate';
   return 'Beginner';
