@@ -32,9 +32,9 @@ function Lessons() {
           (selectedType === 'All' || lesson.type === selectedType) &&
           (selectedStatus === 'All' ||
             (selectedStatus === 'Complete' &&
-              user.completedLessons.includes(lesson.id)) ||
+              user.completedLessons.find((l) => (l.id = lesson.id))) ||
             (selectedStatus === 'Incomplete' &&
-              !user.completedLessons.includes(lesson.id))) &&
+              !user.completedLessons.find((l) => (l.id = lesson.id)))) &&
           (searchWord === '' ||
             lesson.titleArabic.includes(searchWord) ||
             lesson.titleEnglish

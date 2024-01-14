@@ -27,19 +27,17 @@ function Quizzes() {
   }, [user.level]);
   const filteredQuizzes = data
     ? data.filter(
-        (lesson) =>
-          (selectedLevel === 'All' || lesson.level === selectedLevel) &&
-          (selectedType === 'All' || lesson.type === selectedType) &&
+        (quiz) =>
+          (selectedLevel === 'All' || quiz.level === selectedLevel) &&
+          (selectedType === 'All' || quiz.type === selectedType) &&
           (selectedStatus === 'All' ||
             (selectedStatus === 'Complete' &&
-              user.completedQuizzes.includes(lesson.id)) ||
+              user.completedQuizzes.find((q) => q.id === quiz.id)) ||
             (selectedStatus === 'Incomplete' &&
-              !user.completedQuizzes.includes(lesson.id))) &&
+              !user.completedQuizzes.find((q) => q.id === quiz.id))) &&
           (searchWord === '' ||
-            lesson.titleArabic.includes(searchWord) ||
-            lesson.titleEnglish
-              .toLowerCase()
-              .includes(searchWord.toLowerCase()))
+            quiz.titleArabic.includes(searchWord) ||
+            quiz.titleEnglish.toLowerCase().includes(searchWord.toLowerCase()))
       )
     : [];
 

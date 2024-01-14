@@ -200,7 +200,7 @@ function QuizResults({
         )}
         {isPlacement && (
           <>
-            <Text>Your level</Text>
+            <Text>Your level is</Text>
             <Class>{calculatedLevel ? calculatedLevel : user.level}</Class>
           </>
         )}
