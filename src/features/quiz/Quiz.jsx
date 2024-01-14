@@ -134,7 +134,7 @@ function Quiz({ isPlacement = false, results = false }) {
     if (isPlacement) {
       const numCorrectAnswers = getResult(questions, answers);
       const percentage = getPercentage(numCorrectAnswers, questions.length);
-      studentLevel = getPlacement(percentage, intermediate, advanced);
+      studentLevel = getPlacement(percentage, advanced, intermediate);
       updatedUser = {
         ...updatedUser,
         level: studentLevel,
