@@ -1,5 +1,3 @@
-import draftToHtml from 'draftjs-to-html';
-
 export const transformLesson = (lesson) => {
   const {
     id,
@@ -90,8 +88,7 @@ export const transformQuiz = (quiz) => {
   return newQuiz;
 };
 
-export const toHtml = (editorState) => {
-  let html = draftToHtml(editorState);
+export const toHtml = (html) => {
   const arabicRegex =
     /^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/;
   const parser = new DOMParser();
