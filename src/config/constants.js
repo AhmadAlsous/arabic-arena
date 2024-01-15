@@ -1,4 +1,4 @@
-export const PAGE_SIZE = 9;
+export const PAGE_SIZE = 6;
 
 const GOOGLE_API_KEY = 'AIzaSyA3_b3fTpNod1-7MnPrgTF-rV6EoXrEWME';
 

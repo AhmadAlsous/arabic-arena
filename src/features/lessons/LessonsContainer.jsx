@@ -22,7 +22,7 @@ const StyledLessonsContainer = styled.div`
 `;
 
 function LessonsContainer({ lessons, isQuiz, isLoading, error }) {
-  const content = isLoading || error ? [0, 1, 2, 3, 4, 5, 6, 7, 8] : lessons;
+  const content = isLoading || error ? [0, 1, 2, 3, 4, 5] : lessons;
   return (
     <StyledLessonsContainer>
       {content.map((lesson) =>
