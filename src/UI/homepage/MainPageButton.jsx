@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { useMsal } from '@azure/msal-react';
 import { loginRequest } from '../../config/authConfig';
-import toast from 'react-hot-toast';
 
 const StyledMainPageButton = styled.button`
   border: none;
@@ -87,7 +86,6 @@ function MainPageButton() {
     instance.loginRedirect(loginRequest).catch((e) => {
       console.log(e);
     });
-    toast.success('Successfully logged in.');
   }
 
   return (

@@ -75,7 +75,9 @@ function LessonInfo({ lesson }) {
         ) : (
           <YoutubeVideo url={lesson.videoLink} />
         ))}
-      {lesson.videoText && <Transcript>{lesson.videoText}</Transcript>}
+      {lesson.videoText && lesson.videoText !== '<p></p>' && (
+        <Transcript>{lesson.videoText}</Transcript>
+      )}
     </StyledLessonInfo>
   );
 }
