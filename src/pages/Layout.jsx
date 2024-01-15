@@ -166,7 +166,7 @@ function Layout() {
 
   if (!isAuthenticated) {
     navigate('/');
-    toast.error('You are not logged in. Please login to continue.');
+    toast.error('You must be logged in to view this page.');
   }
   return (
     <>

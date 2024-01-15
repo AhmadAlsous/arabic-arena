@@ -84,11 +84,10 @@ function NavBar({ isHomepage = false }) {
             name='PLACEMENT'
             navTo='/placement'
           />
-          {/* <NavBarButton name='ASK' navTo='/ask' /> */}
         </ButtonsContainer>
       </Container>
       <ProfileContainer>
-        <AccountCircleList isHomepage={isHomepage} />
+        <AccountCircleList />
       </ProfileContainer>
       <MobileContainer>
         <MobileMenu />

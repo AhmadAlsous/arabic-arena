@@ -7,10 +7,9 @@ import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import MenuElement from './MenuElement';
 import AccountInfo from './AccountInfo';
-import { useIsAuthenticated, useMsal } from '@azure/msal-react';
+import { useMsal } from '@azure/msal-react';
 
 function AccountCircleList({ isHomepage }) {
-  const isAuthenticated = useIsAuthenticated();
   const { instance } = useMsal();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -30,11 +29,11 @@ function AccountCircleList({ isHomepage }) {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <AccountCircleIcon
-        onClick={handleClick}
+        onClick={isHomepage ? handleClose : handleClick}
         sx={{
           fontSize: '45px',
-          cursor: 'pointer',
-          color: isHomepage ? 'var(--homepage-grey)' : 'black',
+          cursor: isHomepage ? 'default' : 'pointer',
+          color: isHomepage ? 'transparent' : 'black',
         }}
       />
       <Menu
