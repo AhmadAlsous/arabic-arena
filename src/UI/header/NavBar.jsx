@@ -87,7 +87,7 @@ function NavBar({ isHomepage = false }) {
         </ButtonsContainer>
       </Container>
       <ProfileContainer>
-        <AccountCircleList />
+        <AccountCircleList isHomepage={isHomepage} />
       </ProfileContainer>
       <MobileContainer>
         <MobileMenu />

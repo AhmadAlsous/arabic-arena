@@ -164,10 +164,12 @@ function Layout() {
     );
   };
 
-  if (!isAuthenticated) {
-    navigate('/');
-    toast.error('You must be logged in to view this page.');
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate('/');
+      toast.error('You must be logged in to view this page.');
+    }
+  }, [isAuthenticated, navigate]);
   return (
     <>
       <NavBar />
