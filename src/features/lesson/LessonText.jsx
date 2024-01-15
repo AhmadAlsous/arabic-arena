@@ -14,6 +14,10 @@ const StyledLessonText = styled.div`
     height: auto;
   }
 
+  & a {
+    text-decoration: underline;
+  }
+
   @media (max-width: 1000px) {
     padding: 0 7%;
   }

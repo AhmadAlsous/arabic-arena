@@ -114,7 +114,6 @@ function Layout() {
   useEffect(() => {
     if (combinedCounts.data) {
       setProgress(combinedCounts.data);
-      console.log(combinedCounts.data);
     }
   }, [combinedCounts, setProgress]);
 
@@ -164,23 +163,26 @@ function Layout() {
       }
     );
   };
+
+  if (!isAuthenticated) {
+    navigate('/');
+    toast.error('You are not logged in. Please login to continue.');
+  }
   return (
     <>
       <NavBar />
       <AppWrapper>
         <Content>
-          {
-            <OutletContainer>
-              <Outlet />
-              {error && !user.language && (
-                <NewUserModal
-                  open={error && !user.language}
-                  onSaveLanguage={handleSaveUser}
-                  name={getFirstName(account.name)}
-                />
-              )}
-            </OutletContainer>
-          }
+          <OutletContainer>
+            <Outlet />
+            {error && !user.language && (
+              <NewUserModal
+                open={error && !user.language}
+                onSaveLanguage={handleSaveUser}
+                name={getFirstName(account.name)}
+              />
+            )}
+          </OutletContainer>
         </Content>
         {isAuthenticated ? <Footer /> : <Footer withAboutUs={false} />}
       </AppWrapper>

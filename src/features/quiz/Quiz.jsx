@@ -126,7 +126,6 @@ function Quiz({ isPlacement = false, results = false }) {
   const quizTitle = isPlacement ? 'Placement Test' : 'Quizzes';
   const intermediate = data && isPlacement ? data.intermediate : 0;
   const advanced = data && isPlacement ? data.advanced : 0;
-  console.log(intermediate, advanced);
 
   const handleSubmit = () => {
     let updatedUser = { ...user };

@@ -5,7 +5,7 @@ export const msalConfig = {
     clientId: '9ab239b9-8b2e-41e4-96e1-1cdd23165760',
     authority:
       'https://login.microsoftonline.com/05405dba-373c-4e20-a30e-3e6fcf507cfe',
-    redirectUri: 'https://arabicarena.netlify.app/learn',
+    redirectUri: 'https://arabicarena.netlify.app',
     navigateToLoginRequestUrl: false,
   },
   cache: {
